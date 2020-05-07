@@ -1,4 +1,4 @@
-# _Disclaimer_\*\*
+# _Disclaimer_
 
 The information contained in this Application is provided for informational purposes only, any and all usage is at the sole discretion of the user. No recipients of content from this Application or otherwise, should act or refrain from acting on the basis of any content included in the Application without seeking the appropriate legal or other professional advice on the particular facts and circumstances at issue from an attorney licensed in the recipient's state. The content of this Application contains general information and may not reflect current legal developments. This Application disclaims all liability in respect to actions taken or not taken based on any or all the contents of this Application.
 
