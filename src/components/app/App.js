@@ -16,7 +16,10 @@ import './App.css'
 
 class App extends Component {
   // what is our state going to look like?
-  state = {}
+  state = {
+    error: "",
+    hasError: false
+  }
 
   render() {
     // what is our context going to look like?
@@ -40,9 +43,21 @@ class App extends Component {
                 path={'/register'}
                 component={RegistrationPage}
               />
-              <PrivateRoute
+              <Route
                 path={'/dashboard'}
                 component={DashboardPage}
+              />
+              <PrivateRoute
+                path="/create"
+                component={CreateStoryPage}
+              />
+              <Route
+                path="/story/:id"
+                component={StoryPage}
+              />
+              <Route
+                path="/policies"
+                component={PoliciesPage}
               />
               <Route
                 component={NotFoundPage}
