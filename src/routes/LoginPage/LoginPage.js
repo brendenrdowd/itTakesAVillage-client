@@ -2,10 +2,25 @@ import React, { Component } from 'react'
 import LoginForm from '../../components/LoginForm/LoginForm'
 
 export class LoginPage extends Component {
+  static defaultProps = {
+    history: {
+      push: () => { },
+    },
+  }
+
+  handleLoginSuccess = () => {
+    const { history } = this.props
+    history.push("/Dashboardpage")
+  }
+
   render() {
     return (
-      <section>
-        
+      <section className='LoginPage'>
+        <h2>Login</h2>
+        <LoginForm
+          onLoginSuccess={this.handleLoginSuccess}
+        />
+
       </section>
     )
   }
