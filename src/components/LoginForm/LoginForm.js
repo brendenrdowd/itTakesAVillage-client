@@ -34,33 +34,33 @@ export class LoginForm extends Component {
         onSubmit={this.handleSubmitJwtAuth}
       >
         <div role='alert'>
-          {error && <p className='red'>{error}</p>}
+          {/* {error && <p className='red'>{error}</p>} */}
         </div>
         <div className='username'>
           <label htmlFor='LoginForm__username'>
             Username
           </label>
-          <Input
+          <input type='text'
             required
             name='username'
             id='LoginForm__username'>
-          </Input>
+          </input>
         </div>
 
         <div className='password'>
           <label htmlFor='LoginForm__password'>
             Password
           </label>
-          <Input
+          <input type='text'
             required
             name='password'
             type='password'
             id='LoginForm__password'>
-          </Input>
+          </input>
         </div>
-        <Button type='submit'>
+        <button type='submit'>
           Login
-        </Button>
+        </button>
       </form>
     )
   }
