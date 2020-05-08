@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import StoryCard from '../../components/CreateStoryForm/CreateStoryForm'
 
-export class Dashboard extends Component {
+export class DashboardPage extends Component {
   render() {
     return (
       <div>
@@ -11,4 +11,4 @@ export class Dashboard extends Component {
   }
 }
 
-export default Dashboard
+export default DashboardPage

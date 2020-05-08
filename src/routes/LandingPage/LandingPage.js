@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'react-router-dom'
 
-export default function LandPage() {
+export default function LandingPage() {
   return (
     <section>
       <h2>It Takes A village</h2>
