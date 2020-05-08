@@ -4,8 +4,8 @@ import OrganizationRegForm from '../../components/OrganizationRegForm/Organizati
 
 export default function RegistrationPage() {
   return (
-    <div>
+    <section>
       
-    </div>
+    </section>
   )
 }
