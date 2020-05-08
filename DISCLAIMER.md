@@ -7,4 +7,6 @@ Any information sent through the Application is secured by the developers best a
 Some features within the Application may utilize third parties application programming interface henceforth known and referred to as an API. The Application includes these features solely as a convenience to you, and the presence of such an API does not imply a responsibility for the API or an endorsement of the API, or its contents.
 Furthermore, This Application does not wish to represent anyone desiring representation based upon viewing this Application in a state where this Application fails to comply with all laws and ethical rules of that state.
 
+Use of this Application involves meeting real people and doing real things in the real world, which can sometimes lead to unexpected situations. We can’t control what happens in the real world, and we are not responsible for it. You should use common sense and good judgment when interacting with others.
+
 Reproduction, distribution, republication, and/or retransmission of material contained within this Application is prohibited unless the prior written permission of the developer has been obtained.

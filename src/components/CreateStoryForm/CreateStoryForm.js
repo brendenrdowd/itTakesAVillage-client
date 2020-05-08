@@ -1,13 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
 export class CreateStoryForm extends Component {
   render() {
-    return (
-      <form>
-        
-      </form>
-    )
+    return <form>{/* humberto form */}</form>;
   }
 }
 
-export default CreateStoryForm
+export default CreateStoryForm;
