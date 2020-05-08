@@ -9,12 +9,17 @@ import LandingPage from '../../routes/LandingPage/LandingPage'
 import LoginPage from '../../routes/LoginPage/LoginPage'
 import NotFoundPage from '../../routes/NotFoundPage/NotFoundPage'
 import RegistrationPage from '../../routes/RegistrationPage/RegistrationPage'
+import CreateStoryPage from '../../routes/CreateStoryPage/CreateStoryPage'
+import PoliciesPage from '../../routes/PoliciesPage/PoliciesPage'
+import StoryPage from '../../routes/StoryPage/StoryPage'
 import './App.css'
 
 class App extends Component {
+  // what is our state going to look like?
   state = {}
 
   render() {
+    // what is our context going to look like?
     const value = {}
     return (
       <ApiContext.Provider value={value}>
