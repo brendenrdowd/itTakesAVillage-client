@@ -6,7 +6,9 @@ export class StoryPage extends Component {
     return (
       <section>
         {/* card itself */}
+        {CreateCommentForm}
         {/* comments */}
+        {/* resolution? */}
       </section>
     )
   }
