@@ -31,29 +31,40 @@ export default class App extends Component {
           <main>
             {this.state.hasError && <p className='red'>{this.state.error}</p>}
             <Switch>
-              <PublicOnlyRoute 
-              exact 
-              path={'/'} 
-              component={LandingPage} />
-              <PublicOnlyRoute 
-                path={'/login'} 
+              <PublicOnlyRoute
+                exact
+                path={'/'}
+                component={LandingPage} />
+              <PublicOnlyRoute
+                path={'/login'}
                 component={LoginPage} />
-              <PublicOnlyRoute 
-                path={'/register'} 
+              <PublicOnlyRoute
+                path={'/register'}
                 component={RegistrationPage} />
-              <Route 
-                path={'/dashboard'} 
+              {/* private */}
+              <Route
+                path={'/dashboard'}
                 component={DashboardPage} />
-              <PrivateRoute 
-                path={'/create'} 
+              {/* Private */}
+              <Route
+                path={'/create'}
                 component={CreateStoryPage} />
-              <Route 
-                path={'/story/:id'} 
+                {/* private route */}
+                {/* we need to load the commentComponent instead of the createStory component, probably by indicating with props... */}
+              {/* <Route
+                path={'/comment/edit/:id'}
+                component={CreateStoryPage} /> */}
+              <Route
+                path={'/story/:id'}
                 component={StoryPage} />
-              <Route 
-                path={'/policies'} 
+              {/* private route */}
+              <Route
+                path={'/story/edit/:id'}
+                component={CreateStoryPage} />
+              <Route
+                path={'/policies'}
                 component={PoliciesPage} />
-              <Route 
+              <Route
                 component={NotFoundPage} />
             </Switch>
           </main>
