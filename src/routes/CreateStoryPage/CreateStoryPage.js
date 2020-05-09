@@ -1,14 +1,16 @@
-import React, { Component } from 'react'
-import CraeteStoryForm from '../../components/CreateStoryForm/CreateStoryForm'
+import React, { Component } from "react";
+import CreateStoryForm from "../../components/CreateStoryForm/CreateStoryForm";
+import CreateCommentForm from "../../components/CreateCommentForm/CreateCommentForm";
 
 export class CreateStoryPage extends Component {
   render() {
     return (
       <div>
-        
+        <CreateStoryForm />
+        <CreateCommentForm />
       </div>
-    )
+    );
   }
 }
 
-export default CreateStoryPage
+export default CreateStoryPage;

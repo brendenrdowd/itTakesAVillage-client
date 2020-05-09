@@ -1,3 +1,8 @@
-import React from 'react'
+import React from "react";
 
-export default React.createContext({})
+export default React.createContext({
+  stories: [],
+  comments: [],
+  handleAddStory: () => {},
+  handleAddComment: () => {},
+});
