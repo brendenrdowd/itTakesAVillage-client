@@ -1,3 +1,5 @@
+//what should I pass into location? X, Y, Z coordinates or state code and the city?
+
 export default {
   "users":[{
     "id":"1",
