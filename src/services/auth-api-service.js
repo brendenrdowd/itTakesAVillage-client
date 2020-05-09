@@ -1,4 +1,4 @@
-import config from '../config'
+import config from '../config';
 
 const AuthApiService = {
   postLogin(credentials) {
@@ -8,27 +8,23 @@ const AuthApiService = {
         'content-type': 'application/json',
       },
       body: JSON.stringify(credentials),
-    })
-      .then(res =>
-        (!res.ok)
-          ? res.json().then(e => Promise.reject(e))
-          : res.json()
-      )
+    }).then((res) =>
+      !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
+    );
   },
-  postUser(user){
+  postUser(user) {
     return fetch(`${config.API_ENDPOINT}/users`, {
-      method:'POST',
-      headers:{
-        'content-type':'application/json'
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
       },
-      body:JSON.stringify(user)
-    })
-    .then(response => {
-      return response.json().then(json => {
+      body: JSON.stringify(user),
+    }).then((response) => {
+      return response.json().then((json) => {
         return response.ok ? json : Promise.reject(json.error);
       });
     });
   },
-}
+};
 
-export default AuthApiService
+module.exports = AuthApiService;
