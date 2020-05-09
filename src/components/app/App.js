@@ -13,12 +13,15 @@ import CreateStoryPage from "../../routes/CreateStoryPage/CreateStoryPage";
 import PoliciesPage from "../../routes/PoliciesPage/PoliciesPage";
 import StoryPage from "../../routes/StoryPage/StoryPage";
 import "./App.css";
+import Store from "../../dummystore";
 
 class App extends Component {
   // what is our state going to look like?
   state = {
     error: "",
     hasError: false,
+    user: Store.users.map((user) => user.name),
+    help: [],
     story: [],
     comment: [],
   };
@@ -27,21 +30,36 @@ class App extends Component {
     this.setState({
       comment: [...this.state.comment, comment],
     });
+    // for testing remove after
+    console.log("comment", this.state.comment);
   };
 
   addStory = (story) => {
     this.setState({
       story: [...this.state.story, story],
     });
+    // for testing remove after
+    console.log("story", this.state.story);
+  };
+
+  addHelp = (help) => {
+    this.setState({
+      help: [...this.state.help, help],
+    });
+    // for testing remove after
+    console.log("help", this.state.help);
   };
 
   render() {
     // what is our context going to look like?
     const value = {
+      user: this.state.user,
+      story: this.state.story,
       stories: this.state.stories,
       comments: this.state.comments,
       addStory: this.addStory,
       addComment: this.addComment,
+      addHelp: this.addHelp,
     };
     return (
       <ApiContext.Provider value={value}>

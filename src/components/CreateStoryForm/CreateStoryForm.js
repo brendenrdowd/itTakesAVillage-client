@@ -21,18 +21,15 @@ export class CreateStoryForm extends Component {
   };
 
   handleSubmit = (event) => {
-    console.log(this.state.selectValue);
-    console.log(this.state.textValue);
+    this.context.addStory(this.state.textValue);
+    this.context.addHelp(this.state.selectValue);
     event.preventDefault();
-    // const story = {
-    //   stories: event.target.
-    // }
   };
 
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <h3>User: {this.context.username}</h3>
+        <h3>User: {this.context.user}</h3>
         <label>Crerate Story:</label>
         {/* drop down for keywords */}
         <label>

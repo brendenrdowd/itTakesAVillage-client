@@ -3,29 +3,29 @@ import Context from "../../contexts/ApiContext";
 
 export class CreateCommentForm extends Component {
   // grab parent story from props
-
   // user from context
   static contextType = Context;
   constructor(props) {
     super(props);
     this.state = {
-      comment: "",
+      newComment: "",
     };
   }
 
   handleCommentChange = (event) => {
-    this.setState({ comment: event.target.value });
+    this.setState({ newComment: event.target.value });
   };
 
   handleSubmit = (event) => {
-    console.log(this.state.comment);
+    this.context.addComment(this.state.newComment);
     event.preventDefault();
   };
 
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <h3>User: {this.context.username}</h3>
+        <h3>User: {this.context.user}</h3>
+        <h3>Story: {this.context.story}</h3>
         {/* input for comment */}
         <label>Crerate comment:</label>
         <input
