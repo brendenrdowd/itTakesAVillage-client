@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import StoryCard from '../../components/CreateStoryForm/CreateStoryForm'
+import React, { Component } from 'react';
+// import StoryCard from '../../components/CreateStoryForm/CreateStoryForm'
 
-export class DashboardPage extends Component {
+export default class DashboardPage extends Component {
   render() {
     // const storyCards = thing.map(card =>{
     //   <StoryCard />
@@ -11,8 +11,6 @@ export class DashboardPage extends Component {
         {/* filter form */}
         {/* {StoryCards} */}
       </section>
-    )
+    );
   }
 }
-
-export default DashboardPage

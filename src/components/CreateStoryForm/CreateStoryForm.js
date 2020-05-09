@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-export class CreateStoryForm extends Component {
+class CreateStoryForm extends Component {
   // grab user data from context?
   render() {
     return (
@@ -8,8 +8,8 @@ export class CreateStoryForm extends Component {
         {/* input for issue */}
         {/* drop down for keywords */}
       </form>
-    )
+    );
   }
 }
 
-export default CreateStoryForm
+export default CreateStoryForm;

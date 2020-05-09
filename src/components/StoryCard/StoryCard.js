@@ -1,13 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-export class StoryCard extends Component {
+class StoryCard extends Component {
   render() {
-    return (
-      <div>
-        
-      </div>
-    )
+    return <div></div>;
   }
 }
 
-export default StoryCard
+export default StoryCard;

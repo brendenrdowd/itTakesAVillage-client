@@ -1,7 +1,7 @@
-import React from 'react';
+// import React from 'react';
 
-const ApiContext = React.createContext({
-  value: {},
-});
+// const ApiContext = React.createContext({
+//   value: {},
+// });
 
-export default ApiContext;
+// export default ApiContext;

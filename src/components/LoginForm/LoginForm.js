@@ -1,13 +1,8 @@
-import React, { Component } from 'react'
-
-export class LoginForm extends Component {
+import React, { Component } from 'react';
+class LoginForm extends Component {
   render() {
-    return (
-      <form>
-        
-      </form>
-    )
+    return <form></form>;
   }
 }
 
-export default LoginForm
+export default LoginForm;
