@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { Component } from 'react';
 
 export default class RegistrationForm extends Component {
@@ -74,3 +75,18 @@ export default class RegistrationForm extends Component {
     );
   }
 }
+=======
+import React, { Component } from 'react'
+
+export class IndividualRegForm extends Component {
+  render() {
+    return (
+      <form>
+        
+      </form>
+    )
+  }
+}
+
+export default IndividualRegForm
+>>>>>>> 57b3e2111bc4b986577ac2bb22301f089b6f2e1c

@@ -4,6 +4,7 @@ import ApiContext from '../../contexts/ApiContext';
 import PrivateRoute from '../Utils/PrivateRoute';
 import PublicOnlyRoute from '../Utils/PublicOnlyRoute';
 // import all the routes
+<<<<<<< HEAD
 import DashboardPage from '../../routes/Dashboard/Dashboard';
 import LandingPage from '../../routes/LandingPage/LandPage';
 import LoginPage from '../../routes/LoginPage/LoginPage';
@@ -17,6 +18,28 @@ class App extends Component {
 
   render() {
     // const value = {};
+=======
+import DashboardPage from '../../routes/DashboardPage/DashboardPage'
+import LandingPage from '../../routes/LandingPage/LandingPage'
+import LoginPage from '../../routes/LoginPage/LoginPage'
+import NotFoundPage from '../../routes/NotFoundPage/NotFoundPage'
+import RegistrationPage from '../../routes/RegistrationPage/RegistrationPage'
+import CreateStoryPage from '../../routes/CreateStoryPage/CreateStoryPage'
+import PoliciesPage from '../../routes/PoliciesPage/PoliciesPage'
+import StoryPage from '../../routes/StoryPage/StoryPage'
+import './App.css'
+
+class App extends Component {
+  // what is our state going to look like?
+  state = {
+    error: "",
+    hasError: false
+  }
+
+  render() {
+    // what is our context going to look like?
+    const value = {}
+>>>>>>> 57b3e2111bc4b986577ac2bb22301f089b6f2e1c
     return (
       // <ApiContext.Provider value={value}>
         <div className='App container'>
@@ -32,8 +55,30 @@ class App extends Component {
                 path={'/register'}
                 component={RegistrationPage}
               />
+<<<<<<< HEAD
               <PrivateRoute path={'/dashboard'} component={DashboardPage} />
               <Route component={NotFoundPage} />
+=======
+              <Route
+                path={'/dashboard'}
+                component={DashboardPage}
+              />
+              <PrivateRoute
+                path="/create"
+                component={CreateStoryPage}
+              />
+              <Route
+                path="/story/:id"
+                component={StoryPage}
+              />
+              <Route
+                path="/policies"
+                component={PoliciesPage}
+              />
+              <Route
+                component={NotFoundPage}
+              />
+>>>>>>> 57b3e2111bc4b986577ac2bb22301f089b6f2e1c
             </Switch>
           </main>
         </div>
