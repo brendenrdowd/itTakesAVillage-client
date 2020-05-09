@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 
 export class CreateCommentForm extends Component {
+  // grab parent story from props
+  // user from context
   render() {
     return (
       <form>
-        {/* keyword dropdown */}
+        {/* input for comment */}
       </form>
     )
   }
