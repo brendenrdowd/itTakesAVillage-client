@@ -1,0 +1,13 @@
+.IndividualRegForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.registrationError {
+  color: red;
+  padding: 5px;
+}

@@ -1,0 +1,13 @@
+.RegistrationPage {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  margin: auto;
+  font-weight: bold;
+}
+.RegistrationPage h2 {
+  padding: 40px;
+}
