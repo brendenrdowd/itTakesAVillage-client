@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import PrivateRoute from '../Utils/PrivateRoute';
 import PublicOnlyRoute from '../Utils/PublicOnlyRoute';
-import Nav from '../../components/Nav/Nav';
+import Toolbar from '../Nav/Toolbar/Toolbar'
+import SideDrawer from '../Nav/SideDrawer/SideDrawer';
+import Backdrop from '../Nav/Backdrop/Backdrop'
 import ApiContext from '../../contexts/ApiContext'
 // import all the routes
 import DashboardPage from '../../routes/DashboardPage/DashboardPage';
@@ -20,15 +22,35 @@ export default class App extends Component {
   state = {
     error: '',
     hasError: false,
+    sideDrawerOpen: false
   };
+
+  handleBackdropClose = () => {
+    this.setState({ sideDrawerOpen: false })
+  }
+
+  drawerToggleClickHandler = () => {
+    this.setState((prevState) => {
+      return { sideDrawerOpen: !prevState.sideDrawerOpen }
+    })
+  }
 
   render() {
     // what is our context going to look like?
-    const value = {};
+    const value = {
+      toggleSideDrawer: this.drawerToggleClickHandler,
+      closeBackdrop: this.handleBackdropClose
+    };
+    let backdrop
+    if (this.state.sideDrawerOpen) {
+      backdrop = <Backdrop />
+    }
     return (
       <ApiContext.Provider value={value}>
         <div className='container'>
-          {/* <Nav /> */}
+          <Toolbar />
+          <SideDrawer show={this.state.sideDrawerOpen} />
+          {backdrop}
           <main>
             {this.state.hasError && <p className='red'>{this.state.error}</p>}
             <Switch>
@@ -50,8 +72,8 @@ export default class App extends Component {
               <Route
                 path={'/create'}
                 component={CreateStoryPage} />
-                {/* private route */}
-                {/* we need to load the commentComponent instead of the createStory component, probably by indicating with props... */}
+              {/* private route */}
+              {/* we need to load the commentComponent instead of the createStory component, probably by indicating with props... */}
               {/* <Route
                 path={'/comment/edit/:id'}
                 component={CreateStoryPage} /> */}
