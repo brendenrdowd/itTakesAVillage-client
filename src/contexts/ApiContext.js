@@ -1,7 +1,5 @@
-// import React from 'react';
+import React from 'react'
 
-// const ApiContext = React.createContext({
-//   value: {},
-// });
+export default React.createContext({
 
-// export default ApiContext;
+})

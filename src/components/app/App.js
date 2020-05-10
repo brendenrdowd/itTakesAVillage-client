@@ -27,7 +27,8 @@ export default class App extends Component {
     const value = {};
     return (
       <ApiContext.Provider value={value}>
-        <div className='App container'>
+        <div className='container'>
+          {/* <Nav /> */}
           <main>
             {this.state.hasError && <p className='red'>{this.state.error}</p>}
             <Switch>
