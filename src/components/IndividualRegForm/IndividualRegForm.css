@@ -1,6 +1,7 @@
 .IndividualRegForm {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -10,4 +11,10 @@
 .registrationError {
   color: red;
   padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-wrap: wrap;
+  word-wrap: wrap;
 }

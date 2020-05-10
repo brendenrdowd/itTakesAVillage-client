@@ -1,28 +1,27 @@
 import React, { Component, isValidElement } from 'react';
-import { Input, Button, Required, Section } from '../Utils/Utils';
-// import isEmail from 'validator/lib/isEmail';
+import { Input, Button, Required } from '../Utils/Utils';
 import './IndividualRegForm.css';
 
-const initalState = {
+const initialState = {
   full_name: '',
   user_name: '',
   email: '',
   zip_code: '',
   password: '',
-  re_enter_password: '',
+  repeatPassword: '',
   nameError: '',
   userNameError: '',
   emailError: '',
   zipCodeError: '',
   passwordError: '',
-  reEnterPasswordError: '',
+  repeatPasswordError: '',
 };
 export default class IndividualRegForm extends Component {
   //   static defaultProps = {
   //     onRegistrationSuccess: () => {},
   //   };
 
-  state = initalState;
+  state = initialState;
 
   handleValue = (event) => {
     const isCheckbox = event.target.type === 'checkbox';
@@ -39,7 +38,8 @@ export default class IndividualRegForm extends Component {
     let emailError = '';
     let zipCodeError = '';
     let passwordError = '';
-    let reEnterPasswordError = '';
+    let repeatPasswordError = '';
+    const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[A-Z])(?=.*[0-9])[\S]/;
 
     if (this.state.full_name.length < 5) {
       nameError = 'full name must have at least 6 characters';
@@ -54,8 +54,47 @@ export default class IndividualRegForm extends Component {
     if (!this.state.email) {
       emailError = 'Email field is empty';
     }
-    if (nameError || userNameError) {
-      this.setState({ nameError, userNameError });
+    if (!this.state.email.includes('@')) {
+      emailError = 'Invalid email';
+    }
+    if (!this.state.zip_code) {
+      zipCodeError = 'Zip code field is empty';
+    }
+    if (!Number(this.state.zip_code)) {
+      zipCodeError = 'must be numbers';
+    }
+    if (this.state.zip_code.length !== 5) {
+      zipCodeError = 'must be 5 characters long';
+    }
+    if (!this.state.password) {
+      passwordError = 'Password field is empty';
+    }
+    if (!REGEX_UPPER_LOWER_NUMBER_SPECIAL.test(this.state.password)) {
+      passwordError =
+        'Password must contain at least 1 upper case letter, and a number';
+    }
+    if (!this.state.repeatPassword) {
+      repeatPasswordError = 'Password field is empty';
+    }
+    if (this.state.repeatPassword.length !== this.state.password.length) {
+      repeatPasswordError = 'Passwords must match';
+    }
+    if (
+      nameError ||
+      userNameError ||
+      emailError ||
+      zipCodeError ||
+      passwordError ||
+      repeatPasswordError
+    ) {
+      this.setState({
+        nameError,
+        userNameError,
+        emailError,
+        zipCodeError,
+        passwordError,
+        repeatPasswordError,
+      });
       return false;
     }
     return true;
@@ -67,9 +106,9 @@ export default class IndividualRegForm extends Component {
 
     if (isInputValid) {
       console.log(this.state);
-      this.setState(initalState);
+      event.target.reset();
+      this.setState(initialState);
     }
-    event.target.reset();
   };
 
   render() {
@@ -102,10 +141,10 @@ export default class IndividualRegForm extends Component {
             id='IndividualRegForm__user_name'
             onChange={this.handleValue}
           ></Input>
+          <section className='registrationError'>
+            {this.state.userNameError}
+          </section>
         </div>
-        <section className='registrationError'>
-          {this.state.userNameError}
-        </section>
         <div className='email'>
           <label htmlFor='IndividualRegForm__email'>
             Email <Required />
@@ -116,6 +155,9 @@ export default class IndividualRegForm extends Component {
             id='IndividualRegForm__email'
             onChange={this.handleValue}
           ></Input>
+          <section className='registrationError'>
+            {this.state.emailError}
+          </section>
         </div>
         <div className='zip_code'>
           <label htmlFor='IndividualRegForm__zip_code'>
@@ -128,6 +170,9 @@ export default class IndividualRegForm extends Component {
             id='IndividualRegForm__zip_code'
             onChange={this.handleValue}
           ></Input>
+          <section className='registrationError'>
+            {this.state.zipCodeError}
+          </section>
         </div>
         <div className='password'>
           <label htmlFor='IndividualRegForm__password'>
@@ -141,17 +186,23 @@ export default class IndividualRegForm extends Component {
             onChange={this.handleValue}
           ></Input>
         </div>
+        <section className='registrationError'>
+          {this.state.passwordError}
+        </section>
         <div className='re-enter-password'>
           <label htmlFor='IndividualRegForm__password'>
-            Re-enter password <Required />
+            Repeat password <Required />
           </label>
           <Input
-            name='re_enter_password'
+            name='repeatPassword'
             placeholder='Password123'
             type='password'
             id='IndividualRegForm__password'
             onChange={this.handleValue}
           ></Input>
+          <section className='registrationError'>
+            {this.state.repeatPasswordError}
+          </section>
         </div>
         <Button type='submit'>Sign up</Button>
       </form>
