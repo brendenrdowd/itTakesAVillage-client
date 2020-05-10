@@ -15,31 +15,46 @@ import StoryPage from "../../routes/StoryPage/StoryPage";
 import "./App.css";
 import Store from "../../dummystore";
 
+// string
+const users = Store.users.map((item) => item.name);
+// arrays
+const stories = Store.stories;
+const comments = Store.comments;
+
 class App extends Component {
   // what is our state going to look like?
   state = {
     error: "",
     hasError: false,
-    user: Store.users.map((user) => user.name),
+    user: "",
     help: [],
-    story: [],
-    comment: [],
+    stories: [],
+    comments: [],
   };
 
-  addComment = (comment) => {
+  componentDidMount() {
     this.setState({
-      comment: [...this.state.comment, comment],
+      // need to validate if single user or all users (HH)
+      user: users,
+      stories: stories,
+      comments: comments,
+    });
+  }
+
+  addComment = (comments) => {
+    this.setState({
+      comments: [...this.state.comments, comments],
     });
     // for testing remove after
-    console.log("comment", this.state.comment);
+    console.log("comments", this.state.comments);
   };
 
-  addStory = (story) => {
+  addStory = (stories) => {
     this.setState({
-      story: [...this.state.story, story],
+      stories: [...this.state.stories, stories],
     });
     // for testing remove after
-    console.log("story", this.state.story);
+    console.log("stories", this.state.stories);
   };
 
   addHelp = (help) => {
@@ -54,7 +69,6 @@ class App extends Component {
     // what is our context going to look like?
     const value = {
       user: this.state.user,
-      story: this.state.story,
       stories: this.state.stories,
       comments: this.state.comments,
       addStory: this.addStory,
