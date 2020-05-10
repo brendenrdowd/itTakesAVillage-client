@@ -7,8 +7,15 @@ export class StoryPage extends Component {
     return (
       <section>
         {StoryCard}
+        <nav>
+        <button>edit</button>
+        <button>delete</button>
+        <button>reply</button>
+        <button>share</button>
+        </nav>
         {CreateCommentForm}
         {/* comments */}
+        //logic 
         {/* resolution? */}
       </section>
     )
