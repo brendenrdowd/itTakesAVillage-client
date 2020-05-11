@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import AuthApiService from '../../services/auth-api-service'
+import UserApiService from '../../services/user-api-service'
+import "./LoginForm.css"
 
 export class LoginForm extends Component {
   static defaultProps = {
@@ -13,7 +14,7 @@ export class LoginForm extends Component {
     this.setState({ error: null })
     const { username, password } = ev.target
 
-    AuthApiService.postLogin({
+    UserApiService.postLogin({
       username: username.value,
       password: password.value,
     })
@@ -27,19 +28,23 @@ export class LoginForm extends Component {
       })
   }
 
+
+
   render() {
+    const { error } = this.state
     return (
       <form
         className='LoginForm'
         onSubmit={this.handleSubmitJwtAuth}
       >
         <div role='alert'>
-          {/* {error && <p className='red'>{error}</p>} */}
+          {error && <p className='red'>{error}</p>}
         </div>
         <div className='username'>
           <label htmlFor='LoginForm__username'>
             Username
           </label>
+          {" "}
           <input type='text'
             required
             name='username'
@@ -51,7 +56,8 @@ export class LoginForm extends Component {
           <label htmlFor='LoginForm__password'>
             Password
           </label>
-          <input type='text'
+          {" "}
+          <input
             required
             name='password'
             type='password'
