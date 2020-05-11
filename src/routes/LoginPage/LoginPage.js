@@ -10,7 +10,7 @@ export class LoginPage extends Component {
 
   handleLoginSuccess = () => {
     const { history } = this.props
-    history.push("/DashboardPage")
+    history.push("/dashboard")
   }
 
   render() {
