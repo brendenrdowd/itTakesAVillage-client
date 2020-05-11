@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+// import StoryService from "../../services/story-api-service";
 import Context from "../../contexts/ApiContext";
 
 export class CreateStoryForm extends Component {
@@ -20,11 +21,30 @@ export class CreateStoryForm extends Component {
     this.setState({ selectValue: event.target.value });
   };
 
+  // only needed for non back end stuff
   handleSubmit = (event) => {
     this.context.addStory(this.state.textValue);
     this.context.addHelp(this.state.selectValue);
     event.preventDefault();
   };
+
+  // ready for backend connect
+  // handleSubmit = (event) => {
+  //   const story = {
+  //     type: this.state.selectValue,
+  //     title: this.state.textValue,
+  //   };
+  //   StoryService.postStory(story)
+  //     .then((story) => {
+  //       this.context.addStory(story);
+  //       this.props.history.push(`/story/${story.id}`);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+
+  //   event.preventDefault();
+  // };
 
   render() {
     return (
@@ -34,7 +54,10 @@ export class CreateStoryForm extends Component {
         {/* drop down for keywords */}
         <label>
           select help type
-          <select value={this.state.value} onChange={this.handleSelectorChange}>
+          <select
+            value={this.state.selectValue}
+            onChange={this.handleSelectorChange}
+          >
             <option value="food">Food</option>
             <option value="clothes">Clothes</option>
             <option value="transport">Transportation</option>
@@ -43,7 +66,7 @@ export class CreateStoryForm extends Component {
         {/* input for issue */}
         <input
           type="text"
-          value={this.state.value}
+          value={this.state.textValue}
           placeholder="enter issue"
           onChange={this.handleTextChange}
           required
