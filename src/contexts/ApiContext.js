@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-// import React from 'react';
-
-// const ApiContext = React.createContext({
-//   value: {},
-// });
-
-// export default ApiContext;
-=======
 import React from "react";
 
 export default React.createContext({
@@ -15,4 +6,3 @@ export default React.createContext({
   handleAddStory: () => {},
   handleAddComment: () => {},
 });
->>>>>>> tomilone

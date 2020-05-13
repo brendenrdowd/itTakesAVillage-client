@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-import React, { Component } from 'react';
-// import StoryCard from '../../components/CreateStoryForm/CreateStoryForm'
-
-export default class DashboardPage extends Component {
-=======
 import React, { Component } from "react";
 import StoryCard from "../../components/StoryCard/StoryCard";
 import thing from "../../dummystore";
@@ -46,7 +40,6 @@ export default class DashboardPage extends Component {
     }
   };
 
->>>>>>> tomilone
   render() {
     return (
       <section>

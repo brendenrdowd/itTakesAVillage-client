@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^7.2.1",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
+    "jsonwebtoken": "^8.5.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-fontawesome": "^1.7.1",
