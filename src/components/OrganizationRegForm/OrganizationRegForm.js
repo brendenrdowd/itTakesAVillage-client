@@ -1,13 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-export class OrganizationRegForm extends Component {
+class OrganizationRegForm extends Component {
   render() {
-    return (
-      <form>
-        
-      </form>
-    )
+    return <form></form>;
   }
 }
 
-export default OrganizationRegForm
+export default OrganizationRegForm;

@@ -1,11 +1,11 @@
 import config from "../config";
 
-const StoryApiService = {
-  postStory(story) {
+const CommentApiService = {
+  postComment(comment) {
     fetch(`${config.API_NOTES}`, {
-      // fetch(`${config.API_ENDPOINT}/story`, {
+      // fetch(`${config.API_ENDPOINT}/comment`, {
       method: "POST",
-      body: JSON.stringify(story),
+      body: JSON.stringify(comment),
       headers: {
         // authorization: `bearer ${config.API_ENDPOINT}`,
         "content-type": "application/json",
@@ -21,4 +21,4 @@ const StoryApiService = {
   },
 };
 
-export default StoryApiService;
+export default CommentApiService;
