@@ -1,4 +1,4 @@
-//zipcode
+
 
 export default {
   "users":[{

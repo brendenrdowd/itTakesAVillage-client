@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-// import history from './history';
+import { Router } from 'react-router-dom';
+
+import history from './history';
 import App from './components/App/App';
 // we'll use this later for styling, especially for story toolbar
 // import { library } from '@fortawesome/fontawesome-svg-core'
@@ -12,8 +13,8 @@ import './index.css';
 // library.add(fab,faSignOutAlt,faHome,faSearch,faBars )
 
 ReactDOM.render(
-  <BrowserRouter>
+  <Router history={history}>
     <App />
-  </BrowserRouter>,
+  </Router>,
   document.getElementById('root')
 );

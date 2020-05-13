@@ -1,7 +1,10 @@
-// import React from 'react';
+  
+import React, { Component } from "react";
 
-// const ApiContext = React.createContext({
-//   value: {},
-// });
+export default React.createContext({
+  stories: [],
+  comments: [],
+  handleAddStory: () => {},
+  handleAddComment: () => {},
+});
 
-// export default ApiContext;
