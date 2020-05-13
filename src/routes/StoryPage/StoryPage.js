@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import CreateCommentForm from '../../components/CreateCommentForm/CreateCommentForm';
+import React, { Component } from "react";
+import CreateCommentForm from "../../components/CreateCommentForm/CreateCommentForm";
 
 export default class StoryPage extends Component {
   render() {
     return (
       <section>
         {/* card itself */}
-        {CreateCommentForm}
+        {/* CreateCommentForm */}
         {/* comments */}
         {/* resolution? */}
       </section>
