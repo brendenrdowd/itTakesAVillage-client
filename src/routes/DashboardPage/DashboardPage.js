@@ -45,7 +45,6 @@ export default class DashboardPage extends Component {
       <section>
         {/* Nav When merged */}
         <div className="filterForm">
-          {/* {If you want to be able to select multiple keywords at once in the filter, I can change that.} */}
           <form>
             <label for="keywords">Filter By:</label>
             <select onChange={this.handleFilter} id="keywords">
