@@ -1,24 +1,9 @@
 export default {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-  "users": [{
-    "id": "1",
-    "name": "John Doe",
-    "email": "jd@gmail.com",
-    "location": "?"
-  }],
-  "stories": [],
-  "comments": [],
-}
-=======
->>>>>>> 76f85eb3e82a17c862474b5b4e8a102dac510c12
   users: [
     {
       id: "1",
       name: "John Doe",
       email: "jd@gmail.com",
-<<<<<<< HEAD
       location: "90027",
     },
     {
@@ -104,12 +89,3 @@ export default {
     },
   ],
 };
-=======
-      location: "?",
-    },
-  ],
-  stories: ["never rick and morty"],
-  comments: ["wubalubadubdub"],
-};
->>>>>>> a78c223c8833932e6ef710d9213bf175db4fe15e
->>>>>>> 76f85eb3e82a17c862474b5b4e8a102dac510c12
