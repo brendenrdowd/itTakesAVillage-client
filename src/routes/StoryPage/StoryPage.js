@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import {Section} from '../../components/Utils'
+import {Section, Hyph} from '../../components/Utils'
 import CreateCommentForm from '../../components/CreateCommentForm/CreateCommentForm'
 import StoryCard from '../../components/StoryCard/StoryCard'
 import CardToolBar from '../../components/Utils/CardToolBar'
 import CommentToolBar from '../../components/Utils/CommentToolbar'
 
-
+//componentDidMount? 
 
 
 export default class StoryPage extends Component {
@@ -38,4 +38,21 @@ export default class StoryPage extends Component {
       </Section>
     )
   }
+}
+
+function displayComments({ comments = [] }) {
+  return (
+    <ul className="comments_list">
+      {comments.map( comment => 
+        <li key={comment.id} className="comment">
+          <p className="comment_text">
+            {comment.content}
+          </p>
+          <Hyph />
+          <p>
+          {comment.user_id}
+          </p>
+        </li>)}
+    </ul>
+  )
 }
