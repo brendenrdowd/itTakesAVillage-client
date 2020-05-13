@@ -19,6 +19,21 @@ const StoryApiService = {
       return res.json();
     });
   },
+
+  //add delete and edit story functions 
+  getStoryById(id) {
+    return fetch(`${config.API_ENDPOINT}/story/${id}`, {
+      method: "GET",
+      headers: {
+        //authorization: `bearer ${config.API_ENDPOINT}`
+      },
+    })
+      .then(res =>
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json()
+      )
+  },
 };
 
 export default StoryApiService;
