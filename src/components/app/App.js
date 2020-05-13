@@ -27,7 +27,7 @@ export default class App extends Component {
     const value = {};
     return (
       <ApiContext.Provider value={value}>
-        <div className="App container">
+        <div className='App container'>
           <main>
             {this.state.hasError && <p className="red">{this.state.error}</p>}
             <Switch>
@@ -55,6 +55,9 @@ export default class App extends Component {
               <Route component={NotFoundPage} />
             </Switch>
           </main>
+          <footer>
+            <Footer />
+          </footer>
         </div>
       </ApiContext.Provider>
     );
