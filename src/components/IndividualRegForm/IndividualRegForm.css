@@ -1,0 +1,24 @@
+/* * {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+.IndividualRegForm {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.registrationError {
+  color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-wrap: wrap;
+  word-wrap: wrap;
+} */
