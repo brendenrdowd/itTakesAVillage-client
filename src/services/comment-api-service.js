@@ -3,7 +3,7 @@ import config from "../config";
 const CommentApiService = {
   postComment(comment) {
     fetch(`${config.API_NOTES}`, {
-      // fetch(`${config.API_ENDPOINT}/notes`, {
+      // fetch(`${config.API_ENDPOINT}/comment`, {
       method: "POST",
       body: JSON.stringify(comment),
       headers: {
