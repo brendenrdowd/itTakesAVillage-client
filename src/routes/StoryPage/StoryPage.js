@@ -17,7 +17,7 @@ export default class StoryPage extends Component {
     {CardToolBar}
     {CreateCommentForm}
     {CommentToolBar}
-    //logic 
+    {displayComments()}
     {/* resolution? */}
     </Section>
     )
