@@ -1,10 +1,13 @@
-import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
-import PrivateRoute from "../Utils/PrivateRoute";
-import PublicOnlyRoute from "../Utils/PublicOnlyRoute";
-import Nav from "../../components/Nav/Nav";
+import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import PrivateRoute from '../Utils/PrivateRoute';
+import PublicOnlyRoute from '../Utils/PublicOnlyRoute';
+import Toolbar from '../Nav/Toolbar/Toolbar'
+import SideDrawer from '../Nav/SideDrawer/SideDrawer';
+import Backdrop from '../Nav/Backdrop/Backdrop'
 import Footer from '../../components/Footer/Footer'
-import ApiContext from "../../contexts/ApiContext";
+import Store from "../../dummystore";
+import ApiContext from '../../contexts/ApiContext'
 // import all the routes
 import DashboardPage from "../../routes/DashboardPage/DashboardPage";
 import LandingPage from "../../routes/LandingPage/LandingPage";
@@ -15,7 +18,6 @@ import CreateStoryPage from "../../routes/CreateStoryPage/CreateStoryPage";
 import PoliciesPage from "../../routes/PoliciesPage/PoliciesPage";
 import StoryPage from "../../routes/StoryPage/StoryPage";
 
-import Store from "../../dummystore";
 import "./App.css";
 
 export default class App extends Component {
@@ -27,6 +29,7 @@ export default class App extends Component {
     help: [], //won't need this
     stories: [],
     comments: [],
+    sideDrawerOpen: false
   };
   stories = Store.stories;
   comments = Store.comments;
@@ -71,6 +74,16 @@ export default class App extends Component {
     console.log("help", this.state.help);
   };
 
+  handleBackdropClose = () => {
+    this.setState({ sideDrawerOpen: false })
+  }
+
+  drawerToggleClickHandler = () => {
+    this.setState((prevState) => {
+      return { sideDrawerOpen: !prevState.sideDrawerOpen }
+    })
+  }
+
   render() {
     // what is our context going to look like?
     const value = {
@@ -80,12 +93,20 @@ export default class App extends Component {
       addStory: this.handleAddStory,
       addComment: this.handleAddComment,
       addHelp: this.addHelp, //won't need this
-      updateUser:this.handleUpdateUser
+      updateUser:this.handleUpdateUser,
+      toggleSideDrawer: this.drawerToggleClickHandler,
+      closeBackdrop: this.handleBackdropClose
     };
+    let backdrop
+    if (this.state.sideDrawerOpen) {
+      backdrop = <Backdrop />
+    }
     return (
       <ApiContext.Provider value={value}>
         <div className='container'>
-          <Nav />
+          <Toolbar />
+          <SideDrawer show={this.state.sideDrawerOpen} />
+          {backdrop}
           <main>
             {this.state.hasError && <p className="red">{this.state.error}</p>}
             <Switch>
@@ -100,7 +121,9 @@ export default class App extends Component {
               {/* private */}
               <Route path={"/dashboard"} component={DashboardPage} />
               {/* Private */}
-              <Route path={"/create"} component={CreateStoryPage} />
+              <Route
+                path={'/create'}
+                component={CreateStoryPage} />
               {/* private route */}
               {/* we need to load the commentComponent instead of the createStory component, probably by indicating with props... */}
               {/* <Route

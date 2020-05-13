@@ -6,5 +6,7 @@ export default React.createContext({
   user:{},
   addStory: () => {},
   addComment: () => {},
-  updateUser: () => {}
-});
+  updateUser: () => {},
+  toggleSideDrawer: () => {},
+  closeBackdrop: () => {}
+})
