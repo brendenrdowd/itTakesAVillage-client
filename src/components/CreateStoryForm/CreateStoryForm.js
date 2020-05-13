@@ -52,6 +52,14 @@ class CreateStoryForm extends Component {
         <h3>User: {this.context.user}</h3>
         <label>Crerate Story:</label>
         {/* drop down for keywords */}
+        <p>
+          Please select the requested type of help from the drop down selections
+          menu. Then enter the specifics of the help you are requesting.
+        </p>
+        <p>
+          TIP: Create a story for each individual need, additionally please be
+          as specific as possible for your requested help.
+        </p>
         <label>
           select help type
           <select
