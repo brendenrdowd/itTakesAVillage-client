@@ -49,8 +49,9 @@ class CreateStoryForm extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <h3>User: {this.context.user}</h3>
-        <label>Crerate Story:</label>
+        {/* will need to update this once we're grabbing user object from backend */}
+        {/* <h3>User: {this.context.user.name}</h3> */}
+        <label>Create Story:</label>
         {/* drop down for keywords */}
         <p>
           Please select the requested type of help from the drop down selections

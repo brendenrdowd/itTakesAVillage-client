@@ -2,3 +2,7 @@
   margin: 30px auto;
   width: 50%;
 }
+.card-link{
+  text-decoration: none;
+  color:black;
+}

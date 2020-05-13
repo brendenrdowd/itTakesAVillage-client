@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Section, Hyph} from '../../components/Utils/Utils'
+import { Section, Hyph } from '../../components/Utils/Utils'
 import CreateCommentForm from '../../components/CreateCommentForm/CreateCommentForm'
 import StoryCard from '../../components/StoryCard/StoryCard'
 import CardToolBar from '../../components/Utils/CardToolBar'
@@ -14,7 +14,7 @@ import ApiContext from '../../contexts/ApiContext'
 export default class StoryPage extends Component {
 
   static defaultProps = {
-    match: {params: {} }
+    match: { params: {} }
   }
 
   static contextType = ApiContext
@@ -22,78 +22,63 @@ export default class StoryPage extends Component {
   state = {
     story: {},
     comments: [],
-    user: {} 
+    user: {}
   }
 
   componentDidMount() {
-    
     const story_id = this.props.match.params.id
-    const story = StoryApiService.getStoryById(story_id) 
+    const story = StoryApiService.getStoryById(story_id)
     const comments = CommentApiService.getCommentsByStoryId(story_id) || []
-    const user = this.context.user 
+    const user = this.context.user
     this.setState(
       {
         story,
-        comments, 
-        user 
+        comments,
+        user
       }
-    ) 
-
+    )
   }
-  
-   displayComments({ comments = [] }) {
+
+  displayComments({ comments = [] }) {
     return (
       <ul className="comments_list">
-        {comments.map( comment => 
+        {comments.map(comment =>
           <li key={comment.id} className="comment">
             <p className="comment_text">
               {comment.content}
             </p>
             <Hyph />
             <p>
-            {comment.user}
+              {comment.user}
             </p>
             {this.displayComments()}
           </li>)}
       </ul>
     )
   }
-  
-  renderStory() {
-  return (
-    <Section className="StoryPage">
-    {StoryCard}
-    {/*CardToolBar*/}
-    {CreateCommentForm}
-    {/*CommentToolBar*/}
-    {/* resolution? */}
-    </Section>
+
+  renderStory =  (
+      <Section className="StoryPage"> 
+      <StoryCard
+              title={this.state.story.title}
+              keywords={this.state.story.keywords}
+              issue={this.state.story.issue}
+            />
+      </Section>
     )
-  } 
-    
   render() {
-    const {error} = this.context 
-    let content 
+    const { error } = this.context
+    let content
     if (error) {
       content = (error.error === `Story doesn't exist`)
-      ? <p className="not_found">Story not found</p>
-      : <p className="not_found">Something went wrong</p> 
+        ? <p className="not_found">Story not found</p>
+        : <p className="not_found">Something went wrong</p>
     }
-    else {content = this.renderStory()}
+    else { content = this.renderStory }
     return (
-<<<<<<< HEAD
-      <section>
-        {/* card itself */}
-        {/* CreateCommentForm */}
-        {/* comments */}
-        {/* resolution? */}
-      </section>
-    );
-=======
       <Section className="StoryPage">
         {content}
       </Section>
     )
->>>>>>> oleg
   }
 }

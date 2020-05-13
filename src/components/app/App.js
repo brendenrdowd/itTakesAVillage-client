@@ -93,7 +93,7 @@ export default class App extends Component {
       addStory: this.handleAddStory,
       addComment: this.handleAddComment,
       addHelp: this.addHelp, //won't need this
-      updateUser:this.handleUpdateUser,
+      updateUser: this.handleUpdateUser,
       toggleSideDrawer: this.drawerToggleClickHandler,
       closeBackdrop: this.handleBackdropClose
     };
@@ -110,10 +110,14 @@ export default class App extends Component {
           <main>
             {this.state.hasError && <p className="red">{this.state.error}</p>}
             <Switch>
-              <PublicOnlyRoute exact path={"/"} component={LandingPage} />
-              <PublicOnlyRoute path={"/login"} component={LoginPage} />
-              <PublicOnlyRoute exact path={"/"} component={LandingPage} />
-              <PublicOnlyRoute path={"/login"} component={LoginPage} />
+              <PublicOnlyRoute
+                exact
+                path={"/"}
+                component={LandingPage}
+              />
+              <PublicOnlyRoute path={"/login"}
+                component={LoginPage}
+              />
               <PublicOnlyRoute
                 path={"/register"}
                 component={RegistrationPage}

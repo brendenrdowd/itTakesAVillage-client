@@ -1,13 +1,11 @@
 #footer {
-  background-color: rgb(27, 77, 94);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
+  background-color: #487948;
   height: 70px;
   color: #fff;
   text-align: center;
-  margin-top: -70px;
-  margin-bottom: 0;
-  clear: both;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding:1.5rem;
 }

@@ -3,6 +3,7 @@ import StoryCard from "../../components/StoryCard/StoryCard";
 import UserService from '../../services/user-api-service'
 import thing from "../../dummystore";
 import "./DashboardPage.css";
+import { Link } from "react-router-dom";
 
 export default class DashboardPage extends Component {
   constructor() {
@@ -11,12 +12,21 @@ export default class DashboardPage extends Component {
       filter: null,
     };
   }
+  keywords = [
+    "groceries",
+    // "delivery",
+    "food offer",
+    "rideshare",
+    "transportation",
+    "moving",
+    "clothing"
+  ]
   // need to update this, grab user id/object on successful login
-  componentDidMount(){
-    UserService.getUser()
-      .then(res => {
-        this.context.updateUser(res)
-      })
+  componentDidMount() {
+    // UserService.getUser()
+    //   .then(res => {
+    //     this.context.updateUser(res)
+    //   })
   }
 
   handleFilter = (e) => {
@@ -26,23 +36,25 @@ export default class DashboardPage extends Component {
   conditionalRender = () => {
     if (!this.state.filter || this.state.filter === "all") {
       return thing.stories.map((card) => (
-        <StoryCard
-          key={card.id}
-          title={card.title}
-          keywords={card.keywords}
-          issue={card.issue}
-        />
+        <Link key={card.id} to={`/story/${card.id}`} className="card-link">
+          <StoryCard
+            title={card.title}
+            keywords={card.keywords}
+            issue={card.issue}
+          />
+        </Link>
       ));
     }
     if (this.state.filter) {
       return thing.stories.map((card) =>
         card.keywords.includes(this.state.filter) ? (
-          <StoryCard
-            key={card.id}
-            title={card.title}
-            keywords={card.keywords}
-            issue={card.issue}
-          />
+          <Link key={card.id} to={`/story/${card.id}`} className="card-link">
+            <StoryCard
+              title={card.title}
+              keywords={card.keywords}
+              issue={card.issue}
+            />
+          </Link>
         ) : null
       );
     }
@@ -51,20 +63,18 @@ export default class DashboardPage extends Component {
   render() {
     return (
       <section>
-        {/* Nav When merged */}
         <div className="filterForm">
           <form>
             <label for="keywords">Filter By:</label>
             <select onChange={this.handleFilter} id="keywords">
               <option value="all">All</option>
-              {thing.keywords.map((keywords) => (
+              {this.keywords.map((keywords) => (
                 <option value={keywords}>{keywords}</option>
               ))}
             </select>
           </form>
         </div>
         {this.conditionalRender()}
-        {/* Footer ? */}
       </section>
     );
   }
