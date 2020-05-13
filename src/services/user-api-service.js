@@ -32,7 +32,7 @@ const UserApiService = {
             )
             .then(res => {
                 /*
-                  whenever a logint is performed:
+                  whenever a login is performed:
                   1. save the token in local storage
                   */
                 TokenService.saveAuthToken(res.authToken)
