@@ -3,6 +3,10 @@ import React from "react";
 export default React.createContext({
   stories: [],
   comments: [],
-  handleAddStory: () => {},
-  handleAddComment: () => {},
-});
+  user:{},
+  addStory: () => {},
+  addComment: () => {},
+  updateUser: () => {},
+  toggleSideDrawer: () => {},
+  closeBackdrop: () => {}
+})

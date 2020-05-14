@@ -1,0 +1,20 @@
+.btn{
+  background-color:darkseagreen;
+  padding:1em;
+  color:white;
+  text-decoration: none;
+  margin:1em;
+  border-radius: 3px;
+}
+
+.btn:hover{
+  background-color:#e5efe5;
+  color:darkseagreen;
+
+}
+.button-bar{
+  display:flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  text-align: center;
+}

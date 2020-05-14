@@ -7,7 +7,7 @@ class CreateStoryPage extends Component {
     return (
       <div>
         <CreateStoryForm />
-        <CreateCommentForm />
+        {/* <CreateCommentForm /> */}
       </div>
     );
   }
