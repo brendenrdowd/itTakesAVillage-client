@@ -27,7 +27,9 @@ export default class StoryPage extends Component {
 
   componentDidMount() {
     const story_id = this.props.match.params.id
+    // need to make sure we're grabbing the story in service
     const story = StoryApiService.getStoryById(story_id)
+    // need to make sure we're grabbing story from commentApi correctly
     const comments = CommentApiService.getCommentsByStoryId(story_id) || []
     const user = this.context.user
     this.setState(
@@ -39,33 +41,31 @@ export default class StoryPage extends Component {
     )
   }
 
-  displayComments({ comments = [] }) {
-    return (
-      <ul className="comments_list">
-        {comments.map(comment =>
-          <li key={comment.id} className="comment">
-            <p className="comment_text">
-              {comment.content}
-            </p>
-            <Hyph />
-            <p>
-              {comment.user}
-            </p>
-            {this.displayComments()}
-          </li>)}
-      </ul>
-    )
-  }
+  comments = (this.state.comments.length > 0) ? "Add a comment..." : this.state.comments.map(comment =>
+    <li key={comment.id} className="comment">
+      <p className="comment_text">
+        {comment.content}
+      </p>
+      <Hyph />
+      <p>
+        {comment.user}
+      </p>
+    </li>
+  )
 
-  renderStory =  (
-      <Section className="StoryPage"> 
+
+  renderStory = (
+    <Section className="Story">
       <StoryCard
-              title={this.state.story.title}
-              keywords={this.state.story.keywords}
-              issue={this.state.story.issue}
-            />
-      </Section>
-    )
+        title={this.state.story.title}
+        keywords={this.state.story.keywords}
+        issue={this.state.story.issue}
+      />
+      <ul className="comments_list">
+        {this.comments}
+      </ul>
+    </Section>
+  )
   render() {
     const { error } = this.context
     let content

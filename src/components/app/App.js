@@ -5,7 +5,7 @@ import PublicOnlyRoute from '../Utils/PublicOnlyRoute';
 import Toolbar from '../Nav/Toolbar/Toolbar'
 import SideDrawer from '../Nav/SideDrawer/SideDrawer';
 import Backdrop from '../Nav/Backdrop/Backdrop'
-import Footer from '../../components/Footer/Footer'
+import Footer from '../Footer/Footer'
 import Store from "../../dummystore";
 import ApiContext from '../../contexts/ApiContext'
 // import all the routes

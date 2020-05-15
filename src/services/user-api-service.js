@@ -39,6 +39,7 @@ const UserApiService = {
                 return res
             })
     },
+    // get user
     postRefreshToken() {
         return fetch(`${config.API_ENDPOINT}/auth/refresh`, {
             method: 'POST',
