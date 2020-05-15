@@ -61,6 +61,7 @@ export default class StoryPage extends Component {
         keywords={this.state.story.keywords}
         issue={this.state.story.issue}
       />
+      <CreateCommentForm story={this.state.story.id} />
       <ul className="comments_list">
         {this.comments}
       </ul>

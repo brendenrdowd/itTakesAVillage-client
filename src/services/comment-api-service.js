@@ -2,10 +2,12 @@ import config from "../config";
 
 const CommentApiService = {
 
-  postComment(comment) {
+
+  postComment(comment, storyId, userId) {
+    const package = {comment, storyId, userId}
     fetch(`${config.API_ENDPOINT}/comment`, {
       method: "POST",
-      body: JSON.stringify(comment),
+      body: JSON.stringify(package),
       headers: {
         // authorization: `bearer ${config.API_ENDPOINT}`,
         "content-type": "application/json",
@@ -37,3 +39,5 @@ const CommentApiService = {
     
 //add delete comment & edit comment 
 export default CommentApiService
+//grab storyId & userId 
+//postComment pass the body 

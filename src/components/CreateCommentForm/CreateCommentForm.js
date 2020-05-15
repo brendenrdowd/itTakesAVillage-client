@@ -21,6 +21,10 @@ class CreateCommentForm extends Component {
     this.context.addComment(this.state.newComment);
     event.preventDefault();
   };
+  //need to grab storyId which should be passed to createCommentForm by props from the story page
+  //need to grab userId from context & pass to the backend to the comment body
+  
+
 
   // ready for backend connect
   // handleSubmit = (event) => {
