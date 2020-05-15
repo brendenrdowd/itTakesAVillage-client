@@ -1,3 +1,5 @@
+import config from '../config';
+
 const userApiService = {
   postUser(newUser) {
     return fetch(`${config.API_ENDPOINT}/users`, {
@@ -11,3 +13,5 @@ const userApiService = {
     );
   },
 };
+
+export default userApiService;
