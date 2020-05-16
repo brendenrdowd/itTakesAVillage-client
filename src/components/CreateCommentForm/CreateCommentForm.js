@@ -4,6 +4,8 @@ import Context from "../../contexts/ApiContext";
 
 class CreateCommentForm extends Component {
   // grab parent story from props
+
+    
   // user from context
   static contextType = Context;
   constructor(props) {
@@ -27,20 +29,22 @@ class CreateCommentForm extends Component {
 
 
   // ready for backend connect
-  // handleSubmit = (event) => {
-  //   const comment = {
-  //     comment: this.state.newComment,
-  //   };
-  //   CommentService.postStory(comment)
-  //     .then((comment) => {
-  //       this.context.addComment(comment);
-  //       this.props.history.push(`/comment/${comment.id}`);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  //   event.preventDefault();
-  // };
+  handleSubmit = (event) => {
+    const comment = {
+      user: this.context.user.id,
+      comment: this.state.newComment,
+      story: this.props.story.id
+    };
+    CommentService.postStory(comment)
+      .then((comment) => {
+        this.context.addComment(comment);
+        this.props.history.push(`/comment/${comment.id}`);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    event.preventDefault();
+  };
 
   render() {
     return (
