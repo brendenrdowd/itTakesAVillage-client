@@ -30,6 +30,7 @@ class CreateStoryForm extends Component {
 
   // ready for backend connect
   handleSubmit = (event) => {
+    event.preventDefault();
     const story = {
       // these may be reversed check before merege
       flag: this.state.selectValue,
@@ -37,6 +38,8 @@ class CreateStoryForm extends Component {
       // test for user
       author: 100,
     };
+    console.log(this.context.story);
+
     StoryService.postStory(story)
       .then((story) => {
         this.context.addStory(story);
@@ -45,8 +48,6 @@ class CreateStoryForm extends Component {
       .catch((error) => {
         console.error(error);
       });
-
-    event.preventDefault();
   };
 
   render() {
@@ -77,11 +78,12 @@ class CreateStoryForm extends Component {
         </label>
         {/* input for issue */}
         <input
+          name="issue"
           type="text"
           value={this.state.textValue}
           placeholder="enter issue"
           onChange={this.handleTextChange}
-          required
+          // required
         />
         <input type="submit" value="Submit" />
       </form>
