@@ -3,11 +3,10 @@ import config from "../config";
 const CommentApiService = {
 
 
-  postComment(comment, storyId, userId) {
-    const package = { comment, storyId, userId }
+  postComment(comment) {
     fetch(`${config.API_ENDPOINT}/comment`, {
       method: "POST",
-      body: JSON.stringify(package),
+      body: JSON.stringify(comment),
       headers: {
         authorization: `bearer ${config.API_ENDPOINT}`,
         "content-type": "application/json",
@@ -26,7 +25,7 @@ const CommentApiService = {
     return fetch(`${config.API_ENDPOINT}/story/${storyId}`, {
       method: "GET",
       headers: {
-        authorization: `bearer ${config.API_ENDPOINT}`,
+        //authorization: `bearer ${config.API_ENDPOINT}`,
         "content-type": "application/json"
       },
     })
@@ -37,7 +36,7 @@ const CommentApiService = {
   },
 
   editComment(comment) {
-    return fetch(`${config.API_ENDPOINT}/comment/edit/${id}`, {
+    return fetch(`${config.API_ENDPOINT}/comment/edit/${comment.id}`, {
       method: "PATCH",
       body: JSON.stringify(comment),
       headers: {
@@ -52,7 +51,7 @@ const CommentApiService = {
   },
 
   deleteComment(comment) {
-    return fetch(`${config.API_ENDPOINT}/comment/${id}`, {
+    return fetch(`${config.API_ENDPOINT}/comment/${comment.id}`, {
       method: "DELETE",
       body: JSON.stringify(comment)
       

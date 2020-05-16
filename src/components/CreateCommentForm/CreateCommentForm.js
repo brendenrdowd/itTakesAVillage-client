@@ -65,8 +65,8 @@ class CreateCommentForm extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <h3>User: {this.context.user}</h3>
-        <h3>Story: {this.context.stories}</h3>
+        {/* <h3>User: {this.context.user}</h3>
+        <h3>Story: {this.context.stories}</h3> */}
         {/* input for comment */}
         <label>Crerate comment:</label>
         <input

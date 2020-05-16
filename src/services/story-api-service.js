@@ -24,17 +24,16 @@ const StoryApiService = {
   getStoryById(id) {
     return fetch(`${config.API_ENDPOINT}/story/${id}`, {
       method: "GET",
-      body: JSON.stringify(id),
-      headers: {
-        authorization: `bearer ${config.API_ENDPOINT}`
-      },
+      // headers: {
+      //   authorization: `bearer ${config.API_ENDPOINT}`
+      // },
     }).then((res) =>
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
   },
 
   editStory(story) {
-    return fetch(`${config.API_ENDPOINT}/story/edit/${id}`, {
+    return fetch(`${config.API_ENDPOINT}/story/edit/${story.id}`, {
       method: "PATCH",
       body: JSON.stringify(story),
       headers: {
@@ -49,7 +48,7 @@ const StoryApiService = {
   },
 
   deleteStory(story) {
-    return fetch(`${config.API_ENDPOINT}/story/${id}`, {
+    return fetch(`${config.API_ENDPOINT}/story/${story.id}`, {
       method: "DELETE",
       body: JSON.stringify(),
       headers: {
