@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import CommentService from "../../services/comment-api-service";
+import CommentService from "../../services/comment-api-service";
 import Context from "../../contexts/ApiContext";
 
 class CreateCommentForm extends Component {
@@ -34,6 +34,22 @@ class CreateCommentForm extends Component {
       user: this.context.user.id,
       comment: this.state.newComment,
       story: this.props.story.id
+    };
+    CommentService.postStory(comment)
+      .then((comment) => {
+        this.context.addComment(comment);
+        this.props.history.push(`/comment/${comment.id}`);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    event.preventDefault();
+  };
+
+  // ready for backend connect
+  handleSubmit = (event) => {
+    const comment = {
+      comment: this.state.newComment,
     };
     CommentService.postStory(comment)
       .then((comment) => {

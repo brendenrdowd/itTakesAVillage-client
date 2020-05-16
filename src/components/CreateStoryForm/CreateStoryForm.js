@@ -31,10 +31,11 @@ class CreateStoryForm extends Component {
   // ready for backend connect
   handleSubmit = (event) => {
     const story = {
-      issue: this.state.selectValue,
-      keyword: this.state.textValue,
-      // need id 
-      // author: this.context.
+      // these may be reversed check before merege
+      flag: this.state.selectValue,
+      issue: this.state.textValue,
+      // test for user
+      author: 100,
     };
     StoryService.postStory(story)
       .then((story) => {
