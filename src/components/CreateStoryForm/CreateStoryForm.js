@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import StoryService from "../../services/story-api-service";
 import Context from "../../contexts/ApiContext";
+import history from "../../history";
 
 class CreateStoryForm extends Component {
   // grab user data from context?
@@ -36,14 +37,14 @@ class CreateStoryForm extends Component {
       flag: this.state.selectValue,
       issue: this.state.textValue,
       // test for user
-      author: 100,
+      author: 1,
     };
     console.log(this.context.story);
 
     StoryService.postStory(story)
       .then((story) => {
         this.context.addStory(story);
-        this.props.history.push(`/story/${story.id}`);
+        history.push(`/story/${story.id}`);
       })
       .catch((error) => {
         console.error(error);
