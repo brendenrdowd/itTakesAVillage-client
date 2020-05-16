@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import StoryService from "../../services/story-api-service";
+import StoryService from "../../services/story-api-service";
 import Context from "../../contexts/ApiContext";
 
 class CreateStoryForm extends Component {
@@ -22,29 +22,32 @@ class CreateStoryForm extends Component {
   };
 
   // only needed for non back end stuff
-  handleSubmit = (event) => {
-    this.context.addStory(this.state.textValue);
-    this.context.addHelp(this.state.selectValue);
-    event.preventDefault();
-  };
-
-  // ready for backend connect
   // handleSubmit = (event) => {
-  //   const story = {
-  //     type: this.state.selectValue,
-  //     title: this.state.textValue,
-  //   };
-  //   StoryService.postStory(story)
-  //     .then((story) => {
-  //       this.context.addStory(story);
-  //       this.props.history.push(`/story/${story.id}`);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-
+  //   this.context.addStory(this.state.textValue);
+  //   this.context.addHelp(this.state.selectValue);
   //   event.preventDefault();
   // };
+
+  // ready for backend connect
+  handleSubmit = (event) => {
+    const story = {
+      // these may be reversed check before merege
+      keyword: this.state.selectValue,
+      issue: this.state.textValue,
+      // test for user
+      author: 100,
+    };
+    StoryService.postStory(story)
+      .then((story) => {
+        this.context.addStory(story);
+        this.props.history.push(`/story/${story.id}`);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    event.preventDefault();
+  };
 
   render() {
     return (
