@@ -8,7 +8,7 @@ const StoryApiService = {
       method: "POST",
       body: JSON.stringify(story),
       headers: {
-        // authorization: `bearer ${config.API_ENDPOINT}`,
+        // authorization: `Bearer ${TokenService.getAuthToken()}`,
         "content-type": "application/json",
       },
     }).then((res) => {
@@ -26,7 +26,7 @@ const StoryApiService = {
     return fetch(`${config.API_ENDPOINT}/story/${id}`, {
       method: "GET",
       headers: {
-        //authorization: `bearer ${config.API_ENDPOINT}`
+        //authorization: `Bearer ${TokenService.getAuthToken()}`
         "content-type": "application/json",
       },
     }).then((res) =>
