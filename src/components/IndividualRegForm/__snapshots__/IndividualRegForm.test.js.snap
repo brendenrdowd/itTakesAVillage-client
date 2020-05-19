@@ -1,0 +1,143 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<form
+  className="IndividualRegForm"
+  onSubmit={[Function]}
+>
+  <div
+    role="alert"
+  />
+  <div
+    className="name"
+  >
+    <label
+      htmlFor="IndividualRegForm__full_name"
+    >
+      Full name 
+      <span
+        className="Required "
+      >
+        *
+      </span>
+    </label>
+    <input
+      className="Input "
+      id="IndividualRegForm__full_name"
+      name="name"
+      placeholder="joe doe"
+      type="text"
+    />
+  </div>
+  <div
+    className="user_name"
+  >
+    <label
+      htmlFor="IndividualRegForm__user_name"
+    >
+      Username 
+      <span
+        className="Required "
+      >
+        *
+      </span>
+    </label>
+    <input
+      className="Input "
+      id="IndividualRegForm__user_name"
+      name="username"
+      placeholder="joedoe"
+      type="text"
+    />
+  </div>
+  <div
+    className="email"
+  >
+    <label
+      htmlFor="IndividualRegForm__email"
+    >
+      Email 
+      <span
+        className="Required "
+      >
+        *
+      </span>
+    </label>
+    <input
+      className="Input "
+      id="IndividualRegForm__email"
+      name="email"
+      type="text"
+    />
+  </div>
+  <div
+    className="location"
+  >
+    <label
+      htmlFor="IndividualRegForm__zip_code"
+    >
+      Zip code 
+      <span
+        className="Required "
+      >
+        *
+      </span>
+    </label>
+    <input
+      className="Input "
+      id="IndividualRegForm__zip_code"
+      name="location"
+      placeholder="88888"
+      type="text"
+    />
+  </div>
+  <div
+    className="password"
+  >
+    <label
+      htmlFor="IndividualRegForm__password"
+    >
+      Password 
+      <span
+        className="Required "
+      >
+        *
+      </span>
+    </label>
+    <input
+      className="Input "
+      id="IndividualRegForm__password"
+      name="password"
+      placeholder="Password123"
+      type="password"
+    />
+  </div>
+  <div
+    className="re-enter-password"
+  >
+    <label
+      htmlFor="IndividualRegForm__password"
+    >
+      Repeat password 
+      <span
+        className="Required "
+      >
+        *
+      </span>
+    </label>
+    <input
+      className="Input "
+      id="IndividualRegForm__password"
+      name="repeatPassword"
+      placeholder="Password123"
+      type="password"
+    />
+  </div>
+  <button
+    className="Button "
+    type="submit"
+  >
+    Sign up
+  </button>
+</form>
+`;
