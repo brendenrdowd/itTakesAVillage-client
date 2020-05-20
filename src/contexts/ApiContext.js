@@ -1,15 +1,3 @@
-import React from "react";
-
-export default React.createContext({
-  stories: [],
-  comments: [],
-  user:{},
-  addStory: () => {},
-  addComment: () => {},
-  updateUser: () => {},
-  toggleSideDrawer: () => {},
-  closeBackdrop: () => {}
-})
 import React, { Component } from 'react';
 
 const userContext = React.createContext({
@@ -17,6 +5,14 @@ const userContext = React.createContext({
   error: null,
   setUserId: () => {},
   clearError: () => {},
+  stories: [],
+  comments: [],
+  user: {},
+  addStory: () => {},
+  addComment: () => {},
+  updateUser: () => {},
+  toggleSideDrawer: () => {},
+  closeBackdrop: () => {},
 });
 export default userContext;
 

@@ -1,19 +1,10 @@
-<<<<<<< HEAD
-import React, { Component } from 'react'
-import UserApiService from '../../services/user-api-service'
-import ApiContext from '../../contexts/ApiContext'
-import "./LoginForm.css"
-=======
 import React, { Component } from 'react';
-// import UserApiService from '../../services/user-api-service';
+import UserApiService from '../../services/user-api-service';
 import userContext from '../../contexts/ApiContext';
 import TokenService from '../../services/token-service';
-import AuthApiService from '../../services/auth-api-service';
 import './LoginForm.css';
->>>>>>> rupi
 
 class LoginForm extends Component {
-  static contextType = ApiContext
   static defaultProps = {
     onLoginSuccess: () => {},
   };
@@ -22,11 +13,12 @@ class LoginForm extends Component {
   state = { error: null };
 
   handleSubmitJwtAuth = (ev) => {
+    console.log(this.props.history);
     ev.preventDefault();
     this.setState({ error: null });
     const { username, password } = ev.target;
 
-    AuthApiService.postLogin({
+    UserApiService.postLogin({
       username: username.value,
       password: password.value,
     })
