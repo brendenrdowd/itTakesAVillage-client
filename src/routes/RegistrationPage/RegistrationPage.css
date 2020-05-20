@@ -1,4 +1,4 @@
-/* .RegistrationPage {
+.RegistrationPage {
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -10,4 +10,4 @@
 }
 .RegistrationPage h2 {
   padding: 40px;
-} */
+}
