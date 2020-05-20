@@ -4,6 +4,7 @@ const userContext = React.createContext({
   userId: [],
   error: null,
   setUserId: () => {},
+  clearError: () => {},
 });
 export default userContext;
 

@@ -21,17 +21,7 @@ const UserApiService = {
       },
       body: JSON.stringify({ username, password }),
     })
-      .then((res) =>
-        !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
-      )
-      .then((res) => {
-        /*
-                  whenever a login is performed:
-                  1. save the token in local storage
-                  */
-        TokenService.saveAuthToken(res.authToken);
-        return res;
-      });
+     
   },
   postRefreshToken() {
     return fetch(`${config.API_ENDPOINT}/auth/refresh`, {
