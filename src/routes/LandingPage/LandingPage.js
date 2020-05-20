@@ -14,7 +14,7 @@ export default function LandingPage() {
         back, you can connect to the people in your community.
       </p>
       <div className="button-bar">
-        <Link to="/registration" className="btn">
+        <Link to="/register" className="btn">
           Sign Up
         </Link>
         <Link to="/login" className="btn">
