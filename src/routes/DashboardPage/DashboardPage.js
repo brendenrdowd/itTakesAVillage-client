@@ -1,15 +1,22 @@
 import React, { Component } from "react";
 import StoryCard from "../../components/StoryCard/StoryCard";
-import UserService from '../../services/user-api-service'
+import UserService from "../../services/user-api-service";
 import thing from "../../dummystore";
 import "./DashboardPage.css";
 import { Link } from "react-router-dom";
+// test change
+import StoryService from "../../services/story-api-service";
+import Context from "../../contexts/ApiContext";
+import history from "../../history";
+import config from "../../config";
 
 export default class DashboardPage extends Component {
+  static contextType = Context;
   constructor() {
     super();
     this.state = {
       filter: null,
+      data: [],
     };
   }
   keywords = [
@@ -19,14 +26,21 @@ export default class DashboardPage extends Component {
     "rideshare",
     "transportation",
     "moving",
-    "clothing"
-  ]
+    "clothing",
+  ];
   // need to update this, grab user id/object on successful login
   componentDidMount() {
     // UserService.getUser()
     //   .then(res => {
     //     this.context.updateUser(res)
     //   })
+    fetch(`${config.API_ENDPOINT}/story`)
+      .then((res) => res.json())
+      .then((data) =>
+        this.setState({
+          data,
+        })
+      );
   }
 
   handleFilter = (e) => {
@@ -61,6 +75,7 @@ export default class DashboardPage extends Component {
   };
 
   render() {
+    console.log(this.state.data);
     return (
       <section>
         <div className="filterForm">

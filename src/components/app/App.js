@@ -1,43 +1,43 @@
-import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import PrivateRoute from '../Utils/PrivateRoute';
-import PublicOnlyRoute from '../Utils/PublicOnlyRoute';
-import Toolbar from '../Nav/Toolbar/Toolbar';
-import SideDrawer from '../Nav/SideDrawer/SideDrawer';
-import Backdrop from '../Nav/Backdrop/Backdrop';
-import Footer from '../Footer/Footer';
-import Store from '../../dummystore';
-import ApiContext from '../../contexts/ApiContext';
+import React, { Component } from "react";
+import { Route, Switch } from "react-router-dom";
+import PrivateRoute from "../Utils/PrivateRoute";
+import PublicOnlyRoute from "../Utils/PublicOnlyRoute";
+import Toolbar from "../Nav/Toolbar/Toolbar";
+import SideDrawer from "../Nav/SideDrawer/SideDrawer";
+import Backdrop from "../Nav/Backdrop/Backdrop";
+import Footer from "../Footer/Footer";
+import Store from "../../dummystore";
+import ApiContext from "../../contexts/ApiContext";
 // import all the routes
-import DashboardPage from '../../routes/DashboardPage/DashboardPage';
-import LandingPage from '../../routes/LandingPage/LandingPage';
-import LoginPage from '../../routes/LoginPage/LoginPage';
-import NotFoundPage from '../../routes/NotFoundPage/NotFoundPage';
-import RegistrationPage from '../../routes/RegistrationPage/RegistrationPage';
-import CreateStoryPage from '../../routes/CreateStoryPage/CreateStoryPage';
-import PoliciesPage from '../../routes/PoliciesPage/PoliciesPage';
-import StoryPage from '../../routes/StoryPage/StoryPage';
-import { Route, Switch } from 'react-router-dom';
+import DashboardPage from "../../routes/DashboardPage/DashboardPage";
+import LandingPage from "../../routes/LandingPage/LandingPage";
+import LoginPage from "../../routes/LoginPage/LoginPage";
+import NotFoundPage from "../../routes/NotFoundPage/NotFoundPage";
+import RegistrationPage from "../../routes/RegistrationPage/RegistrationPage";
+import CreateStoryPage from "../../routes/CreateStoryPage/CreateStoryPage";
+import PoliciesPage from "../../routes/PoliciesPage/PoliciesPage";
+import StoryPage from "../../routes/StoryPage/StoryPage";
+// import { Route, Switch } from 'react-router-dom';
 // import ApiContext from '../../contexts/ApiContext'
 // import PrivateRoute from '../Utils/PrivateRoute'
-import PublicOnlyRoute from '../Utils/PublicOnlyRoute';
+// import PublicOnlyRoute from "../Utils/PublicOnlyRoute";
 // import all the routes
 // import DashboardPage from '../../routes/DashboardPage/DashboardPage'
-import LandingPage from '../../routes/LandingPage/LandingPage';
-import LoginPage from '../../routes/LoginPage/LoginPage';
-import NotFoundPage from '../../routes/NotFoundPage/NotFoundPage';
+// import LandingPage from "../../routes/LandingPage/LandingPage";
+// import LoginPage from "../../routes/LoginPage/LoginPage";
+// import NotFoundPage from "../../routes/NotFoundPage/NotFoundPage";
 // import RegistrationPage from '../../routes/RegistrationPage/RegistrationPage'
 // import CreateStoryPage from '../../routes/CreateStoryPage/CreateStoryPage'
 // import PoliciesPage from '../../routes/PoliciesPage/PoliciesPage'
 // import StoryPage from '../../routes/StoryPage/StoryPage'
-import './App.css';
+import "./App.css";
 
-import './App.css';
+import "./App.css";
 
 export default class App extends Component {
   // what is our state going to look like?
   state = {
-    error: '',
+    error: "",
     hasError: false,
     user: {},
     help: [], //won't need this
@@ -57,12 +57,18 @@ export default class App extends Component {
     });
   }
 
+  populateStories = (dbStories) => {
+    this.setState({
+      stories: [...this.state.stories, dbStories],
+    });
+  };
+
   handleAddComment = (comments) => {
     this.setState({
       comments: [...this.state.comments, comments],
     });
     // for testing remove after
-    console.log('comments', this.state.comments);
+    console.log("comments", this.state.comments);
   };
 
   handleAddStory = (stories) => {
@@ -70,7 +76,7 @@ export default class App extends Component {
       stories: [...this.state.stories, stories],
     });
     // for testing remove after
-    console.log('stories', this.state.stories);
+    console.log("stories", this.state.stories);
   };
 
   handleUpdateUser = (user) => {
@@ -85,7 +91,7 @@ export default class App extends Component {
       help: [...this.state.help, help],
     });
     // for testing remove after
-    console.log('help', this.state.help);
+    console.log("help", this.state.help);
   };
 
   handleBackdropClose = () => {
@@ -110,6 +116,7 @@ export default class App extends Component {
       updateUser: this.handleUpdateUser,
       toggleSideDrawer: this.drawerToggleClickHandler,
       closeBackdrop: this.handleBackdropClose,
+      populateStories: this.populateStories,
     };
     let backdrop;
     if (this.state.sideDrawerOpen) {
@@ -117,32 +124,32 @@ export default class App extends Component {
     }
     return (
       <ApiContext.Provider value={value}>
-        <div className='container'>
+        <div className="container">
           <Toolbar />
           <SideDrawer show={this.state.sideDrawerOpen} />
           {backdrop}
           <main>
-            {this.state.hasError && <p className='red'>{this.state.error}</p>}
+            {this.state.hasError && <p className="red">{this.state.error}</p>}
             <Switch>
-              <PublicOnlyRoute exact path={'/'} component={LandingPage} />
-              <PublicOnlyRoute path={'/login'} component={LoginPage} />
+              <PublicOnlyRoute exact path={"/"} component={LandingPage} />
+              <PublicOnlyRoute path={"/login"} component={LoginPage} />
               <PublicOnlyRoute
-                path={'/register'}
+                path={"/register"}
                 component={RegistrationPage}
               />
               {/* private */}
-              <Route path={'/dashboard'} component={DashboardPage} />
+              <Route path={"/dashboard"} component={DashboardPage} />
               {/* Private */}
-              <Route path={'/create'} component={CreateStoryPage} />
+              <Route path={"/create"} component={CreateStoryPage} />
               {/* private route */}
               {/* we need to load the commentComponent instead of the createStory component, probably by indicating with props... */}
               {/* <Route
                 path={'/comment/edit/:id'}
                 component={CreateStoryPage} /> */}
-              <Route path={'/story/:id'} component={StoryPage} />
+              <Route path={"/story/:id"} component={StoryPage} />
               {/* private route */}
-              <Route path={'/story/edit/:id'} component={CreateStoryPage} />
-              <Route path={'/policies'} component={PoliciesPage} />
+              <Route path={"/story/edit/:id"} component={CreateStoryPage} />
+              <Route path={"/policies"} component={PoliciesPage} />
               <Route component={NotFoundPage} />
             </Switch>
           </main>
