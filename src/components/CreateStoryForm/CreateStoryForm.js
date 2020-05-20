@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import StoryService from "../../services/story-api-service";
+import StoryService from "../../services/story-api-service";
 import Context from "../../contexts/ApiContext";
 
 class CreateStoryForm extends Component {
@@ -22,29 +22,33 @@ class CreateStoryForm extends Component {
   };
 
   // only needed for non back end stuff
-  handleSubmit = (event) => {
-    this.context.addStory(this.state.textValue);
-    this.context.addHelp(this.state.selectValue);
-    event.preventDefault();
-  };
-
-  // ready for backend connect
   // handleSubmit = (event) => {
-  //   const story = {
-  //     type: this.state.selectValue,
-  //     title: this.state.textValue,
-  //   };
-  //   StoryService.postStory(story)
-  //     .then((story) => {
-  //       this.context.addStory(story);
-  //       this.props.history.push(`/story/${story.id}`);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-
+  //   this.context.addStory(this.state.textValue);
+  //   this.context.addHelp(this.state.selectValue);
   //   event.preventDefault();
   // };
+
+  // ready for backend connect
+  handleSubmit = (event) => {
+    event.preventDefault();
+    const story = {
+      // these may be reversed check before merege
+      flag: this.state.selectValue,
+      issue: this.state.textValue,
+      // test for user
+      author: 100,
+    };
+    console.log(this.context.story);
+
+    StoryService.postStory(story)
+      .then((story) => {
+        this.context.addStory(story);
+        this.props.history.push(`/story/${story.id}`);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   render() {
     return (
@@ -74,11 +78,12 @@ class CreateStoryForm extends Component {
         </label>
         {/* input for issue */}
         <input
+          name="issue"
           type="text"
           value={this.state.textValue}
           placeholder="enter issue"
           onChange={this.handleTextChange}
-          required
+          // required
         />
         <input type="submit" value="Submit" />
       </form>

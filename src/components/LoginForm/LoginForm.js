@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import UserApiService from '../../services/user-api-service'
+import ApiContext from '../../contexts/ApiContext'
 import "./LoginForm.css"
 
-export class LoginForm extends Component {
+class LoginForm extends Component {
+  static contextType = ApiContext
   static defaultProps = {
     onLoginSuccess: () => { }
   }
@@ -21,6 +23,9 @@ export class LoginForm extends Component {
       .then(res => {
         username.value = ''
         password.value = ''
+        // update user in context
+        // what is res object?
+        // this.context.updateUser(res)
         this.props.onLoginSuccess()
       })
       .catch(res => {
