@@ -6,89 +6,89 @@ import UserApiService from '../../services/user-api-service';
 import './IndividualRegForm.css';
 import userContext from '../../contexts/ApiContext';
 
-const initialState = {
-  name: '',
-  username: '',
-  email: '',
-  location: '',
-  password: '',
-  repeatPassword: '',
-  nameError: '',
-  userNameError: '',
-  emailError: '',
-  zipCodeError: '',
-  passwordError: '',
-  repeatPasswordError: '',
-};
+// const initialState = {
+//   name: '',
+//   username: '',
+//   email: '',
+//   location: '',
+//   password: '',
+//   repeatPassword: '',
+//   nameError: '',
+//   userNameError: '',
+//   emailError: '',
+//   zipCodeError: '',
+//   passwordError: '',
+//   repeatPasswordError: '',
+// };
 export default class IndividualRegForm extends Component {
   static defaultProps = {
     onRegistrationSuccess: () => {},
   };
 
-  validation = () => {
-    let nameError = '';
-    let userNameError = '';
-    let emailError = '';
-    let zipCodeError = '';
-    let passwordError = '';
-    let repeatPasswordError = '';
+  // validation = () => {
+  //   let nameError = '';
+  //   let userNameError = '';
+  //   let emailError = '';
+  //   let zipCodeError = '';
+  //   let passwordError = '';
+  //   let repeatPasswordError = '';
 
-    if (!this.state.name) {
-      nameError = 'Name field is empty';
-    }
-    if (!this.state.username) {
-      userNameError = 'Username field is empty';
-    }
-    if (!this.state.email) {
-      emailError = 'Email field is empty';
-    }
-    if (!validator.isEmail(this.state.email)) {
-      emailError = 'invalid email';
-    }
-    // if (!this.state.email.includes('@')) {
-    //   emailError = 'Invalid email';
-    // }
-    if (!this.state.location) {
-      zipCodeError = 'Zip code field is empty';
-    }
-    if (!isValidZipcode(this.state.location)) {
-      zipCodeError = 'invalid zip code';
-    }
-    if (!Number(this.state.location)) {
-      zipCodeError = 'must be numbers';
-    }
-    if (this.state.location.length !== 5) {
-      zipCodeError = 'must be 5 characters long';
-    }
-    if (!this.state.password) {
-      passwordError = 'Password field is empty';
-    }
-    if (!this.state.repeatPassword) {
-      repeatPasswordError = 'Password field is empty';
-    }
-    if (this.state.repeatPassword.length !== this.state.password.length) {
-      repeatPasswordError = 'Passwords must match';
-    }
-    if (
-      nameError ||
-      userNameError ||
-      emailError ||
-      zipCodeError ||
-      passwordError ||
-      repeatPasswordError
-    ) {
-      this.setState({
-        nameError,
-        userNameError,
-        emailError,
-        zipCodeError,
-        passwordError,
-        repeatPasswordError,
-      });
-      return false;
-    }
-    return true;
-  };
+  //   if (!this.state.name) {
+  //     nameError = 'Name field is empty';
+  //   }
+  //   if (!this.state.username) {
+  //     userNameError = 'Username field is empty';
+  //   }
+  //   if (!this.state.email) {
+  //     emailError = 'Email field is empty';
+  //   }
+  //   if (!validator.isEmail(this.state.email)) {
+  //     emailError = 'invalid email';
+  //   }
+  //   // if (!this.state.email.includes('@')) {
+  //   //   emailError = 'Invalid email';
+  //   // }
+  //   if (!this.state.location) {
+  //     zipCodeError = 'Zip code field is empty';
+  //   }
+  //   if (!isValidZipcode(this.state.location)) {
+  //     zipCodeError = 'invalid zip code';
+  //   }
+  //   if (!Number(this.state.location)) {
+  //     zipCodeError = 'must be numbers';
+  //   }
+  //   if (this.state.location.length !== 5) {
+  //     zipCodeError = 'must be 5 characters long';
+  //   }
+  //   if (!this.state.password) {
+  //     passwordError = 'Password field is empty';
+  //   }
+  //   if (!this.state.repeatPassword) {
+  //     repeatPasswordError = 'Password field is empty';
+  //   }
+  //   if (this.state.repeatPassword.length !== this.state.password.length) {
+  //     repeatPasswordError = 'Passwords must match';
+  //   }
+  //   if (
+  //     nameError ||
+  //     userNameError ||
+  //     emailError ||
+  //     zipCodeError ||
+  //     passwordError ||
+  //     repeatPasswordError
+  //   ) {
+  //     this.setState({
+  //       nameError,
+  //       userNameError,
+  //       emailError,
+  //       zipCodeError,
+  //       passwordError,
+  //       repeatPasswordError,
+  //     });
+  //     return false;
+  //   }
+  //   return true;
+  // };
   state = { error: null }; // error and logic will come from back end
 
   handleSubmit = (ev) => {
@@ -103,8 +103,7 @@ export default class IndividualRegForm extends Component {
     } = ev.target;
 
     this.setState({ error: null });
-    const isValid = this.validation();
-    if (isValid) {
+   
       UserApiService.postUser({
         name: name.value,
         username: username.value,
