@@ -1,6 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "./LandingPage.css";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './LandingPage.css';
 
 export default function LandingPage() {
   return (
@@ -13,11 +13,11 @@ export default function LandingPage() {
         of assistance or you are fortunate enough to be in a position to give
         back, you can connect to the people in your community.
       </p>
-      <div className="button-bar">
-        <Link to="/register" className="btn">
+      <div className='button-bar'>
+        <Link to='/register' className='btn'>
           Sign Up
         </Link>
-        <Link to="/login" className="btn">
+        <Link to='/login' className='btn'>
           Log In
         </Link>
       </div>
