@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 const userContext = React.createContext({
   userId: [],
   error: null,
-  setUserId: () => {},
+  setUserId: (userId) => {
+    localStorage.setItem('user_id', userId);
+  },
   clearError: () => {},
   stories: [],
   comments: [],
@@ -23,8 +25,7 @@ export class UserProvider extends Component {
   };
 
   setUserId = (userId) => {
-    this.setState({ userId: localStorage.setItem('user_id', userId) });
-    // console.log('userid:', this.state.userId);
+    this.setState({ userId });
   };
   clearError = () => {
     this.setState({ error: null });

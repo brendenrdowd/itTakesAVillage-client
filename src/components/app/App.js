@@ -111,41 +111,34 @@ export default class App extends Component {
       backdrop = <Backdrop />;
     }
     return (
-      <userContext>
-        {/* <ApiContext.Provider value={value}> */}
-        <div className='container'>
-          <Toolbar />
-          <SideDrawer show={this.state.sideDrawerOpen} />
-          {backdrop}
-          <main>
-            {this.state.hasError && <p className='red'>{this.state.error}</p>}
-            <Switch>
-              <PublicOnlyRoute exact path={'/'} component={LandingPage} />
-              <PublicOnlyRoute path={'/login'} component={LoginPage} />
-              <PublicOnlyRoute
-                path={'/register'}
-                component={RegistrationPage}
-              />
-              {/* private */}
-              <Route path={'/dashboard'} component={DashboardPage} />
-              {/* Private */}
-              <Route path={'/create'} component={CreateStoryPage} />
-              {/* private route */}
-              {/* we need to load the commentComponent instead of the createStory component, probably by indicating with props... */}
-              {/* <Route
+      <div className='container'>
+        <Toolbar />
+        <SideDrawer show={this.state.sideDrawerOpen} />
+        {backdrop}
+        <main>
+          {this.state.hasError && <p className='red'>{this.state.error}</p>}
+          <Switch>
+            <PublicOnlyRoute exact path={'/'} component={LandingPage} />
+            <PublicOnlyRoute path={'/login'} component={LoginPage} />
+            <PublicOnlyRoute path={'/register'} component={RegistrationPage} />
+            {/* private */}
+            <Route path={'/dashboard'} component={DashboardPage} />
+            {/* Private */}
+            <Route path={'/create'} component={CreateStoryPage} />
+            {/* private route */}
+            {/* we need to load the commentComponent instead of the createStory component, probably by indicating with props... */}
+            {/* <Route
                 path={'/comment/edit/:id'}
                 component={CreateStoryPage} /> */}
-              <Route path={'/story/:id'} component={StoryPage} />
-              {/* private route */}
-              <Route path={'/story/edit/:id'} component={CreateStoryPage} />
-              <Route path={'/policies'} component={PoliciesPage} />
-              <Route component={NotFoundPage} />
-            </Switch>
-          </main>
-          <Footer />
-        </div>
-        {/* </ApiContext.Provider> */}
-      </userContext>
+            <Route path={'/story/:id'} component={StoryPage} />
+            {/* private route */}
+            <Route path={'/story/edit/:id'} component={CreateStoryPage} />
+            <Route path={'/policies'} component={PoliciesPage} />
+            <Route component={NotFoundPage} />
+          </Switch>
+        </main>
+        <Footer />
+      </div>
     );
   }
 }

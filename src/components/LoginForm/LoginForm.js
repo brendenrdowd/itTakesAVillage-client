@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import UserApiService from '../../services/user-api-service';
+import AuthApiService from '../../services/auth-api-service';
 import userContext from '../../contexts/ApiContext';
 import TokenService from '../../services/token-service';
 import './LoginForm.css';
@@ -18,11 +18,12 @@ class LoginForm extends Component {
     this.setState({ error: null });
     const { username, password } = ev.target;
 
-    UserApiService.postLogin({
+    AuthApiService.postLogin({
       username: username.value,
       password: password.value,
     })
       .then((res) => {
+        console.log(this.context.userId);
         username.value = '';
         password.value = '';
         TokenService.saveAuthToken(res.authToken);
