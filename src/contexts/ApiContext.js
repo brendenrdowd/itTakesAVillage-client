@@ -1,5 +1,16 @@
+// import React from "react";
 
-import React, { Component } from 'react';
+// export default React.createContext({
+//   stories: [],
+//   comments: [],
+//   user:{},
+//   addStory: () => {},
+//   addComment: () => {},
+//   updateUser: () => {},
+//   toggleSideDrawer: () => {},
+//   closeBackdrop: () => {}
+// })
+import React, { Component } from "react";
 
 const userContext = React.createContext({
   userId: [],
@@ -16,7 +27,7 @@ export class UserProvider extends Component {
   };
 
   setUserId = (userId) => {
-    this.setState({ userId: localStorage.setItem('user_id', userId) });
+    this.setState({ userId: localStorage.setItem("user_id", userId) });
     // console.log('userid:', this.state.userId);
   };
   clearError = () => {
@@ -25,7 +36,7 @@ export class UserProvider extends Component {
 
   render() {
     const value = {
-      userId: localStorage.getItem('user_id'),
+      userId: localStorage.getItem("user_id"),
       error: this.state.error,
       clearError: this.clearError,
       setUserId: this.setUserId,

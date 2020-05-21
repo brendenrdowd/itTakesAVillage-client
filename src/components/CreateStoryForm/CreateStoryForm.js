@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import StoryService from "../../services/story-api-service";
 import Context from "../../contexts/ApiContext";
+import userContext from "../../contexts/ApiContext";
 import history from "../../history";
 
 class CreateStoryForm extends Component {
@@ -11,8 +12,14 @@ class CreateStoryForm extends Component {
     this.state = {
       selectValue: "food",
       textValue: "",
+      // userId: 4,
     };
   }
+  static contextType = userContext;
+
+  setUserId = (event) => {
+    this.setState({ userId: this.userContext.userId });
+  };
 
   keywords = [
     "groceries",
@@ -39,19 +46,17 @@ class CreateStoryForm extends Component {
       flag: this.state.selectValue,
       issue: this.state.textValue,
       // test for user
-      author: 1,
+      // author: this.context.userId,
+      // author: this.state.userId,
     };
-    console.log(this.context.story);
 
     // StoryService.postStory({ user_id: userId, story: story.value }) .then(this.context.addStory) .then(() => { title.value = ''; }) .catch(this.context.setError); };
-
-    // const {userId} = this context
 
     // pass user_id through here
     StoryService.postStory(story)
       .then((story) => {
         this.context.addStory(story);
-        history.push(`/story/${story.id}`);
+        this.props.history.push(`/story/${story.id}`);
       })
       .catch((error) => {
         console.error(error);
@@ -59,6 +64,8 @@ class CreateStoryForm extends Component {
   };
 
   render() {
+    console.log(window.localStorage.getItem("userId"));
+
     return (
       <form onSubmit={this.handleSubmit}>
         {/* will need to update this once we're grabbing user object from backend */}
@@ -94,7 +101,7 @@ class CreateStoryForm extends Component {
           value={this.state.textValue}
           placeholder="enter issue"
           onChange={this.handleTextChange}
-          // required
+          required
         />
         <input type="submit" value="Submit" />
       </form>

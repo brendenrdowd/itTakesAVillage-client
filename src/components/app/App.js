@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import PrivateRoute from '../Utils/PrivateRoute';
-import PublicOnlyRoute from '../Utils/PublicOnlyRoute';
-import Toolbar from '../Nav/Toolbar/Toolbar'
-import SideDrawer from '../Nav/SideDrawer/SideDrawer';
-import Backdrop from '../Nav/Backdrop/Backdrop'
-import Footer from '../Footer/Footer'
+import React, { Component } from "react";
+import { Route, Switch } from "react-router-dom";
+import PrivateRoute from "../Utils/PrivateRoute";
+import PublicOnlyRoute from "../Utils/PublicOnlyRoute";
+import Toolbar from "../Nav/Toolbar/Toolbar";
+import SideDrawer from "../Nav/SideDrawer/SideDrawer";
+import Backdrop from "../Nav/Backdrop/Backdrop";
+import Footer from "../Footer/Footer";
 import Store from "../../dummystore";
-import ApiContext from '../../contexts/ApiContext'
+import ApiContext from "../../contexts/ApiContext";
 // import all the routes
 import DashboardPage from "../../routes/DashboardPage/DashboardPage";
 import LandingPage from "../../routes/LandingPage/LandingPage";
@@ -17,6 +17,20 @@ import RegistrationPage from "../../routes/RegistrationPage/RegistrationPage";
 import CreateStoryPage from "../../routes/CreateStoryPage/CreateStoryPage";
 import PoliciesPage from "../../routes/PoliciesPage/PoliciesPage";
 import StoryPage from "../../routes/StoryPage/StoryPage";
+// import { Route, Switch } from 'react-router-dom';
+// import ApiContext from '../../contexts/ApiContext'
+// import PrivateRoute from '../Utils/PrivateRoute'
+// import PublicOnlyRoute from "../Utils/PublicOnlyRoute";
+// import all the routes
+// import DashboardPage from '../../routes/DashboardPage/DashboardPage'
+// import LandingPage from "../../routes/LandingPage/LandingPage";
+// import LoginPage from "../../routes/LoginPage/LoginPage";
+// import NotFoundPage from "../../routes/NotFoundPage/NotFoundPage";
+// import RegistrationPage from '../../routes/RegistrationPage/RegistrationPage'
+// import CreateStoryPage from '../../routes/CreateStoryPage/CreateStoryPage'
+// import PoliciesPage from '../../routes/PoliciesPage/PoliciesPage'
+// import StoryPage from '../../routes/StoryPage/StoryPage'
+import "./App.css";
 
 import "./App.css";
 
@@ -29,7 +43,7 @@ export default class App extends Component {
     help: [], //won't need this
     stories: [],
     comments: [],
-    sideDrawerOpen: false
+    sideDrawerOpen: false,
   };
   stories = Store.stories;
   comments = Store.comments;
@@ -43,9 +57,15 @@ export default class App extends Component {
     });
   }
 
-  handleAddComment = (comment) => {
+  populateStories = (dbStories) => {
     this.setState({
-      comments: [...this.state.comments, comment],
+      stories: [...this.state.stories, dbStories],
+    });
+  };
+
+  handleAddComment = (comments) => {
+    this.setState({
+      comments: [...this.state.comments, comments],
     });
     // for testing remove after
     console.log("comments", this.state.comments);
@@ -59,11 +79,11 @@ export default class App extends Component {
     console.log("stories", this.state.stories);
   };
 
-  handleUpdateUser = user => {
+  handleUpdateUser = (user) => {
     return this.setState({
-      user
-    })
-  }
+      user,
+    });
+  };
 
   // won't need this
   addHelp = (help) => {
@@ -75,14 +95,14 @@ export default class App extends Component {
   };
 
   handleBackdropClose = () => {
-    this.setState({ sideDrawerOpen: false })
-  }
+    this.setState({ sideDrawerOpen: false });
+  };
 
   drawerToggleClickHandler = () => {
     this.setState((prevState) => {
-      return { sideDrawerOpen: !prevState.sideDrawerOpen }
-    })
-  }
+      return { sideDrawerOpen: !prevState.sideDrawerOpen };
+    });
+  };
 
   render() {
     // what is our context going to look like?
@@ -95,29 +115,24 @@ export default class App extends Component {
       addHelp: this.addHelp, //won't need this
       updateUser: this.handleUpdateUser,
       toggleSideDrawer: this.drawerToggleClickHandler,
-      closeBackdrop: this.handleBackdropClose
+      closeBackdrop: this.handleBackdropClose,
+      populateStories: this.populateStories,
     };
-    let backdrop
+    let backdrop;
     if (this.state.sideDrawerOpen) {
-      backdrop = <Backdrop />
+      backdrop = <Backdrop />;
     }
     return (
       <ApiContext.Provider value={value}>
-        <div className='container'>
+        <div className="container">
           <Toolbar />
           <SideDrawer show={this.state.sideDrawerOpen} />
           {backdrop}
           <main>
             {this.state.hasError && <p className="red">{this.state.error}</p>}
             <Switch>
-              <PublicOnlyRoute
-                exact
-                path={"/"}
-                component={LandingPage}
-              />
-              <PublicOnlyRoute path={"/login"}
-                component={LoginPage}
-              />
+              <PublicOnlyRoute exact path={"/"} component={LandingPage} />
+              <PublicOnlyRoute path={"/login"} component={LoginPage} />
               <PublicOnlyRoute
                 path={"/register"}
                 component={RegistrationPage}
@@ -125,9 +140,7 @@ export default class App extends Component {
               {/* private */}
               <Route path={"/dashboard"} component={DashboardPage} />
               {/* Private */}
-              <Route
-                path={'/create'}
-                component={CreateStoryPage} />
+              <Route path={"/create"} component={CreateStoryPage} />
               {/* private route */}
               {/* we need to load the commentComponent instead of the createStory component, probably by indicating with props... */}
               {/* <Route

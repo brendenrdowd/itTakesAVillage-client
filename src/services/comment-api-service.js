@@ -1,4 +1,5 @@
 import config from "../config";
+import TokenService from "./token-service";
 
 const CommentApiService = {
 
@@ -7,7 +8,7 @@ const CommentApiService = {
       method: "POST",
       body: JSON.stringify({comment, author: userId, story: storyId}),
       headers: {
-        // authorization: `bearer ${TokenService.getAuthToken()}`,
+        Authorization: `Bearer ${TokenService.getAuthToken()}`,
         "content-type": "application/json",
       },
     }).then((res) => {
@@ -24,7 +25,7 @@ const CommentApiService = {
     return fetch(`${config.API_ENDPOINT}/story/${storyId}`, {
       method: "GET",
       headers: {
-        //authorization: `bearer ${TokenService.getAuthToken()}`,
+        //Authorization: `bearer ${TokenService.getAuthToken()}`,
         "content-type": "application/json"
       },
     })
@@ -39,7 +40,7 @@ const CommentApiService = {
       method: "PATCH",
       body: JSON.stringify(comment),
       headers: {
-        //authorization: `bearer ${TokenService.getAuthToken()}`,
+        //Authorization: `bearer ${TokenService.getAuthToken()}`,
         "content-type": "application/json"
       }
     })
@@ -54,7 +55,7 @@ const CommentApiService = {
       method: "DELETE",
       body: JSON.stringify(comment),
       headers: {
-        //authorization: `bearer ${TokenService.getAuthToken()}`,
+        //Authorization: `bearer ${TokenService.getAuthToken()}`,
         "content-type": "application/json"
       }
 

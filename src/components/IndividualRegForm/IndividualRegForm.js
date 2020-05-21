@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Input, Button, Required } from '../Utils/Utils';
-import validator from 'validator';
-import isValidZipcode from 'is-valid-zipcode';
+// import validator from 'validator';
+// import isValidZipcode from 'is-valid-zipcode';
 import userApiService from '../../services/user-api-service';
 import './IndividualRegForm.css';
 
@@ -20,9 +20,9 @@ import './IndividualRegForm.css';
 //   repeatPasswordError: '',
 // };
 export default class IndividualRegForm extends Component {
-  //   static defaultProps = {
-  //     onRegistrationSuccess: () => {},
-  //   };
+  static defaultProps = {
+    onRegistrationSuccess: () => {},
+  };
 
   //   state = initialState;
 
@@ -125,10 +125,10 @@ export default class IndividualRegForm extends Component {
   handleSubmit = (ev) => {
     ev.preventDefault();
     const {
-      full_name,
-      user_name,
+      name,
+      username,
       email,
-      zip_code,
+      location,
       password,
       repeatPassword,
     } = ev.target;
@@ -137,18 +137,18 @@ export default class IndividualRegForm extends Component {
 
     userApiService
       .postUser({
-        full_name: full_name.value,
-        user_name: user_name.value,
+        name: name.value,
+        username: username.value,
         email: email.value,
-        zip_code: zip_code.value,
+        location: location.value,
         password: password.value,
         repeatPassword: repeatPassword.value,
       })
       .then((user) => {
-        full_name.value = '';
-        user_name.value = '';
+        name.value = '';
+        username.value = '';
         email.value = '';
-        zip_code.value = '';
+        location.value = '';
         password.value = '';
         repeatPassword.value = '';
         this.props.onRegistrationSuccess();
@@ -158,67 +158,51 @@ export default class IndividualRegForm extends Component {
       });
   };
   render() {
+    const { error } = this.state;
     return (
       //Name, username, email, zipcode, password, and re-enter password Inputs
       <form className='IndividualRegForm' onSubmit={this.handleSubmit}>
-        {/* <div role='alert'>{error && <p className='red'>{error}</p>}</div> */}
-        <div className='full_name'>
+        <div role='alert'>{error && <p className='red'>{error}</p>}</div>
+        <div className='name'>
           <label htmlFor='IndividualRegForm__full_name'>
             Full name <Required />
           </label>
           <Input
-            name='full_name'
+            name='name'
             placeholder='joe doe'
             type='text'
             // required
             id='IndividualRegForm__full_name'
-            onChange={this.handleValue}
           ></Input>
         </div>
-        <section className='registrationError'>{this.state.nameError}</section>
+
         <div className='user_name'>
           <label htmlFor='IndividualRegForm__user_name'>
             Username <Required />
           </label>
           <Input
-            name='user_name'
+            name='username'
             placeholder='joedoe'
             type='text'
             id='IndividualRegForm__user_name'
-            onChange={this.handleValue}
           ></Input>
-          <section className='registrationError'>
-            {this.state.userNameError}
-          </section>
         </div>
         <div className='email'>
           <label htmlFor='IndividualRegForm__email'>
             Email <Required />
           </label>
-          <Input
-            name='email'
-            type='text'
-            id='IndividualRegForm__email'
-            onChange={this.handleValue}
-          ></Input>
-          <section className='registrationError'>
-            {this.state.emailError}
-          </section>
+          <Input name='email' type='text' id='IndividualRegForm__email'></Input>
         </div>
-        <div className='zip_code'>
+        <div className='location'>
           <label htmlFor='IndividualRegForm__zip_code'>
             Zip code <Required />
           </label>
           <Input
-            name='zip_code'
+            name='location'
             placeholder='88888'
             type='text'
             id='IndividualRegForm__zip_code'
-            onChange={this.handleValue}
           ></Input>
-          <section className='registrationError'>
-            {this.state.zipCodeError}
-          </section>
         </div>
         <div className='password'>
           <label htmlFor='IndividualRegForm__password'>
@@ -229,12 +213,9 @@ export default class IndividualRegForm extends Component {
             placeholder='Password123'
             type='password'
             id='IndividualRegForm__password'
-            onChange={this.handleValue}
           ></Input>
         </div>
-        <section className='registrationError'>
-          {this.state.passwordError}
-        </section>
+
         <div className='re-enter-password'>
           <label htmlFor='IndividualRegForm__password'>
             Repeat password <Required />
@@ -244,11 +225,7 @@ export default class IndividualRegForm extends Component {
             placeholder='Password123'
             type='password'
             id='IndividualRegForm__password'
-            onChange={this.handleValue}
           ></Input>
-          <section className='registrationError'>
-            {this.state.repeatPasswordError}
-          </section>
         </div>
         <Button type='submit'>Sign up</Button>
       </form>

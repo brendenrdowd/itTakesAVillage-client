@@ -32,11 +32,12 @@ class CreateCommentForm extends Component {
       comment: this.state.newComment,
       story: this.props.story.id
     };
-    console.log({comment})
+    
     CommentService.postComment(this.context.userId, this.state.newComment, this.props.story.id)
+    //CommentService.postComment(comment)
       .then((comment) => {
         this.context.addComment(comment);
-        //this.props.history.push(`/comment/${comment.id}`);
+        this.props.history.push(`/comment/${comment.id}`);
       })
       .catch((error) => {
         console.error(error);
@@ -51,7 +52,7 @@ class CreateCommentForm extends Component {
         {/* <h3>User: {this.context.user}</h3>
         <h3>Story: {this.context.stories}</h3> */}
         {/* input for comment */}
-        <label>Cerate comment:</label>
+        <label>Create comment:</label>
         <input
           type="text"
           value={this.state.value}
