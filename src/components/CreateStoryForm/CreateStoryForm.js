@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import StoryService from "../../services/story-api-service";
 import Context from "../../contexts/ApiContext";
+import history from "../../history";
 
 class CreateStoryForm extends Component {
   // grab user data from context?
@@ -13,6 +14,15 @@ class CreateStoryForm extends Component {
     };
   }
 
+  keywords = [
+    "groceries",
+    "food offer",
+    "rideshare",
+    "transportation",
+    "moving",
+    "clothing",
+  ];
+
   handleTextChange = (event) => {
     this.setState({ textValue: event.target.value });
   };
@@ -20,13 +30,6 @@ class CreateStoryForm extends Component {
   handleSelectorChange = (event) => {
     this.setState({ selectValue: event.target.value });
   };
-
-  // only needed for non back end stuff
-  // handleSubmit = (event) => {
-  //   this.context.addStory(this.state.textValue);
-  //   this.context.addHelp(this.state.selectValue);
-  //   event.preventDefault();
-  // };
 
   // ready for backend connect
   handleSubmit = (event) => {
@@ -36,14 +39,19 @@ class CreateStoryForm extends Component {
       flag: this.state.selectValue,
       issue: this.state.textValue,
       // test for user
-      author: 100,
+      author: 1,
     };
     console.log(this.context.story);
 
+    // StoryService.postStory({ user_id: userId, story: story.value }) .then(this.context.addStory) .then(() => { title.value = ''; }) .catch(this.context.setError); };
+
+    // const {userId} = this context
+
+    // pass user_id through here
     StoryService.postStory(story)
       .then((story) => {
         this.context.addStory(story);
-        this.props.history.push(`/story/${story.id}`);
+        history.push(`/story/${story.id}`);
       })
       .catch((error) => {
         console.error(error);
@@ -71,9 +79,12 @@ class CreateStoryForm extends Component {
             value={this.state.selectValue}
             onChange={this.handleSelectorChange}
           >
-            <option value="food">Food</option>
-            <option value="clothes">Clothes</option>
-            <option value="transport">Transportation</option>
+            {/* may need to change key to an actual value */}
+            {this.keywords.map((keyword) => (
+              <option key={keyword} value={keyword}>
+                {keyword}
+              </option>
+            ))}
           </select>
         </label>
         {/* input for issue */}

@@ -2,13 +2,12 @@ import config from "../config";
 
 const CommentApiService = {
 
-
-  postComment(comment) {
-    fetch(`${config.API_ENDPOINT}/comment`, {
+  postComment(userId, comment, storyId) {
+    return fetch(`${config.API_ENDPOINT}/comment`, {
       method: "POST",
-      body: JSON.stringify(comment),
+      body: JSON.stringify({comment, author: userId, story: storyId}),
       headers: {
-        authorization: `bearer ${config.API_ENDPOINT}`,
+        // authorization: `bearer ${TokenService.getAuthToken()}`,
         "content-type": "application/json",
       },
     }).then((res) => {
@@ -25,7 +24,7 @@ const CommentApiService = {
     return fetch(`${config.API_ENDPOINT}/story/${storyId}`, {
       method: "GET",
       headers: {
-        //authorization: `bearer ${config.API_ENDPOINT}`,
+        //authorization: `bearer ${TokenService.getAuthToken()}`,
         "content-type": "application/json"
       },
     })
@@ -40,7 +39,7 @@ const CommentApiService = {
       method: "PATCH",
       body: JSON.stringify(comment),
       headers: {
-        authorization: `bearer ${config.API_ENDPOINT}`,
+        //authorization: `bearer ${TokenService.getAuthToken()}`,
         "content-type": "application/json"
       }
     })
@@ -53,8 +52,12 @@ const CommentApiService = {
   deleteComment(comment) {
     return fetch(`${config.API_ENDPOINT}/comment/${comment.id}`, {
       method: "DELETE",
-      body: JSON.stringify(comment)
-      
+      body: JSON.stringify(comment),
+      headers: {
+        //authorization: `bearer ${TokenService.getAuthToken()}`,
+        "content-type": "application/json"
+      }
+
     })
       .then(res =>
         (!res.ok)

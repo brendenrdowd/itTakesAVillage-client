@@ -19,10 +19,6 @@ class CreateCommentForm extends Component {
     this.setState({ newComment: event.target.value });
   };
 
-  handleSubmit = (event) => {
-    this.context.addComment(this.state.newComment);
-    event.preventDefault();
-  };
   //need to grab storyId which should be passed to createCommentForm by props from the story page
   //need to grab userId from context & pass to the backend to the comment body
   
@@ -30,37 +26,24 @@ class CreateCommentForm extends Component {
 
   // ready for backend connect
   handleSubmit = (event) => {
+    event.preventDefault()
     const comment = {
-      user: this.context.user.id,
+      user: this.context.userId,
       comment: this.state.newComment,
       story: this.props.story.id
     };
-    CommentService.postStory(comment)
+    console.log({comment})
+    CommentService.postComment(this.context.userId, this.state.newComment, this.props.story.id)
       .then((comment) => {
         this.context.addComment(comment);
-        this.props.history.push(`/comment/${comment.id}`);
+        //this.props.history.push(`/comment/${comment.id}`);
       })
       .catch((error) => {
         console.error(error);
       });
-    event.preventDefault();
   };
 
-  // ready for backend connect
-  handleSubmit = (event) => {
-    const comment = {
-      comment: this.state.newComment,
-    };
-    CommentService.postStory(comment)
-      .then((comment) => {
-        this.context.addComment(comment);
-        this.props.history.push(`/comment/${comment.id}`);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-    event.preventDefault();
-  };
+ 
 
   render() {
     return (
@@ -68,7 +51,7 @@ class CreateCommentForm extends Component {
         {/* <h3>User: {this.context.user}</h3>
         <h3>Story: {this.context.stories}</h3> */}
         {/* input for comment */}
-        <label>Crerate comment:</label>
+        <label>Cerate comment:</label>
         <input
           type="text"
           value={this.state.value}

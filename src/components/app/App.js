@@ -43,9 +43,9 @@ export default class App extends Component {
     });
   }
 
-  handleAddComment = (comments) => {
+  handleAddComment = (comment) => {
     this.setState({
-      comments: [...this.state.comments, comments],
+      comments: [...this.state.comments, comment],
     });
     // for testing remove after
     console.log("comments", this.state.comments);

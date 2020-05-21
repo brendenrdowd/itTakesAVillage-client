@@ -76,7 +76,7 @@ export default class StoryPage extends Component {
           flag={this.state.story.flag}
           author={this.state.authorName}
         />
-        <CreateCommentForm story={this.state.story.id} />
+        <CreateCommentForm story={this.state.story} />
         <ul className="comments_list">
           {this.comments}
         </ul>
