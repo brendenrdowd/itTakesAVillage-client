@@ -12,7 +12,7 @@ class CreateStoryForm extends Component {
     this.state = {
       selectValue: "food",
       textValue: "",
-      userId: 4,
+      // userId: 4,
     };
   }
   static contextType = userContext;
@@ -47,7 +47,7 @@ class CreateStoryForm extends Component {
       issue: this.state.textValue,
       // test for user
       // author: this.context.userId,
-      author: this.state.userId,
+      // author: this.state.userId,
     };
 
     // StoryService.postStory({ user_id: userId, story: story.value }) .then(this.context.addStory) .then(() => { title.value = ''; }) .catch(this.context.setError); };
@@ -56,7 +56,7 @@ class CreateStoryForm extends Component {
     StoryService.postStory(story)
       .then((story) => {
         this.context.addStory(story);
-        history.push(`/story/${story.id}`);
+        this.props.history.push(`/story/${story.id}`);
       })
       .catch((error) => {
         console.error(error);
