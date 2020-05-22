@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import StoryService from "../../services/story-api-service";
 import Context from "../../contexts/ApiContext";
-import userContext from "../../contexts/ApiContext";
-import history from "../../history";
+// import userContext from "../../contexts/ApiContext";
+// import history from "../../history";
 
 class CreateStoryForm extends Component {
   // grab user data from context?
@@ -12,14 +12,8 @@ class CreateStoryForm extends Component {
     this.state = {
       selectValue: "food",
       textValue: "",
-      // userId: 4,
     };
   }
-  static contextType = userContext;
-
-  setUserId = (event) => {
-    this.setState({ userId: this.userContext.userId });
-  };
 
   keywords = [
     "groceries",
@@ -38,21 +32,14 @@ class CreateStoryForm extends Component {
     this.setState({ selectValue: event.target.value });
   };
 
-  // ready for backend connect
   handleSubmit = (event) => {
     event.preventDefault();
     const story = {
-      // these may be reversed check before merege
       flag: this.state.selectValue,
       issue: this.state.textValue,
-      // test for user
-      // author: this.context.userId,
-      // author: this.state.userId,
     };
 
-    // StoryService.postStory({ user_id: userId, story: story.value }) .then(this.context.addStory) .then(() => { title.value = ''; }) .catch(this.context.setError); };
-
-    // pass user_id through here
+    // User_Id aka author being passed from API backend
     StoryService.postStory(story)
       .then((story) => {
         this.context.addStory(story);
@@ -64,14 +51,11 @@ class CreateStoryForm extends Component {
   };
 
   render() {
-    console.log(window.localStorage.getItem("userId"));
-
     return (
       <form onSubmit={this.handleSubmit}>
         {/* will need to update this once we're grabbing user object from backend */}
-        {/* <h3>User: {this.context.user.name}</h3> */}
+        {/* <h3>User: {this.context.user}</h3> */}
         <label>Create Story:</label>
-        {/* drop down for keywords */}
         <p>
           Please select the requested type of help from the drop down selections
           menu. Then enter the specifics of the help you are requesting.
@@ -86,7 +70,6 @@ class CreateStoryForm extends Component {
             value={this.state.selectValue}
             onChange={this.handleSelectorChange}
           >
-            {/* may need to change key to an actual value */}
             {this.keywords.map((keyword) => (
               <option key={keyword} value={keyword}>
                 {keyword}
@@ -94,7 +77,6 @@ class CreateStoryForm extends Component {
             ))}
           </select>
         </label>
-        {/* input for issue */}
         <input
           name="issue"
           type="text"
