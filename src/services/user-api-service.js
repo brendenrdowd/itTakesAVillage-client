@@ -2,64 +2,36 @@ import config from '../config';
 import TokenService from './token-service';
 
 const UserApiService = {
-    postUser(user) {
-        return fetch(`${config.API_ENDPOINT}/users`, {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json',
-            },
-            body: JSON.stringify(user),
-        })
-            .then(res =>
-                (!res.ok)
-                    ? res.json().then(e => Promise.reject(e))
-                    : res.json()
-            )
-    },
-    postLogin({ username, password }) {
-        return fetch(`${config.API_ENDPOINT}/auth/login`, {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json',
-            },
-            body: JSON.stringify({ username, password }),
-        })
-            .then(res =>
-                (!res.ok)
-                    ? res.json().then(e => Promise.reject(e))
-                    : res.json()
-            )
-            .then(res => {
-                /*
-                  whenever a login is performed:
-                  1. save the token in local storage
-                  */
-                TokenService.saveAuthToken(res.authToken)
-                return res
-            })
-    },
-    // get user
-    postRefreshToken() {
-        return fetch(`${config.API_ENDPOINT}/auth/refresh`, {
-            method: 'POST',
-            headers: {
-                'authorization': `Bearer ${TokenService.getAuthToken()}`,
-            },
-        })
-            .then(res =>
-                (!res.ok)
-                    ? res.json().then(e => Promise.reject(e))
-                    : res.json()
-            )
-            .then(res => {
-                TokenService.saveAuthToken(res.authToken)
-                return res
-            })
-            .catch(err => {
-                console.log('refresh token request error')
-                console.error(err)
-            })
-    },
-}
+  postUser(newUser) {
+    return fetch(`${config.API_ENDPOINT}/users`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(newUser),
+    }).then((res) =>
+      !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
+    );
+  },
+  postRefreshToken() {
+    return fetch(`${config.API_ENDPOINT}/auth/refresh`, {
+      method: 'POST',
+      headers: {
+        authorization: `Bearer ${TokenService.getAuthToken()}`,
+      },
+    })
+      .then((res) =>
+        !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
+      )
+      .then((res) => {
+        TokenService.saveAuthToken(res.authToken);
+        return res;
+      })
+      .catch((err) => {
+        console.log('refresh token request error');
+        console.error(err);
+      });
+  },
+};
 
-export default UserApiService
+export default UserApiService;

@@ -37,19 +37,18 @@ export class NavLinks extends Component {
 
   render() {
     let links
-    // for development, until we can authenticate users
-    // if (this.state.loggedIn) {
+    if (this.state.loggedIn) {
       links = [
         <li onClick={this.closeModal} key="3" className="tooltip"><Link to="/dashboard"><FontAwesomeIcon icon="home" /> <span className="tooltiptext">Home</span></Link></li>,
         <li onClick={this.closeModal} key="4" className="tooltip"><Link to="/create"><FontAwesomeIcon icon="plus-square" /> <span className="tooltiptext">New Story</span></Link></li>,
         <li onClick={this.closeModal} key="5" className="tooltip"><Link onClick={this.handleLogoutClick} to='/'><FontAwesomeIcon icon="sign-out-alt" /> <span className="tooltiptext">Log Out</span></Link></li>
       ]
-    // } else {
-    //   links = [
-    //     <li onClick={this.closeModal} key="2"><Link to="/login"> Log in</Link></li>,
-    //     <li onClick={this.closeModal} key="1"><Link to="/register"> Sign Up</Link></li>
-    //   ]
-    // }
+    } else {
+      links = [
+        <li onClick={this.closeModal} key="2"><Link to="/login"> Log in</Link></li>,
+        <li onClick={this.closeModal} key="1"><Link to="/register"> Sign Up</Link></li>
+      ]
+    }
     return (<ul>
       {links}
     </ul>)

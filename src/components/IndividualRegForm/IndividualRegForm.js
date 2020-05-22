@@ -1,125 +1,77 @@
 import React, { Component } from 'react';
 import { Input, Button, Required } from '../Utils/Utils';
-// import validator from 'validator';
-// import isValidZipcode from 'is-valid-zipcode';
-import userApiService from '../../services/user-api-service';
+import validator from 'validator';
+import UserApiService from '../../services/user-api-service';
 import './IndividualRegForm.css';
 
-// const initialState = {
-//   full_name: '',
-//   user_name: '',
-//   email: '',
-//   zip_code: '',
-//   password: '',
-//   repeatPassword: '',
-//   nameError: '',
-//   userNameError: '',
-//   emailError: '',
-//   zipCodeError: '',
-//   passwordError: '',
-//   repeatPasswordError: '',
-// };
 export default class IndividualRegForm extends Component {
   static defaultProps = {
     onRegistrationSuccess: () => {},
   };
 
-  //   state = initialState;
+  validation = (target) => {
+    let nameError = '';
+    let userNameError = '';
+    let emailError = '';
+    let zipCodeError = '';
+    let passwordError = '';
+    let repeatPasswordError = '';
+    // let { users } = this.context;
+    //need to add user name and email take validations
 
-  //   handleValue = (event) => {
-  //     const isCheckbox = event.target.type === 'checkbox';
-  //     this.setState({
-  //       [event.target.name]: isCheckbox
-  //         ? event.target.checked
-  //         : event.target.value,
-  //     });
-  //   };
-
-  //   validation = () => {
-  //     let nameError = '';
-  //     let userNameError = '';
-  //     let emailError = '';
-  //     let zipCodeError = '';
-  //     let passwordError = '';
-  //     let repeatPasswordError = '';
-  //     const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[A-Z])(?=.*[0-9])[\S]/;
-
-  //     if (this.state.full_name.length < 5) {
-  //       nameError = 'full name must have at least 6 characters';
-  //     }
-
-  //     if (!this.state.full_name) {
-  //       nameError = 'Name field is empty';
-  //     }
-  //     if (!this.state.user_name) {
-  //       userNameError = 'Username field is empty';
-  //     }
-  //     if (!this.state.email) {
-  //       emailError = 'Email field is empty';
-  //     }
-  //     if (!validator.isEmail(this.state.email)) {
-  //       emailError = 'invalid email';
-  //     }
-  //     // if (!this.state.email.includes('@')) {
-  //     //   emailError = 'Invalid email';
-  //     // }
-  //     if (!this.state.zip_code) {
-  //       zipCodeError = 'Zip code field is empty';
-  //     }
-  //     if (!isValidZipcode(this.state.zip_code)) {
-  //       zipCodeError = 'invalid zip code';
-  //     }
-  //     if (!Number(this.state.zip_code)) {
-  //       zipCodeError = 'must be numbers';
-  //     }
-  //     if (this.state.zip_code.length !== 5) {
-  //       zipCodeError = 'must be 5 characters long';
-  //     }
-  //     if (!this.state.password) {
-  //       passwordError = 'Password field is empty';
-  //     }
-  //     if (!REGEX_UPPER_LOWER_NUMBER_SPECIAL.test(this.state.password)) {
-  //       passwordError =
-  //         'Password must contain at least 1 upper case letter, and a number';
-  //     }
-  //     if (!this.state.repeatPassword) {
-  //       repeatPasswordError = 'Password field is empty';
-  //     }
-  //     if (this.state.repeatPassword.length !== this.state.password.length) {
-  //       repeatPasswordError = 'Passwords must match';
-  //     }
-  //     if (
-  //       nameError ||
-  //       userNameError ||
-  //       emailError ||
-  //       zipCodeError ||
-  //       passwordError ||
-  //       repeatPasswordError
-  //     ) {
-  //       this.setState({
-  //         nameError,
-  //         userNameError,
-  //         emailError,
-  //         zipCodeError,
-  //         passwordError,
-  //         repeatPasswordError,
-  //       });
-  //       return false;
-  //     }
-  //     return true;
-  //   };
-
-  //   handleSubmit = (event) => {
-  //     event.preventDefault();
-  //     const isInputValid = this.validation();
-
-  //     if (isInputValid) {
-  //       console.log(this.state);
-  //       event.target.reset();
-  //       this.setState(initialState);
-  //     }
-  //   };
-
+    if (!target.name.value) {
+      nameError = 'Name field is empty';
+    }
+    if (!target.username.value) {
+      userNameError = 'Username field is empty';
+    }
+    if (!target.email.value) {
+      emailError = 'Email field is empty';
+    }
+    if (!validator.isEmail(target.email.value)) {
+      emailError = 'Invalid email';
+    }
+    if (!target.location.value) {
+      zipCodeError = 'Zip code field is empty';
+    }
+    if (!target.password.value) {
+      passwordError = 'Password field is empty';
+    }
+    // if (!isValidZipcode(target.location.value)) {
+    //   zipCodeError = 'invalid zip code';
+    // }
+    if (!Number(target.location.value)) {
+      zipCodeError = 'Must be numbers';
+    }
+    if (target.location.value.length !== 5) {
+      zipCodeError = 'Zip code must be 5 characters long';
+    }
+    if (!target.repeatPassword.value.length) {
+      repeatPasswordError = 'Password field is empty';
+    }
+    if (target.repeatPassword.value.length !== target.password.value.length) {
+      repeatPasswordError = 'Passwords must match';
+    }
+    this.setState({
+      nameError,
+      userNameError,
+      emailError,
+      zipCodeError,
+      passwordError,
+      repeatPasswordError,
+    });
+    if (
+      nameError ||
+      userNameError ||
+      emailError ||
+      zipCodeError ||
+      passwordError ||
+      repeatPasswordError
+    ) {
+      return false;
+    }
+    return true;
+  };
   state = { error: null }; // error and logic will come from back end
 
   handleSubmit = (ev) => {
@@ -133,17 +85,19 @@ export default class IndividualRegForm extends Component {
       repeatPassword,
     } = ev.target;
 
+    if (this.validation(ev.target)) {
+      return;
+    }
     this.setState({ error: null });
 
-    userApiService
-      .postUser({
-        name: name.value,
-        username: username.value,
-        email: email.value,
-        location: location.value,
-        password: password.value,
-        repeatPassword: repeatPassword.value,
-      })
+    UserApiService.postUser({
+      name: name.value,
+      username: username.value,
+      email: email.value,
+      location: location.value,
+      password: password.value,
+      repeatPassword: repeatPassword.value,
+    })
       .then((user) => {
         name.value = '';
         username.value = '';
@@ -158,13 +112,15 @@ export default class IndividualRegForm extends Component {
       });
   };
   render() {
-    const { error } = this.state;
+    // const { error } = this.state;
     return (
-      //Name, username, email, zipcode, password, and re-enter password Inputs
       <form className='IndividualRegForm' onSubmit={this.handleSubmit}>
-        <div role='alert'>{error && <p className='red'>{error}</p>}</div>
+        {/* <div role='alert'>
+          {error && <p className='registration_error'>{error}</p>}
+        </div> */}
+
         <div className='name'>
-          <label htmlFor='IndividualRegForm__full_name'>
+          <label htmlFor='IndividualRegForm__name'>
             Full name <Required />
           </label>
           <Input
@@ -172,37 +128,40 @@ export default class IndividualRegForm extends Component {
             placeholder='joe doe'
             type='text'
             // required
-            id='IndividualRegForm__full_name'
+            id='IndividualRegForm__name'
           ></Input>
+          {this.state.nameError}
         </div>
-
-        <div className='user_name'>
-          <label htmlFor='IndividualRegForm__user_name'>
+        <div className='username'>
+          <label htmlFor='IndividualRegForm__username'>
             Username <Required />
           </label>
           <Input
             name='username'
             placeholder='joedoe'
             type='text'
-            id='IndividualRegForm__user_name'
+            id='IndividualRegForm__username'
           ></Input>
+          {this.state.userNameError}
         </div>
         <div className='email'>
           <label htmlFor='IndividualRegForm__email'>
             Email <Required />
           </label>
           <Input name='email' type='text' id='IndividualRegForm__email'></Input>
+          {this.state.emailError}
         </div>
         <div className='location'>
-          <label htmlFor='IndividualRegForm__zip_code'>
+          <label htmlFor='IndividualRegForm__location'>
             Zip code <Required />
           </label>
           <Input
             name='location'
             placeholder='88888'
             type='text'
-            id='IndividualRegForm__zip_code'
+            id='IndividualRegForm__location'
           ></Input>
+          {this.state.zipCodeError}
         </div>
         <div className='password'>
           <label htmlFor='IndividualRegForm__password'>
@@ -214,8 +173,8 @@ export default class IndividualRegForm extends Component {
             type='password'
             id='IndividualRegForm__password'
           ></Input>
+          {this.state.passwordError}
         </div>
-
         <div className='re-enter-password'>
           <label htmlFor='IndividualRegForm__password'>
             Repeat password <Required />
@@ -226,6 +185,7 @@ export default class IndividualRegForm extends Component {
             type='password'
             id='IndividualRegForm__password'
           ></Input>
+          {this.state.repeatPasswordError}
         </div>
         <Button type='submit'>Sign up</Button>
       </form>
