@@ -22,7 +22,7 @@ export default class DashboardPage extends Component {
   keywords = [
     "groceries",
     // "delivery",
-    "food offer",
+    "food",
     "rideshare",
     "transportation",
     "moving",
@@ -49,23 +49,25 @@ export default class DashboardPage extends Component {
 
   conditionalRender = () => {
     if (!this.state.filter || this.state.filter === "all") {
-      return thing.stories.map((card) => (
+      return this.state.data.map((card) => (
         <Link key={card.id} to={`/story/${card.id}`} className="card-link">
           <StoryCard
-            title={card.title}
-            keywords={card.keywords}
+            resolved={card.resolved}
+            date={card.created_at}
+            flag={card.flag}
             issue={card.issue}
           />
         </Link>
       ));
     }
     if (this.state.filter) {
-      return thing.stories.map((card) =>
-        card.keywords.includes(this.state.filter) ? (
+      return this.state.data.map((card) =>
+        card.flag.includes(this.state.filter) ? (
           <Link key={card.id} to={`/story/${card.id}`} className="card-link">
             <StoryCard
-              title={card.title}
-              keywords={card.keywords}
+              resolved={card.resolved}
+              date={card.created_at}
+              flag={card.flag}
               issue={card.issue}
             />
           </Link>

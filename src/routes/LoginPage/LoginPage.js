@@ -3,15 +3,14 @@ import LoginForm from '../../components/LoginForm/LoginForm';
 
 export class LoginPage extends Component {
   static defaultProps = {
-    location: {},
     history: {
       push: () => {},
     },
   };
+
   handleLoginSuccess = () => {
-    const { location, history } = this.props;
-    const destination = (location.state || {}).from || '/';
-    history.push(destination);
+    const { history } = this.props;
+    history.push('/dashboard');
   };
 
   render() {
