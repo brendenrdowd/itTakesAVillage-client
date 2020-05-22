@@ -6,8 +6,7 @@ class CreateStoryPage extends Component {
   render() {
     return (
       <div>
-        <CreateStoryForm history={this.props.history} />
-        <CreateCommentForm history={this.props.history}/>
+        <CreateStoryForm history={this.props.history} />        
       </div>
     );
   }
