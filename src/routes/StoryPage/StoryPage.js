@@ -34,10 +34,10 @@ export default class StoryPage extends Component {
     StoryApiService.getStoryById(story_id)
       .then(story => {
         this.setState({ story: story })
-        UserApiService.getUserById(story.author)
-        .then(user => {
-          this.setState({ authorName: user.name })
-      })
+       // UserApiService.getUserById(story.author)
+        //.then(user => {
+          ///this.setState({ authorName: user.name })
+      //})
     
       })
 

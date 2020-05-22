@@ -9,6 +9,7 @@ import StoryService from "../../services/story-api-service";
 import Context from "../../contexts/ApiContext";
 import history from "../../history";
 import config from "../../config";
+import StoryApiService from "../../services/story-api-service";
 
 export default class DashboardPage extends Component {
   static contextType = Context;
@@ -34,13 +35,12 @@ export default class DashboardPage extends Component {
     //   .then(res => {
     //     this.context.updateUser(res)
     //   })
-    fetch(`${config.API_ENDPOINT}/story`)
-      .then((res) => res.json())
-      .then((data) =>
+    StoryApiService.getAllStories()
+    .then((data) =>
         this.setState({
           data,
         })
-      );
+        );        
   }
 
   handleFilter = (e) => {

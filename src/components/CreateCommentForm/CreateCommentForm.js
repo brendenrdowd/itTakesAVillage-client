@@ -32,9 +32,7 @@ class CreateCommentForm extends Component {
       comment: this.state.newComment,
       story: this.props.story.id
     };
-    
     CommentService.postComment(this.context.userId, this.state.newComment, this.props.story.id)
-    //CommentService.postComment(comment)
       .then((comment) => {
         this.context.addComment(comment);
         this.props.history.push(`/comment/${comment.id}`);

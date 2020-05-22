@@ -1,13 +1,10 @@
-import React, { Component } from "react";
-// import UserApiService from '../../services/user-api-service';
-import ApiContext from "../../contexts/ApiContext";
-import userContext from "../../contexts/ApiContext";
-import TokenService from "../../services/token-service";
-import AuthApiService from "../../services/auth-api-service";
-import "./LoginForm.css";
+import React, { Component } from 'react';
+import AuthApiService from '../../services/auth-api-service';
+import userContext from '../../contexts/ApiContext';
+import TokenService from '../../services/token-service';
+import './LoginForm.css';
 
 class LoginForm extends Component {
-  static contextType = ApiContext;
   static defaultProps = {
     onLoginSuccess: () => {},
   };
@@ -16,6 +13,7 @@ class LoginForm extends Component {
   state = { error: null };
 
   handleSubmitJwtAuth = (ev) => {
+    console.log(this.props.history);
     ev.preventDefault();
     this.setState({ error: null });
     const { username, password } = ev.target;
@@ -25,8 +23,9 @@ class LoginForm extends Component {
       password: password.value,
     })
       .then((res) => {
-        username.value = "";
-        password.value = "";
+        console.log(this.context.userId);
+        username.value = '';
+        password.value = '';
         TokenService.saveAuthToken(res.authToken);
         this.context.setUserId(res.userId);
         this.props.onLoginSuccess();
