@@ -7,10 +7,12 @@ import { Link } from 'react-router-dom';
 import userContext from '../../contexts/ApiContext';
 
 export default class DashboardPage extends Component {
+  static contextType = userContext;
   constructor() {
     super();
     this.state = {
       filter: null,
+      data: [],
     };
   }
 
@@ -31,6 +33,14 @@ export default class DashboardPage extends Component {
     //   .then(res => {
     //     this.context.updateUser(res)
     //   })
+    // fetch(`${config.API_ENDPOINT}/story`)
+    StoryService.getAllStories()
+      // .then((res) => res.json())
+      .then((data) =>
+        this.setState({
+          data,
+        })
+      );
   }
 
   handleFilter = (e) => {
@@ -42,20 +52,22 @@ export default class DashboardPage extends Component {
       return thing.stories.map((card) => (
         <Link key={card.id} to={`/story/${card.id}`} className='card-link'>
           <StoryCard
-            title={card.title}
-            keywords={card.keywords}
+            resolved={card.resolved}
+            date={card.created_at}
+            flag={card.flag}
             issue={card.issue}
           />
         </Link>
       ));
     }
     if (this.state.filter) {
-      return thing.stories.map((card) =>
-        card.keywords.includes(this.state.filter) ? (
-          <Link key={card.id} to={`/story/${card.id}`} className='card-link'>
+      return this.state.data.map((card) =>
+        card.flag.includes(this.state.filter) ? (
+          <Link key={card.id} to={`/story/${card.id}`} className="card-link">
             <StoryCard
-              title={card.title}
-              keywords={card.keywords}
+              resolved={card.resolved}
+              date={card.created_at}
+              flag={card.flag}
               issue={card.issue}
             />
           </Link>
@@ -65,8 +77,8 @@ export default class DashboardPage extends Component {
   };
 
   render() {
-    const { userId } = this.context;
-    console.log('userid', userId);
+    // console.log(this.state.data);
+    // console.log(this.context.userId);
     return (
       <section>
         <div className='filterForm'>

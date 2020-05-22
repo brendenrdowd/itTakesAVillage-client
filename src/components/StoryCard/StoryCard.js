@@ -6,9 +6,10 @@ class StoryCard extends Component {
   render() {
     return (
       <div className="cards">
-        <h3>{this.props.title}</h3>
-        <p>{this.props.keywords}</p>
-        <p>{this.props.issue}</p>
+        <h3>{this.props.issue}</h3>
+        <p>{this.props.date}</p>
+        <p>{this.props.resolved}</p>
+        <p>{this.props.flag}</p>
         {/* <CardToolBar /> */}
       </div>
     );

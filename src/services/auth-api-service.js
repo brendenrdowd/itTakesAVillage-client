@@ -1,12 +1,12 @@
-import config from '../config';
-import TokenService from './token-service';
+import config from "../config";
+import TokenService from "./token-service";
 
 const AuthApiService = {
   postLogin(credentials) {
     return fetch(`${config.API_ENDPOINT}/auth/login`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'content-type': 'application/json',
+        "content-type": "application/json",
       },
       body: JSON.stringify(credentials),
     }).then((res) =>
@@ -15,7 +15,7 @@ const AuthApiService = {
   },
   postRefreshToken() {
     return fetch(`${config.API_ENDPOINT}/auth/refresh`, {
-      method: 'POST',
+      method: "POST",
       headers: {
         authorization: `Bearer ${TokenService.getAuthToken()}`,
       },
@@ -36,9 +36,9 @@ const AuthApiService = {
   },
   postUser(user) {
     return fetch(`${config.API_ENDPOINT}/users`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'content-type': 'application/json',
+        "content-type": "application/json",
       },
       body: JSON.stringify(user),
     }).then((response) => {
