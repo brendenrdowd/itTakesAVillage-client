@@ -9,13 +9,14 @@ const userContext = React.createContext({
   clearError: () => {},
   stories: [],
   comments: [],
-  user: {},
+  // user: {},
   addStory: () => {},
   addComment: () => {},
   updateUser: () => {},
   toggleSideDrawer: () => {},
   closeBackdrop: () => {},
 });
+
 export default userContext;
 
 export class UserProvider extends Component {
@@ -26,6 +27,7 @@ export class UserProvider extends Component {
 
   setUserId = (userId) => {
     this.setState({ userId });
+    console.log('userid context:', this.state.userId);
   };
   clearError = () => {
     this.setState({ error: null });
