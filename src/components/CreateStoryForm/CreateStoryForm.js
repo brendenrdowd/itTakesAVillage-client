@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import StoryService from "../../services/story-api-service";
 import Context from "../../contexts/ApiContext";
 // import userContext from "../../contexts/ApiContext";
+// import userContext from "../../contexts/ApiContext";
 // import history from "../../history";
 
 class CreateStoryForm extends Component {
   // grab user data from context?
   static contextType = Context;
+  // static contextType = userContext;
   constructor(props) {
     super(props);
     this.state = {
@@ -37,6 +39,7 @@ class CreateStoryForm extends Component {
     const story = {
       flag: this.state.selectValue,
       issue: this.state.textValue,
+      // author: userContext.userId
     };
 
     // User_Id aka author being passed from API backend

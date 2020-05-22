@@ -6,12 +6,12 @@ import "./DashboardPage.css";
 import { Link } from "react-router-dom";
 // test change
 import StoryService from "../../services/story-api-service";
-import Context from "../../contexts/ApiContext";
+import userContext from "../../contexts/ApiContext";
 import history from "../../history";
 import config from "../../config";
 
 export default class DashboardPage extends Component {
-  static contextType = Context;
+  static contextType = userContext;
   constructor() {
     super();
     this.state = {
@@ -34,8 +34,9 @@ export default class DashboardPage extends Component {
     //   .then(res => {
     //     this.context.updateUser(res)
     //   })
-    fetch(`${config.API_ENDPOINT}/story`)
-      .then((res) => res.json())
+    // fetch(`${config.API_ENDPOINT}/story`)
+    StoryService.getAllStories()
+      // .then((res) => res.json())
       .then((data) =>
         this.setState({
           data,
@@ -77,7 +78,8 @@ export default class DashboardPage extends Component {
   };
 
   render() {
-    console.log(this.state.data);
+    // console.log(this.state.data);
+    // console.log(this.context.userId);
     return (
       <section>
         <div className="filterForm">
