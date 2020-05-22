@@ -22,10 +22,10 @@ const CommentApiService = {
   },
 
   getCommentsByStoryId(storyId) {
-    return fetch(`${config.API_ENDPOINT}/story/${storyId}`, {
+    return fetch(`${config.API_ENDPOINT}/comment/${storyId}`, {
       method: "GET",
       headers: {
-        //Authorization: `bearer ${TokenService.getAuthToken()}`,
+        Authorization: `bearer ${TokenService.getAuthToken()}`,
         "content-type": "application/json"
       },
     })

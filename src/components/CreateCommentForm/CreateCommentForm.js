@@ -5,6 +5,11 @@ import Context from "../../contexts/ApiContext";
 class CreateCommentForm extends Component {
   // grab parent story from props
 
+  static defaultProps = {
+    history: {
+      push: () => {},
+    },
+  };
     
   // user from context
   static contextType = Context;

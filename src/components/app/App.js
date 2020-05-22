@@ -134,7 +134,7 @@ export default class App extends Component {
             {/* Private */}
             <Route path={'/create'} component={CreateStoryPage} />
             {/* private route */}
-            <Route path={'/comment'} component={CreateCommentForm} />
+            <Route path={'/comment/'} component={CreateCommentForm} />
             {/* <Route
                 path={'/comment/edit/:id'}
                 component={CreateStoryPage} /> */}

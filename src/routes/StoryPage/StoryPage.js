@@ -9,9 +9,6 @@ import CommentApiService from '../../services/comment-api-service'
 import ApiContext from '../../contexts/ApiContext'
 import UserApiService from '../../services/user-api-service'
 
-
-
-
 export default class StoryPage extends Component {
 
   static defaultProps = {
@@ -29,33 +26,30 @@ export default class StoryPage extends Component {
 
   componentDidMount() {
     const story_id = this.props.match.params.id
-
     // need to make sure we're grabbing the story in service
     StoryApiService.getStoryById(story_id)
       .then(story => {
         this.setState({ story: story })
-       // UserApiService.getUserById(story.author)
-        //.then(user => {
-          ///this.setState({ authorName: user.name })
-      //})
-    
       })
 
     // need to make sure we're grabbing story from commentApi correctly
-    const comments = CommentApiService.getCommentsByStoryId(story_id) || []
+    CommentApiService.getCommentsByStoryId(story_id) 
+    .then (comments => {
+      this.setState({ comments })
+    })
+
     const user = this.context.user
+    
+    
     this.setState(
 
       {
-        comments,
         user
       }
     )
   }
 
-
-
-  comments = (this.state.comments.length > 0) ? "Add a comment..." : this.state.comments.map(comment =>
+  comments = (this.state.comments) ? "Add a comment..." : this.state.comments.map(comment =>
     <li key={comment.id} className="comment">
       <p className="comment_text">
         {comment.content}
@@ -69,6 +63,8 @@ export default class StoryPage extends Component {
 
 
   render() {
+    console.log("comments", this.state.comments);
+    
     const renderStory = (
       <Section className="StoryPage">
         <StoryCard
