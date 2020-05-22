@@ -29,8 +29,11 @@ import "./App.css";
 
 import "./App.css";
 
+let userID = localStorage.getItem("user_id");
+
 export default class App extends Component {
   // what is our state going to look like?
+
   state = {
     error: "",
     hasError: false,
@@ -39,6 +42,7 @@ export default class App extends Component {
     stories: [],
     comments: [],
     sideDrawerOpen: false,
+    user_id: userID,
   };
   stories = Store.stories;
   comments = Store.comments;
@@ -103,6 +107,7 @@ export default class App extends Component {
     // what is our context going to look like?
     const value = {
       user: this.state.user,
+      user_id: this.state.user_id,
       stories: this.state.stories,
       comments: this.state.comments,
       addStory: this.handleAddStory,

@@ -6,7 +6,7 @@ import App from "./components/app/App";
 // we'll use this later for styling, especially for story toolbar
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
-import userContext from "./contexts/ApiContext";
+import { UserProvider } from "./contexts/ApiContext";
 import {
   faSignOutAlt,
   faHome,
@@ -19,9 +19,9 @@ import "./index.css";
 
 ReactDOM.render(
   <Router history={history}>
-    <userContext>
+    <UserProvider>
       <App />
-    </userContext>
+    </UserProvider>
   </Router>,
   document.getElementById("root")
 );

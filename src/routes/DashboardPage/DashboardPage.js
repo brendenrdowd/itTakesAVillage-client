@@ -17,11 +17,12 @@ export default class DashboardPage extends Component {
     this.state = {
       filter: null,
       data: [],
+      // userId: "",
     };
   }
   keywords = [
     "groceries",
-    // "delivery",
+    // "author",
     "food",
     "rideshare",
     "transportation",
@@ -42,6 +43,8 @@ export default class DashboardPage extends Component {
           data,
         })
       );
+    // Humberto testing
+    // this.setState({ userId: this.context.userId });
   }
 
   handleFilter = (e) => {
@@ -61,6 +64,20 @@ export default class DashboardPage extends Component {
         </Link>
       ));
     }
+    // if (this.state.filter === "author") {
+    //   return this.state.data.map((card) =>
+    //     card.author.includes(this.state.userId) ? (
+    //       <Link key={card.id} to={`/story/${card.id}`} className="card-link">
+    //         <StoryCard
+    //           resolved={card.resolved}
+    //           date={card.created_at}
+    //           flag={card.flag}
+    //           issue={card.issue}
+    //         />
+    //       </Link>
+    //     ) : null
+    //   );
+    // }
     if (this.state.filter) {
       return this.state.data.map((card) =>
         card.flag.includes(this.state.filter) ? (
@@ -78,8 +95,9 @@ export default class DashboardPage extends Component {
   };
 
   render() {
-    // console.log(this.state.data);
-    // console.log(this.context.userId);
+    // getting userId from context
+    console.log(this.context.userId);
+
     return (
       <section>
         <div className="filterForm">
