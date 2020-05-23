@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import CommentService from "../../services/comment-api-service";
-import Context from "../../contexts/ApiContext";
+import userContext from "../../contexts/ApiContext";
 import "./CommentForm.css";
 
 class CreateCommentForm extends Component {
@@ -13,11 +13,12 @@ class CreateCommentForm extends Component {
   };
 
   // user from context
-  static contextType = Context;
+  static contextType = userContext;
   constructor(props) {
     super(props);
     this.state = {
       newComment: "",
+      comment:{}
     };
   }
 
