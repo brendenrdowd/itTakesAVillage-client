@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import CommentService from "../../services/comment-api-service";
-import Context from "../../contexts/ApiContext";
-import "./CommentForm.css";
+import React, { Component } from 'react';
+import CommentService from '../../services/comment-api-service';
+import userContext from '../../contexts/ApiContext';
+import './CommentForm.css';
 
 class CreateCommentForm extends Component {
   // grab parent story from props
@@ -13,11 +13,11 @@ class CreateCommentForm extends Component {
   };
 
   // user from context
-  static contextType = Context;
+  static contextType = userContext;
   constructor(props) {
     super(props);
     this.state = {
-      newComment: "",
+      newComment: '',
     };
   }
 
@@ -42,8 +42,9 @@ class CreateCommentForm extends Component {
       this.props.story.id
     )
       .then((comment) => {
-        this.context.addComment(comment);
-        this.props.history.push(`/comment/${comment.id}`);
+        //need to add a component did mount
+        this.state.newComment(comment);
+        this.props.history.push(`/story/${comment.story.id}`);
       })
       .catch((error) => {
         console.error(error);
@@ -52,19 +53,19 @@ class CreateCommentForm extends Component {
 
   render() {
     return (
-      <form className="commentForm" onSubmit={this.handleSubmit}>
+      <form className='commentForm' onSubmit={this.handleSubmit}>
         {/* <h3>User: {this.context.user}</h3>
         <h3>Story: {this.context.stories}</h3> */}
         {/* input for comment */}
         <label>Create comment:</label>
         <input
-          type="text"
+          type='text'
           value={this.state.value}
-          placeholder="enter comment"
+          placeholder='enter comment'
           onChange={this.handleCommentChange}
           required
         />
-        <button type="submit">Submit</button>
+        <button type='submit'>Submit</button>
       </form>
     );
   }
