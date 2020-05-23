@@ -1,9 +1,9 @@
 # It Takes A Village
 
-> A community based altruism application
+> A community based altruistic application
 
 [![Build Status][travis-image]][travis-url]
-[![Node version](https://img.shields.io/node/v/[NPM-MODULE-NAME].svg?style=flat)](http://nodejs.org/download/)
+[![NPM Version][npm-image]][npm-url]
 
 ## Live App link
 
@@ -14,7 +14,10 @@
 
 ## App Images
 
-> Login Page
+<p align="center">
+  <img width="223" height="395.5" src="assets/Registration.png">
+</p>
+<!-- > Login Page
 > ![Login Page](assets/Login.png "Login Page")
 > Registration Page
 > ![Registration Page](assets/Registration.png "Registration Page")
@@ -23,7 +26,7 @@
 > Dashboard Page
 > ![Dashboard Page](assets/Dashboard.png "Dashboard Page")
 > CreateStory Page
-> ![CreateStory Page](assets/CreateStory.png "CreateStory Page")
+> ![CreateStory Page](assets/CreateStory.png "CreateStory Page") -->
 
 ### Summary
 
