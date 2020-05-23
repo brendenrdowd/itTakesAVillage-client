@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import StoryService from "../../services/story-api-service";
 import Context from "../../contexts/ApiContext";
+import "./CreateStoryForm.css";
 // import userContext from "../../contexts/ApiContext";
 // import userContext from "../../contexts/ApiContext";
 // import history from "../../history";
@@ -55,20 +56,25 @@ class CreateStoryForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form className="createStory" onSubmit={this.handleSubmit}>
         {/* will need to update this once we're grabbing user object from backend */}
         {/* <h3>User: {this.context.user}</h3> */}
-        <label>Create Story:</label>
+        <label>
+          <h3>Create Story:</h3>
+        </label>
+        <br />
         <p>
           Please select the requested type of help from the drop down selections
           menu. Then enter the specifics of the help you are requesting.
         </p>
+        <br />
         <p>
           TIP: Create a story for each individual need, additionally please be
           as specific as possible for your requested help.
         </p>
-        <label>
-          select help type
+        <br />
+        <label>Select Help Type:</label>
+        <div className="customSelect">
           <select
             value={this.state.selectValue}
             onChange={this.handleSelectorChange}
@@ -79,7 +85,8 @@ class CreateStoryForm extends Component {
               </option>
             ))}
           </select>
-        </label>
+        </div>
+        <br />
         <input
           name="issue"
           type="text"
@@ -88,7 +95,8 @@ class CreateStoryForm extends Component {
           onChange={this.handleTextChange}
           required
         />
-        <input type="submit" value="Submit" />
+        <br />
+        <button type="submit">Submit</button>
       </form>
     );
   }

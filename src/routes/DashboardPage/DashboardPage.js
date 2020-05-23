@@ -106,14 +106,16 @@ export default class DashboardPage extends Component {
         <div className="filterForm">
           <form>
             <label htmlFor="keywords">Filter By:</label>
-            <select onChange={this.handleFilter} id="keywords">
-              <option value="all">All</option>
-              {this.keywords.map((keywords, index) => (
-                <option key={index} value={keywords}>
-                  {keywords}
-                </option>
-              ))}
-            </select>
+            <div className="customSelect">
+              <select onChange={this.handleFilter} id="keywords">
+                <option value="all">All</option>
+                {this.keywords.map((keywords, index) => (
+                  <option key={index} value={keywords}>
+                    {keywords}
+                  </option>
+                ))}
+              </select>
+            </div>
           </form>
         </div>
         {this.conditionalRender()}

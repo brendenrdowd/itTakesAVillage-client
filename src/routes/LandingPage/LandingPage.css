@@ -26,3 +26,22 @@
 .landing p {
   margin-top: 15px;
 }
+
+@media screen and (min-device-width: 1200px) {
+  .landing {
+    display: flex;
+    margin-top: 200px;
+  }
+
+  .missionContain {
+    display: flex;
+    flex-direction: column;
+    max-width: 75%;
+    border-right: 2px solid darkseagreen;
+    padding-right: 20px;
+  }
+
+  .button-bar {
+    margin: 0 auto;
+  }
+}
