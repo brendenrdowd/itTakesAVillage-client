@@ -48,7 +48,11 @@ import StoryPage from '../../routes/StoryPage/StoryPage';
 import userContext from '../../contexts/ApiContext';
 import './App.css';
 
+<<<<<<< HEAD
 >>>>>>> ffb88efc85c0cb1293b2e56ac365f6d22ba73d22
+=======
+>>>>>>> master
+>>>>>>> 16d6268fc14fc7b024f6d3027080f967dcaad891
 
 let userID = localStorage.getItem("user_id");
 
