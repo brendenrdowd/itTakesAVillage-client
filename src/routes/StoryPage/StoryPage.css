@@ -1,12 +1,16 @@
 .comments_list {
-  border: 2px solid darkseagreen;
-  box-shadow: 10px 10px 5px grey;
-  border-radius: 25px;
-  padding: 10px;
   margin: 0;
   color: #487948;
   list-style-type: none;
   text-align: center;
+}
+
+.comments_list li {
+  border: 2px solid darkseagreen;
+  box-shadow: 10px 10px 10px -6px #3c653c;
+  border-radius: 25px;
+  padding: 10px;
+  margin-top: 15px;
 }
 
 @media only screen and (min-device-width: 768px) {

@@ -4,7 +4,7 @@
 
 .cards {
   border: 2px solid darkseagreen;
-  box-shadow: 10px 10px 5px grey;
+  box-shadow: 10px 10px 10px -6px #3c653c;
   border-radius: 25px;
   padding: 10px;
   display: flex;
@@ -21,7 +21,7 @@
 
 .cards .flag {
   border: 1px solid darkseagreen;
-  box-shadow: 2px 2px 2px grey;
+  box-shadow: 1px 1px 2px #3c653c;
   border-radius: 2px;
   padding: 0 20px;
   text-transform: capitalize;
