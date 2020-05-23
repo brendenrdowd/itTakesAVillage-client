@@ -31,24 +31,34 @@ class CreateCommentForm extends Component {
   // ready for backend connect
   handleSubmit = (event) => {
     event.preventDefault();
-    const comment = {
-      author: this.context.userId,
-      comment: this.state.newComment,
+
+    const { comment } = event.target;
+    const { userId } = this.context;
+
+    this.setState({ error: null });
+
+    CommentService.postComment({
+      author: userId,
+      comment: comment.value,
       story: this.props.story.id,
-    };
-    CommentService.postComment(
-      this.context.userId,
-      this.state.newComment,
-      this.props.story.id
-    )
-      .then((comment) => {
-        //need to add a component did mount
-        this.state.newComment(comment);
-        this.props.history.push(`/story/${comment.story.id}`);
+    })
+      .then(this.context.addComment)
+      .then(() => {
+        comment.value = '';
       })
-      .catch((error) => {
-        console.error(error);
-      });
+      .catch(this.context.setError);
+
+    // const comment = {
+    //   author: this.context.userId,
+    //   comment: comment.value,
+    //   story: this.props.story.id,
+    // };
+    // CommentService.postComment(
+    //   this.context.userId,
+    //   this.state.newComment,
+    //   this.props.story.id
+    // ).then(this.context.addComment);
+    // this.props.history.push(`/story/${comment.story.id}`);
   };
 
   render() {
@@ -60,9 +70,10 @@ class CreateCommentForm extends Component {
         <label>Create comment:</label>
         <input
           type='text'
-          value={this.state.value}
+          name='comment'
+          // value={this.state.value}
           placeholder='enter comment'
-          onChange={this.handleCommentChange}
+          // onChange={this.handleCommentChange}
           required
         />
         <button type='submit'>Submit</button>
