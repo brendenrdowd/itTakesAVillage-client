@@ -1,32 +1,6 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 // import PrivateRoute from '../Utils/PrivateRoute';
-import PublicOnlyRoute from "../Utils/PublicOnlyRoute";
-import Toolbar from "../Nav/Toolbar/Toolbar";
-import SideDrawer from "../Nav/SideDrawer/SideDrawer";
-import Backdrop from "../Nav/Backdrop/Backdrop";
-import Footer from "../Footer/Footer";
-import Store from "../../dummystore";
-// import ApiContext from '../../contexts/ApiContext';
-// import all the routes
-import DashboardPage from "../../routes/DashboardPage/DashboardPage";
-import LandingPage from "../../routes/LandingPage/LandingPage";
-import LoginPage from "../../routes/LoginPage/LoginPage";
-import NotFoundPage from "../../routes/NotFoundPage/NotFoundPage";
-import RegistrationPage from "../../routes/RegistrationPage/RegistrationPage";
-import CreateStoryPage from "../../routes/CreateStoryPage/CreateStoryPage";
-import PoliciesPage from "../../routes/PoliciesPage/PoliciesPage";
-import StoryPage from "../../routes/StoryPage/StoryPage";
-// import ApiContext from '../../contexts/ApiContext'
-// import all the routes
-// import DashboardPage from '../../routes/DashboardPage/DashboardPage'
-// import RegistrationPage from '../../routes/RegistrationPage/RegistrationPage'
-// import CreateStoryPage from '../../routes/CreateStoryPage/CreateStoryPage'
-// import PoliciesPage from '../../routes/PoliciesPage/PoliciesPage'
-// import StoryPage from '../../routes/StoryPage/StoryPage'
-import userContext from "../../contexts/ApiContext";
-import "./App.css";
-
 import "./App.css";
 import PublicOnlyRoute from "../Utils/PublicOnlyRoute";
 import Toolbar from "../Nav/Toolbar/Toolbar";
