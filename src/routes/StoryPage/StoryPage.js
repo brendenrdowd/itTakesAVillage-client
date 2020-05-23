@@ -22,6 +22,7 @@ export default class StoryPage extends Component {
     comments: [],
     user: {},
     authorName: "",
+    comment: {},
   };
 
   componentDidMount() {
@@ -51,7 +52,7 @@ export default class StoryPage extends Component {
               <p className="comment_text">{comment.comment}</p>
               <p>
                 <Hyph />
-                {comment.author}
+                {/* {comment.author} */}
               </p>
             </li>
           ));

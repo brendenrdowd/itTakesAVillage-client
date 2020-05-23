@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import CommentService from "../../services/comment-api-service";
-import Context from "../../contexts/ApiContext";
+import userContext from "../../contexts/ApiContext";
 import "./CommentForm.css";
 
 class CreateCommentForm extends Component {
@@ -13,7 +13,7 @@ class CreateCommentForm extends Component {
   };
 
   // user from context
-  static contextType = Context;
+  static contextType = userContext;
   constructor(props) {
     super(props);
     this.state = {
@@ -31,37 +31,33 @@ class CreateCommentForm extends Component {
   // ready for backend connect
   handleSubmit = (event) => {
     event.preventDefault();
-    const comment = {
-      author: this.context.userId,
-      comment: this.state.newComment,
-      story: this.props.story.id,
-    };
-    CommentService.postComment(
-      this.context.userId,
-      this.state.newComment,
-      this.props.story.id
-    )
+
+    const { comment } = event.target;
+    const { userId } = this.context;
+
+    this.setState({ error: null });
+
+    // should be able to consolidate this into just comment, depending on service/backend
+    CommentService.postComment(userId, comment.value, this.props.story.id)
       .then((comment) => {
+        //need to add a component did update, or push the new comment in context and update the storypage comment array with context
         this.context.addComment(comment);
-        this.props.history.push(`/comment/${comment.id}`);
+        this.props.history.push(`/story/${comment.story}`);
       })
-      .catch((error) => {
-        console.error(error);
-      });
+      .catch(this.context.setError);
   };
 
   render() {
     return (
       <form className="commentForm" onSubmit={this.handleSubmit}>
-        {/* <h3>User: {this.context.user}</h3>
-        <h3>Story: {this.context.stories}</h3> */}
         {/* input for comment */}
         <label>Create comment:</label>
         <input
           type="text"
-          value={this.state.value}
+          name="comment"
+          // value={this.state.value}
           placeholder="enter comment"
-          onChange={this.handleCommentChange}
+          // onChange={this.handleCommentChange}
           required
         />
         <button type="submit">Submit</button>
