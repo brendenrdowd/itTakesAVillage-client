@@ -7,8 +7,9 @@ class StoryCard extends Component {
     return (
       <div className="cards">
         <h3>{this.props.issue}</h3>
+        <p>{this.props.date}</p>
+        <p>{this.props.resolved}</p>
         <p>{this.props.flag}</p>
-        <p>{this.props.author}</p>
         {/* <CardToolBar /> */}
       </div>
     );

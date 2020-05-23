@@ -4,9 +4,34 @@ import validator from 'validator';
 import UserApiService from '../../services/user-api-service';
 import './IndividualRegForm.css';
 
+// const initialState = {
+//   name: '',
+//   username: '',
+//   email: '',
+//   location: '',
+//   password: '',
+//   repeatPassword: '',
+//   nameError: '',
+//   userNameError: '',
+//   emailError: '',
+//   zipCodeError: '',
+//   passwordError: '',
+//   repeatPasswordError: '',
+// };
+
 export default class IndividualRegForm extends Component {
   static defaultProps = {
     onRegistrationSuccess: () => {},
+  };
+
+  state = {
+    error: null,
+    nameError: '',
+    userNameError: '',
+    emailError: '',
+    zipCodeError: '',
+    passwordError: '',
+    repeatPasswordError: '',
   };
 
   validation = (target) => {
@@ -43,10 +68,10 @@ export default class IndividualRegForm extends Component {
     if (!Number(target.location.value)) {
       zipCodeError = 'Must be numbers';
     }
-    if (target.location.value.length !== 5) {
-      zipCodeError = 'Zip code must be 5 characters long';
-    }
-    if (!target.repeatPassword.value.length) {
+    // if (target.location.value.length !== 5) {
+    //   zipCodeError = 'Zip code must be 5 characters long';
+    // }
+    if (!target.repeatPassword.value) {
       repeatPasswordError = 'Password field is empty';
     }
     if (target.repeatPassword.value.length !== target.password.value.length) {
@@ -72,7 +97,6 @@ export default class IndividualRegForm extends Component {
     }
     return true;
   };
-  state = { error: null }; // error and logic will come from back end
 
   handleSubmit = (ev) => {
     ev.preventDefault();
@@ -85,10 +109,11 @@ export default class IndividualRegForm extends Component {
       repeatPassword,
     } = ev.target;
 
+    // this.setState({ error: null });
+
     if (this.validation(ev.target)) {
       return;
     }
-    this.setState({ error: null });
 
     UserApiService.postUser({
       name: name.value,
