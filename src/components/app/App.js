@@ -37,24 +37,9 @@ export default class App extends Component {
   state = {
     error: "",
     hasError: false,
-    user: {},
-    help: [], //won't need this
-    stories: [],
-    comments: [],
-    sideDrawerOpen: false,
-    user_id: userID,
   };
-  stories = Store.stories;
-  comments = Store.comments;
 
-  componentDidMount() {
-    this.setState({
-      // need to validate if single user or all users (HH)
-      user: this.user,
-      stories: this.stories,
-      comments: this.comments,
-    });
-  }
+  static contextType = userContext;
 
   populateStories = (dbStories) => {
     this.setState({
@@ -62,72 +47,20 @@ export default class App extends Component {
     });
   };
 
-  handleAddComment = (comments) => {
-    this.setState({
-      comments: [...this.state.comments, comments],
-    });
-    // for testing remove after
-    console.log("comments", this.state.comments);
-  };
-
-  handleAddStory = (stories) => {
-    this.setState({
-      stories: [...this.state.stories, stories],
-    });
-    // for testing remove after
-    console.log("stories", this.state.stories);
-    console.log(this.state.user_id);
-  };
-
   handleUpdateUser = (user) => {
     return this.setState({
       user,
     });
   };
-
-  // won't need this
-  addHelp = (help) => {
-    this.setState({
-      help: [...this.state.help, help],
-    });
-    // for testing remove after
-    console.log("help", this.state.help);
-  };
-
-  handleBackdropClose = () => {
-    this.setState({ sideDrawerOpen: false });
-  };
-
-  drawerToggleClickHandler = () => {
-    this.setState((prevState) => {
-      return { sideDrawerOpen: !prevState.sideDrawerOpen };
-    });
-  };
-
   render() {
-    // what is our context going to look like?
-    const value = {
-      user: this.state.user,
-      user_id: this.state.user_id,
-      stories: this.state.stories,
-      comments: this.state.comments,
-      addStory: this.handleAddStory,
-      addComment: this.handleAddComment,
-      addHelp: this.addHelp, //won't need this
-      updateUser: this.handleUpdateUser,
-      toggleSideDrawer: this.drawerToggleClickHandler,
-      closeBackdrop: this.handleBackdropClose,
-      populateStories: this.populateStories,
-    };
-
     let backdrop;
-    if (this.state.sideDrawerOpen) {
+    if (this.context.sideDrawerOpen) {
       backdrop = <Backdrop />;
     }
     return (
       <div className="container">
         <Toolbar />
-        <SideDrawer show={this.state.sideDrawerOpen} />
+        <SideDrawer show={this.context.sideDrawerOpen} />
         {backdrop}
         <main>
           {this.state.hasError && <p className="red">{this.state.error}</p>}

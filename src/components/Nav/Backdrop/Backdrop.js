@@ -1,14 +1,12 @@
-import React, { Component } from 'react'
-import ApiContext from '../../../contexts/ApiContext'
-import './Backdrop.css'
+import React, { Component } from 'react';
+import userContext from '../../../contexts/ApiContext';
+import './Backdrop.css';
 
 export class Backdrop extends Component {
-  static contextType = ApiContext;
+  static contextType = userContext;
   render() {
-    return (
-      <div className="backdrop" onClick={this.context.closeBackdrop} />
-    )
+    return <div className='backdrop' onClick={this.context.closeBackdrop} />;
   }
 }
 
-export default Backdrop
+export default Backdrop;
