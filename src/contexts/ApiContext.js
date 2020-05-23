@@ -10,6 +10,7 @@ const userContext = React.createContext({
   updateUser: () => {},
   toggleSideDrawer: () => {},
   closeBackdrop: () => {},
+  addComment: () => {}
 });
 
 export default userContext;
@@ -31,6 +32,10 @@ export class UserProvider extends Component {
     this.setState({ sideDrawerOpen: false });
   };
 
+  addCOmment = () => {
+    this.setState( {comment} )
+  }  
+
   drawerToggleClickHandler = () => {
     this.setState((prevState) => {
       return { sideDrawerOpen: !prevState.sideDrawerOpen };
@@ -46,6 +51,7 @@ export class UserProvider extends Component {
       setUserId: this.setUserId,
       closeBackdrop: this.handleBackdropClose,
       toggleSideDrawer: this.drawerToggleClickHandler,
+      addComment: this.addComment, 
     };
     return (
       <userContext.Provider value={value}>
