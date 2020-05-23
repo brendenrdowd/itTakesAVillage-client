@@ -22,6 +22,7 @@ export default class StoryPage extends Component {
     comments: [],
     user: {},
     authorName: "",
+    comment:{}
   };
 
   componentDidMount() {
