@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import StoryCard from "../../components/StoryCard/StoryCard";
 import UserService from "../../services/user-api-service";
-import thing from "../../dummystore";
 import "./DashboardPage.css";
 import { Link } from "react-router-dom";
 import userContext from "../../contexts/ApiContext";
