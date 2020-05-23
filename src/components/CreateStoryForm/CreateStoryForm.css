@@ -1,12 +1,16 @@
-
-.LoginForm {
+.createStory {
+  border: 2px solid darkseagreen;
+  box-shadow: 10px 10px 5px grey;
+  border-radius: 25px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 60px 0;
+  margin: 20px 20px;
+  color: #487948;
 }
 
-.LoginForm button {
+.createStory button {
   margin-top: 20px;
   border-radius: 4px;
   padding: 15px;
@@ -16,15 +20,19 @@
   width: 100px;
 }
 
-.LoginForm button:hover {
+.createStory button:hover {
   background-color: #e5efe5;
   color: darkseagreen;
 }
 
-.LoginForm input {
+.createStory input {
   width: 100%;
   clear: both;
   padding: 5px;
   border: none;
   border-bottom: 2px solid darkseagreen;
+}
+
+.customSelect select {
+  text-transform: capitalize;
 }

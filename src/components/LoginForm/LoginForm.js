@@ -43,23 +43,23 @@ class LoginForm extends Component {
           {error && <p className='login-error'>{error}</p>}
         </div>
         <div className='username'>
-          <label htmlFor='LoginForm__username'>Username</label>{' '}
-          <Input
+          <label htmlFor='LoginForm__username'>Username: </label>{' '}
+          <input
             type='text'
             required
             name='username'
             id='LoginForm__username'
-          ></Input>
+          ></input>
         </div>
 
         <div className='password'>
-          <label htmlFor='LoginForm__password'>Password</label>{' '}
-          <Input
+          <label htmlFor='LoginForm__password'>Password: </label>{' '}
+          <input
             required
             name='password'
             type='password'
             id='LoginForm__password'
-          ></Input>
+          ></input>
         </div>
         <Button type='submit'>Login</Button>
       </form>

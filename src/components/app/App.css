@@ -3,9 +3,9 @@
   padding: 1em 15px;
   margin-right: auto;
   margin-left: auto;
-  background-color:white;
+  background-color: white;
 }
-.App.container{
+.App.container {
   min-height: 100vh;
 }
 @media (min-width: 576px) {
@@ -28,9 +28,10 @@
     max-width: 1140px;
   }
 }
-.red{
-  color:red;
+.red {
+  color: red;
 }
-main{
-  margin-top:5rem;
+main {
+  margin-top: 5rem;
+  margin-bottom: 5rem;
 }

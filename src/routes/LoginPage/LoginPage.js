@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
-import LoginForm from '../../components/LoginForm/LoginForm';
+import React, { Component } from "react";
+import LoginForm from "../../components/LoginForm/LoginForm";
+import "./LoginPage.css";
 
 export class LoginPage extends Component {
   static defaultProps = {
@@ -10,12 +11,12 @@ export class LoginPage extends Component {
 
   handleLoginSuccess = () => {
     const { history } = this.props;
-    history.push('/dashboard');
+    history.push("/dashboard");
   };
 
   render() {
     return (
-      <section className='LoginPage'>
+      <section className="LoginPage">
         <h2>Login</h2>
         <LoginForm onLoginSuccess={this.handleLoginSuccess} />
       </section>
