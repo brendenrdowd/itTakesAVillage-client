@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import CommentService from "../../services/comment-api-service";
-import userContext from "../../contexts/ApiContext";
-import "./CommentForm.css";
+import React, { Component } from 'react';
+import CommentService from '../../services/comment-api-service';
+import userContext from '../../contexts/ApiContext';
+import './CommentForm.css';
 
 class CreateCommentForm extends Component {
   // grab parent story from props
@@ -17,14 +17,14 @@ class CreateCommentForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      newComment: "",
-      comment:{}
+      newComment:""
     };
   }
 
   handleCommentChange = (event) => {
     this.setState({ newComment: event.target.value });
   };
+
 
   //need to grab storyId which should be passed to createCommentForm by props from the story page
   //need to grab userId from context & pass to the backend to the comment body
@@ -37,14 +37,16 @@ class CreateCommentForm extends Component {
       comment: this.state.newComment,
       story: this.props.story.id,
     };
+    // should be able to consolidate this into just comment, depending on service/backend
     CommentService.postComment(
-      this.context.userId,
-      this.state.newComment,
-      this.props.story.id
+      comment.author,
+      comment.comment,
+      comment.story
     )
       .then((comment) => {
-        this.context.addComment(comment);
-        this.props.history.push(`/comment/${comment.id}`);
+        //need to add a component did update, or push the new comment in context and update the storypage comment array with context
+        this.context.addComment(comment)
+        this.props.history.push(`/story/${comment.story}`);
       })
       .catch((error) => {
         console.error(error);
@@ -53,19 +55,17 @@ class CreateCommentForm extends Component {
 
   render() {
     return (
-      <form className="commentForm" onSubmit={this.handleSubmit}>
-        {/* <h3>User: {this.context.user}</h3>
-        <h3>Story: {this.context.stories}</h3> */}
+      <form className='commentForm' onSubmit={this.handleSubmit}>
         {/* input for comment */}
         <label>Create comment:</label>
         <input
-          type="text"
+          type='text'
           value={this.state.value}
-          placeholder="enter comment"
+          placeholder='enter comment'
           onChange={this.handleCommentChange}
           required
         />
-        <button type="submit">Submit</button>
+        <button type='submit'>Submit</button>
       </form>
     );
   }
