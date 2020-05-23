@@ -32,9 +32,15 @@ class CreateCommentForm extends Component {
   // ready for backend connect
   handleSubmit = (event) => {
     event.preventDefault();
-    const comment = {
-      author: this.context.userId,
-      comment: this.state.newComment,
+
+    const { comment } = event.target;
+    const { userId } = this.context;
+
+    this.setState({ error: null });
+
+    CommentService.postComment({
+      author: userId,
+      comment: comment.value,
       story: this.props.story.id,
     };
     // should be able to consolidate this into just comment, depending on service/backend
@@ -48,9 +54,7 @@ class CreateCommentForm extends Component {
         this.context.addComment(comment)
         this.props.history.push(`/story/${comment.story}`);
       })
-      .catch((error) => {
-        console.error(error);
-      });
+      .catch(this.context.setError);
   };
 
   render() {
@@ -60,9 +64,10 @@ class CreateCommentForm extends Component {
         <label>Create comment:</label>
         <input
           type='text'
-          value={this.state.value}
+          name='comment'
+          // value={this.state.value}
           placeholder='enter comment'
-          onChange={this.handleCommentChange}
+          // onChange={this.handleCommentChange}
           required
         />
         <button type='submit'>Submit</button>
