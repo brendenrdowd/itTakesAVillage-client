@@ -5,9 +5,9 @@ import thing from '../../dummystore';
 import './DashboardPage.css';
 import { Link } from 'react-router-dom';
 import userContext from '../../contexts/ApiContext';
+import StoryService from '../../services/story-api-service';
 
 export default class DashboardPage extends Component {
-  static contextType = userContext;
   constructor() {
     super();
     this.state = {
@@ -17,7 +17,7 @@ export default class DashboardPage extends Component {
   }
 
   static contextType = userContext;
-  
+
   keywords = [
     'groceries',
     // "delivery",
@@ -63,7 +63,7 @@ export default class DashboardPage extends Component {
     if (this.state.filter) {
       return this.state.data.map((card) =>
         card.flag.includes(this.state.filter) ? (
-          <Link key={card.id} to={`/story/${card.id}`} className="card-link">
+          <Link key={card.id} to={`/story/${card.id}`} className='card-link'>
             <StoryCard
               resolved={card.resolved}
               date={card.created_at}
@@ -78,7 +78,7 @@ export default class DashboardPage extends Component {
 
   render() {
     // console.log(this.state.data);
-    // console.log(this.context.userId);
+    console.log('dashboard userid', this.context.userId);
     return (
       <section>
         <div className='filterForm'>
@@ -86,8 +86,10 @@ export default class DashboardPage extends Component {
             <label htmlFor='keywords'>Filter By:</label>
             <select onChange={this.handleFilter} id='keywords'>
               <option value='all'>All</option>
-              {this.keywords.map((keywords) => (
-                <option value={keywords}>{keywords}</option>
+              {this.keywords.map((keywords, index) => (
+                <option key={index} value={keywords}>
+                  {keywords}
+                </option>
               ))}
             </select>
           </form>

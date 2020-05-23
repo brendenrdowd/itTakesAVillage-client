@@ -1,17 +1,12 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 const userContext = React.createContext({
   userId: [],
   error: null,
-  setUserId: (userId) => {
-    localStorage.setItem("user_id", userId);
-  },
+  setUserId: () => {},
   clearError: () => {},
   stories: [],
-  comments: [],
-  // user: {},
   addStory: () => {},
-  addComment: () => {},
   updateUser: () => {},
   toggleSideDrawer: () => {},
   closeBackdrop: () => {},
@@ -22,23 +17,35 @@ export default userContext;
 export class UserProvider extends Component {
   state = {
     userId: [],
+    sideDrawerOpen: false,
     error: null,
   };
 
   setUserId = (userId) => {
-    this.setState({ userId });
-    console.log('userid context:', this.state.userId);
+    this.setState({ userId: localStorage.setItem('user_id', userId) });
   };
   clearError = () => {
     this.setState({ error: null });
   };
+  handleBackdropClose = () => {
+    this.setState({ sideDrawerOpen: false });
+  };
+
+  drawerToggleClickHandler = () => {
+    this.setState((prevState) => {
+      return { sideDrawerOpen: !prevState.sideDrawerOpen };
+    });
+  };
 
   render() {
     const value = {
-      userId: localStorage.getItem("user_id"),
+      userId: localStorage.getItem('user_id'),
       error: this.state.error,
+      sideDrawerOpen: this.state.sideDrawerOpen,
       clearError: this.clearError,
       setUserId: this.setUserId,
+      closeBackdrop: this.handleBackdropClose,
+      toggleSideDrawer: this.drawerToggleClickHandler,
     };
     return (
       <userContext.Provider value={value}>
