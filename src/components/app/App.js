@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
+import React, { Component } from "./node_modules/react";
+import { Route, Switch } from "./node_modules/react-router-dom";
 // import PrivateRoute from '../Utils/PrivateRoute';
 import "./App.css";
 import PublicOnlyRoute from "../Utils/PublicOnlyRoute";
@@ -13,7 +13,7 @@ import LoginPage from "../../routes/LoginPage/LoginPage";
 import NotFoundPage from "../../routes/NotFoundPage/NotFoundPage";
 import RegistrationPage from "../../routes/RegistrationPage/RegistrationPage";
 import CreateStoryPage from "../../routes/CreateStoryPage/CreateStoryPage";
-import CreateCommentForm from "../../components/CreateCommentForm/CreateCommentForm";
+import CreateCommentForm from "../CreateCommentForm/CreateCommentForm";
 import PoliciesPage from "../../routes/PoliciesPage/PoliciesPage";
 import StoryPage from "../../routes/StoryPage/StoryPage";
 import userContext from "../../contexts/ApiContext";
