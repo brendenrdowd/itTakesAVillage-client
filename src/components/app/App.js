@@ -22,8 +22,6 @@ import "./App.css";
 let userID = localStorage.getItem("user_id");
 
 export default class App extends Component {
-  // what is our state going to look like?
-
   state = {
     error: "",
     hasError: false,
