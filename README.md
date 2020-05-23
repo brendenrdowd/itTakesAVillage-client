@@ -16,6 +16,10 @@
 
 <p align="center">
   <img width="223" height="395.5" src="assets/Registration.png">
+  <img width="223" height="395.5" src="assets/Registration.png">
+  <img width="223" height="395.5" src="assets/Registration.png">
+  <img width="223" height="395.5" src="assets/Registration.png">
+  <img width="223" height="395.5" src="assets/Registration.png">
 </p>
 <!-- > Login Page
 > ![Login Page](assets/Login.png "Login Page")
