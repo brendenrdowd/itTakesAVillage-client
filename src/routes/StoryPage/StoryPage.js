@@ -7,9 +7,7 @@ import CommentToolBar from '../../components/Utils/CommentToolbar'
 import StoryApiService from '../../services/story-api-service'
 import CommentApiService from '../../services/comment-api-service'
 import ApiContext from '../../contexts/ApiContext'
-
-
-
+import UserApiService from '../../services/user-api-service'
 
 export default class StoryPage extends Component {
 
@@ -22,51 +20,61 @@ export default class StoryPage extends Component {
   state = {
     story: {},
     comments: [],
-    user: {}
+    user: {},
+    authorName: ''
   }
 
   componentDidMount() {
     const story_id = this.props.match.params.id
     // need to make sure we're grabbing the story in service
-    const story = StoryApiService.getStoryById(story_id)
+    StoryApiService.getStoryById(story_id)
+      .then(story => {
+        this.setState({ story: story })
+      })
+
     // need to make sure we're grabbing story from commentApi correctly
-    const comments = CommentApiService.getCommentsByStoryId(story_id) || []
+    CommentApiService.getCommentsByStoryId(story_id) 
+    .then (comments => {
+      this.setState({ comments })
+    })
     const user = this.context.user
     this.setState(
       {
-        story,
-        comments,
         user
       }
     )
   }
 
-  comments = (this.state.comments.length > 0) ? "Add a comment..." : this.state.comments.map(comment =>
-    <li key={comment.id} className="comment">
-      <p className="comment_text">
-        {comment.content}
-      </p>
-      <Hyph />
-      <p>
-        {comment.user}
-      </p>
-    </li>
-  )
 
-
-  renderStory = (
-    <Section className="Story">
-      <StoryCard
-        title={this.state.story.title}
-        keywords={this.state.story.keywords}
-        issue={this.state.story.issue}
-      />
-      <ul className="comments_list">
-        {this.comments}
-      </ul>
-    </Section>
-  )
   render() {
+    console.log("comments", this.state.comments);
+    let comments = (this.state.comments.length < 0) ? "Add a comment..." : this.state.comments.map(comment =>
+      <li key={comment.id} className="comment">
+        <p className="comment_text">
+          {comment.comment}
+        </p>
+        <Hyph />
+        <p>
+          {comment.author}
+        </p>
+      </li>
+    )
+    const renderStory = (
+      <Section className="StoryPage">
+        <StoryCard
+          issue={this.state.story.issue}
+          flag={this.state.story.flag}
+          author={this.state.authorName}
+        />
+        <CreateCommentForm story={this.state.story} />
+        <ul className="comments_list">
+          {comments}
+        </ul>
+      </Section>
+    )
+    console.log(this.state.story);
+    console.log(this.state.authorName);
+
     const { error } = this.context
     let content
     if (error) {
@@ -74,7 +82,7 @@ export default class StoryPage extends Component {
         ? <p className="not_found">Story not found</p>
         : <p className="not_found">Something went wrong</p>
     }
-    else { content = this.renderStory }
+    else { content = renderStory }
     return (
       <Section className="StoryPage">
         {content}
@@ -82,3 +90,4 @@ export default class StoryPage extends Component {
     )
   }
 }
+

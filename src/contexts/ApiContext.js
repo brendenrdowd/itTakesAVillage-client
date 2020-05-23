@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 const userContext = React.createContext({
-  userId: [],
+  get userId () {return localStorage.getItem('user_id')},
   error: null,
   setUserId: () => {},
   clearError: () => {},
