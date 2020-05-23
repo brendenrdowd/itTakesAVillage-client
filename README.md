@@ -15,22 +15,12 @@
 ## App Images
 
 <p align="center">
+  <img width="223" height="395.5" src="assets/Login.png">
   <img width="223" height="395.5" src="assets/Registration.png">
-  <img width="223" height="395.5" src="assets/Registration.png">
-  <img width="223" height="395.5" src="assets/Registration.png">
-  <img width="223" height="395.5" src="assets/Registration.png">
-  <img width="223" height="395.5" src="assets/Registration.png">
+  <img width="223" height="395.5" src="assets/Landing.png">
+  <img width="223" height="395.5" src="assets/Dashboard.png">
+  <img width="223" height="395.5" src="assets/CreateStory.png">
 </p>
-<!-- > Login Page
-> ![Login Page](assets/Login.png "Login Page")
-> Registration Page
-> ![Registration Page](assets/Registration.png "Registration Page")
-> Landing Page
-> ![Landing Page](assets/Landing.png "Landing Page")
-> Dashboard Page
-> ![Dashboard Page](assets/Dashboard.png "Dashboard Page")
-> CreateStory Page
-> ![CreateStory Page](assets/CreateStory.png "CreateStory Page") -->
 
 ### Summary
 
