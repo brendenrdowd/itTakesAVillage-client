@@ -17,7 +17,7 @@ export default class DashboardPage extends Component {
     this.state = {
       filter: null,
       data: [],
-      // userId: "",
+      userId: "",
     };
   }
   keywords = [
@@ -44,7 +44,7 @@ export default class DashboardPage extends Component {
         })
       );
     // Humberto testing
-    // this.setState({ userId: this.context.userId });
+    this.setState({ userId: this.context.userId });
   }
 
   handleFilter = (e) => {

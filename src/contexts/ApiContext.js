@@ -25,6 +25,8 @@ export class UserProvider extends Component {
   };
 
   setUserId = (userId) => {
+    console.log(userId);
+
     this.setState({ userId });
   };
   clearError = () => {

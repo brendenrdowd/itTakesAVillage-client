@@ -76,6 +76,7 @@ export default class App extends Component {
     });
     // for testing remove after
     console.log("stories", this.state.stories);
+    console.log(this.state.user_id);
   };
 
   handleUpdateUser = (user) => {
@@ -118,6 +119,7 @@ export default class App extends Component {
       closeBackdrop: this.handleBackdropClose,
       populateStories: this.populateStories,
     };
+
     let backdrop;
     if (this.state.sideDrawerOpen) {
       backdrop = <Backdrop />;

@@ -45,7 +45,7 @@ class CreateStoryForm extends Component {
     // User_Id aka author being passed from API backend
     StoryService.postStory(story)
       .then((story) => {
-        this.context.addStory(story);
+        // this.context.addStory(story);
         this.props.history.push(`/story/${story.id}`);
       })
       .catch((error) => {
