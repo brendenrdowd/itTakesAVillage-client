@@ -10,6 +10,7 @@ const userContext = React.createContext({
   updateUser: () => {},
   toggleSideDrawer: () => {},
   closeBackdrop: () => {},
+  setUsers: () => {},
 });
 
 export default userContext;
@@ -17,10 +18,13 @@ export default userContext;
 export class UserProvider extends Component {
   state = {
     userId: [],
+    users: [],
     sideDrawerOpen: false,
     error: null,
   };
-
+  setUsers = (users) => {
+    this.setState({ users });
+  };
   setUserId = (userId) => {
     this.setState({ userId: localStorage.setItem('user_id', userId) });
   };
@@ -46,6 +50,7 @@ export class UserProvider extends Component {
       setUserId: this.setUserId,
       closeBackdrop: this.handleBackdropClose,
       toggleSideDrawer: this.drawerToggleClickHandler,
+      setUsers: this.setUsers,
     };
     return (
       <userContext.Provider value={value}>
