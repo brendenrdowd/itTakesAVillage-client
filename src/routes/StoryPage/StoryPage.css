@@ -1,0 +1,17 @@
+.comments_list {
+  border: 2px solid darkseagreen;
+  box-shadow: 10px 10px 5px grey;
+  border-radius: 25px;
+  padding: 10px;
+  margin: 0;
+  color: #487948;
+  list-style-type: none;
+  text-align: center;
+}
+
+@media only screen and (min-device-width: 768px) {
+  .comments_list {
+    max-width: 50%;
+    margin: 20px auto;
+  }
+}

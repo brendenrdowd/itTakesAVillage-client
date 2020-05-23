@@ -1,12 +1,11 @@
-
-.LoginForm {
+.commentForm {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 60px 0;
+  padding: 40px 0;
 }
 
-.LoginForm button {
+.commentForm button {
   margin-top: 20px;
   border-radius: 4px;
   padding: 15px;
@@ -16,12 +15,12 @@
   width: 100px;
 }
 
-.LoginForm button:hover {
+.commentForm button:hover {
   background-color: #e5efe5;
   color: darkseagreen;
 }
 
-.LoginForm input {
+.commentForm input {
   width: 100%;
   clear: both;
   padding: 5px;

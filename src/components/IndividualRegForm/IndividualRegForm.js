@@ -1,102 +1,158 @@
 import React, { Component } from 'react';
 import { Input, Button, Required } from '../Utils/Utils';
 import validator from 'validator';
+import { postcodeValidator } from 'postcode-validator';
 import UserApiService from '../../services/user-api-service';
 import './IndividualRegForm.css';
-
-// const initialState = {
-//   name: '',
-//   username: '',
-//   email: '',
-//   location: '',
-//   password: '',
-//   repeatPassword: '',
-//   nameError: '',
-//   userNameError: '',
-//   emailError: '',
-//   zipCodeError: '',
-//   passwordError: '',
-//   repeatPasswordError: '',
-// };
+import ValidationError from './ValidationError';
+import userContext from '../../contexts/ApiContext';
 
 export default class IndividualRegForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: {
+        value: '',
+        touched: false,
+      },
+      username: {
+        value: '',
+        touched: false,
+      },
+      email: {
+        value: '',
+        touched: false,
+      },
+      location: {
+        value: '',
+        touched: false,
+      },
+      password: {
+        value: '',
+        touched: false,
+      },
+      repeatPassword: {
+        value: '',
+        touched: false,
+      },
+      error: null,
+    };
+  }
+
   static defaultProps = {
     onRegistrationSuccess: () => {},
   };
 
-  state = {
-    error: null,
-    nameError: '',
-    userNameError: '',
-    emailError: '',
-    zipCodeError: '',
-    passwordError: '',
-    repeatPasswordError: '',
-  };
+  static contextType = userContext;
 
-  validation = (target) => {
-    let nameError = '';
-    let userNameError = '';
-    let emailError = '';
-    let zipCodeError = '';
-    let passwordError = '';
-    let repeatPasswordError = '';
-    // let { users } = this.context;
-    //need to add user name and email take validations
+  componentDidMount() {
+    UserApiService.getAllUsers().then(this.context.setUsers);
+  }
 
-    if (!target.name.value) {
-      nameError = 'Name field is empty';
-    }
-    if (!target.username.value) {
-      userNameError = 'Username field is empty';
-    }
-    if (!target.email.value) {
-      emailError = 'Email field is empty';
-    }
-    if (!validator.isEmail(target.email.value)) {
-      emailError = 'Invalid email';
-    }
-    if (!target.location.value) {
-      zipCodeError = 'Zip code field is empty';
-    }
-    if (!target.password.value) {
-      passwordError = 'Password field is empty';
-    }
-    // if (!isValidZipcode(target.location.value)) {
-    //   zipCodeError = 'invalid zip code';
-    // }
-    if (!Number(target.location.value)) {
-      zipCodeError = 'Must be numbers';
-    }
-    // if (target.location.value.length !== 5) {
-    //   zipCodeError = 'Zip code must be 5 characters long';
-    // }
-    if (!target.repeatPassword.value) {
-      repeatPasswordError = 'Password field is empty';
-    }
-    if (target.repeatPassword.value.length !== target.password.value.length) {
-      repeatPasswordError = 'Passwords must match';
-    }
+  updateName(name) {
     this.setState({
-      nameError,
-      userNameError,
-      emailError,
-      zipCodeError,
-      passwordError,
-      repeatPasswordError,
+      name: {
+        value: name,
+        touched: true,
+      },
     });
-    if (
-      nameError ||
-      userNameError ||
-      emailError ||
-      zipCodeError ||
-      passwordError ||
-      repeatPasswordError
-    ) {
-      return false;
+  }
+  updateUsername(username) {
+    this.setState({
+      username: {
+        value: username,
+        touched: true,
+      },
+    });
+  }
+  updateEmail(email) {
+    this.setState({
+      email: {
+        value: email,
+        touched: true,
+      },
+    });
+  }
+  updateZipcode(location) {
+    this.setState({
+      location: {
+        value: location,
+        touched: true,
+      },
+    });
+  }
+  updatePassword(password) {
+    this.setState({
+      password: {
+        value: password,
+        touched: true,
+      },
+    });
+  }
+
+  updateRepeatPassword(repeatPassword) {
+    this.setState({
+      repeatPassword: {
+        value: repeatPassword,
+        touched: true,
+      },
+    });
+  }
+
+  validateName() {
+    const name = this.state.name.value;
+    if (name.length === 0) {
+      return 'Please enter name';
+    } else if (name.match(/[0-9]/)) {
+      return 'Name should not contain any numbers';
     }
-    return true;
-  };
+  }
+  validateUsername() {
+    const username = this.state.username.value;
+    if (username.length === 0) {
+      return 'Please enter username';
+      // } else if (username.match(/[0-9]/)) {
+      //   return 'username should not contain any numbers';
+    }
+  }
+  validateEmail() {
+    const email = this.state.email.value;
+    if (email.length === 0) {
+      return 'Enter an email address';
+    } else if (!validator.isEmail(email)) {
+      return 'Enter a valid email address';
+    }
+  }
+  validateZipcode() {
+    const location = this.state.location.value;
+
+    if (location.length === 0) {
+      return 'Enter a zip code';
+    } else if (!postcodeValidator(location, 'US')) {
+      return 'Enter a valie zip code';
+    }
+  }
+
+  validatePassword() {
+    const password = this.state.password.value.trim();
+    const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[\S]/;
+    if (password.length === 0) {
+      return 'Password is required';
+    } else if (password.length < 8 || password.length > 72) {
+      return 'Password must be between 8 and 72 characters long';
+    } else if (!password.match(REGEX_UPPER_LOWER_NUMBER_SPECIAL)) {
+      return 'Password must contain at least one number and one uppercase letter';
+    }
+  }
+
+  validateRepeatPassword() {
+    const repeatPassword = this.state.repeatPassword.value.trim();
+    const password = this.state.password.value.trim();
+
+    if (repeatPassword !== password) {
+      return 'Passwords do not match';
+    }
+  }
 
   handleSubmit = (ev) => {
     ev.preventDefault();
@@ -109,11 +165,7 @@ export default class IndividualRegForm extends Component {
       repeatPassword,
     } = ev.target;
 
-    // this.setState({ error: null });
-
-    if (this.validation(ev.target)) {
-      return;
-    }
+    this.setState({ error: null });
 
     UserApiService.postUser({
       name: name.value,
@@ -137,7 +189,14 @@ export default class IndividualRegForm extends Component {
       });
   };
   render() {
-    // const { error } = this.state;
+    const { users } = this.context;
+    console.log(users);
+    const nameError = this.validateName();
+    const usernameError = this.validateUsername();
+    const emailError = this.validateEmail();
+    const locationError = this.validateZipcode();
+    const passwordError = this.validatePassword();
+    const repeatPasswordError = this.validateRepeatPassword();
     return (
       <form className='IndividualRegForm' onSubmit={this.handleSubmit}>
         {/* <div role='alert'>
@@ -146,7 +205,7 @@ export default class IndividualRegForm extends Component {
 
         <div className='name'>
           <label htmlFor='IndividualRegForm__name'>
-            Full name <Required />
+            Full name: <Required />
           </label>
           <Input
             name='name'
@@ -154,65 +213,99 @@ export default class IndividualRegForm extends Component {
             type='text'
             // required
             id='IndividualRegForm__name'
+            onChange={(e) => this.updateName(e.target.value)}
           ></Input>
-          {this.state.nameError}
+          {this.state.name.touched && (
+            <ValidationError message={nameError}></ValidationError>
+          )}
         </div>
         <div className='username'>
           <label htmlFor='IndividualRegForm__username'>
-            Username <Required />
+            Username: <Required />
           </label>
           <Input
             name='username'
             placeholder='joedoe'
             type='text'
             id='IndividualRegForm__username'
+            onChange={(e) => this.updateUsername(e.target.value)}
           ></Input>
-          {this.state.userNameError}
+          {this.state.username.touched && (
+            <ValidationError message={usernameError}></ValidationError>
+          )}
         </div>
         <div className='email'>
           <label htmlFor='IndividualRegForm__email'>
-            Email <Required />
+            Email: <Required />
           </label>
-          <Input name='email' type='text' id='IndividualRegForm__email'></Input>
-          {this.state.emailError}
+          <Input
+            name='email'
+            type='text'
+            id='IndividualRegForm__email'
+            onChange={(e) => this.updateEmail(e.target.value)}
+          ></Input>
+          {this.state.email.touched && (
+            <ValidationError message={emailError}></ValidationError>
+          )}
         </div>
         <div className='location'>
           <label htmlFor='IndividualRegForm__location'>
-            Zip code <Required />
+            Zip code: <Required />
           </label>
           <Input
             name='location'
             placeholder='88888'
             type='text'
             id='IndividualRegForm__location'
+            onChange={(e) => this.updateZipcode(e.target.value)}
           ></Input>
-          {this.state.zipCodeError}
+          {this.state.location.touched && (
+            <ValidationError message={locationError}></ValidationError>
+          )}
         </div>
         <div className='password'>
           <label htmlFor='IndividualRegForm__password'>
-            Password <Required />
+            Password: <Required />
           </label>
           <Input
             name='password'
             placeholder='Password123'
             type='password'
             id='IndividualRegForm__password'
+            onChange={(e) => this.updatePassword(e.target.value)}
           ></Input>
-          {this.state.passwordError}
+          {this.state.password.touched && (
+            <ValidationError message={passwordError}></ValidationError>
+          )}
         </div>
         <div className='re-enter-password'>
           <label htmlFor='IndividualRegForm__password'>
-            Repeat password <Required />
+            Repeat password: <Required />
           </label>
           <Input
             name='repeatPassword'
             placeholder='Password123'
             type='password'
             id='IndividualRegForm__password'
+            onChange={(e) => this.updateRepeatPassword(e.target.value)}
           ></Input>
-          {this.state.repeatPasswordError}
+          {this.state.repeatPassword.touched && (
+            <ValidationError message={repeatPasswordError}></ValidationError>
+          )}
         </div>
-        <Button type='submit'>Sign up</Button>
+        <Button
+          type='submit'
+          disabled={
+            this.validateName() ||
+            this.validateUsername() ||
+            this.validateEmail() ||
+            this.validateZipcode() ||
+            this.validatePassword() ||
+            this.validateRepeatPassword()
+          }
+        >
+          Sign up
+        </Button>
       </form>
     );
   }
