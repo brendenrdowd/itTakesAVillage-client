@@ -1,8 +1,61 @@
 .filterForm {
   margin: 30px auto;
-  width: 50%;
 }
-.card-link{
+
+form {
+  text-align: center;
+}
+.card-link {
   text-decoration: none;
-  color:black;
+  color: black;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  outline: 0;
+  box-shadow: none;
+  border: 0 !important;
+  background: darkseagreen;
+  background-image: none;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+.customSelect {
+  position: relative;
+  display: flex;
+  width: 8em;
+  height: 2em;
+  line-height: 2;
+  background: darkseagreen;
+  overflow: hidden;
+  border-radius: 0.25em;
+  margin: 0 auto;
+}
+
+select {
+  flex: 1;
+  padding: 0 0.5em;
+  color: #fff;
+  cursor: pointer;
+}
+
+.customSelect::after {
+  content: "\25BC";
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 6px;
+  background: darkseagreen;
+  color: #487948;
+  cursor: pointer;
+  pointer-events: none;
+  -webkit-transition: 0.25s all ease;
+  -o-transition: 0.25s all ease;
+  transition: 0.25s all ease;
 }

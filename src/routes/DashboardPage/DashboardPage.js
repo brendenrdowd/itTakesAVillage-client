@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import StoryCard from '../../components/StoryCard/StoryCard';
-import UserService from '../../services/user-api-service';
-import thing from '../../dummystore';
-import './DashboardPage.css';
-import { Link } from 'react-router-dom';
-import userContext from '../../contexts/ApiContext';
-import StoryService from '../../services/story-api-service';
+import React, { Component } from "react";
+import StoryCard from "../../components/StoryCard/StoryCard";
+import UserService from "../../services/user-api-service";
+import thing from "../../dummystore";
+import "./DashboardPage.css";
+import { Link } from "react-router-dom";
+import userContext from "../../contexts/ApiContext";
+import StoryService from "../../services/story-api-service";
 
 export default class DashboardPage extends Component {
   constructor() {
@@ -51,9 +51,9 @@ export default class DashboardPage extends Component {
   };
 
   conditionalRender = () => {
-    if (!this.state.filter || this.state.filter === 'all') {
-      return thing.stories.map((card) => (
-        <Link key={card.id} to={`/story/${card.id}`} className='card-link'>
+    if (!this.state.filter || this.state.filter === "all") {
+      return this.state.data.map((card) => (
+        <Link key={card.id} to={`/story/${card.id}`} className="card-link">
           <StoryCard
             resolved={card.resolved}
             date={card.created_at}
@@ -80,7 +80,7 @@ export default class DashboardPage extends Component {
     if (this.state.filter) {
       return this.state.data.map((card) =>
         card.flag.includes(this.state.filter) ? (
-          <Link key={card.id} to={`/story/${card.id}`} className='card-link'>
+          <Link key={card.id} to={`/story/${card.id}`} className="card-link">
             <StoryCard
               resolved={card.resolved}
               date={card.created_at}
@@ -95,20 +95,22 @@ export default class DashboardPage extends Component {
 
   render() {
     // console.log(this.state.data);
-    console.log('dashboard userid', this.context.userId);
+    console.log("dashboard userid", this.context.userId);
     return (
       <section>
-        <div className='filterForm'>
+        <div className="filterForm">
           <form>
-            <label htmlFor='keywords'>Filter By:</label>
-            <select onChange={this.handleFilter} id='keywords'>
-              <option value='all'>All</option>
-              {this.keywords.map((keywords, index) => (
-                <option key={index} value={keywords}>
-                  {keywords}
-                </option>
-              ))}
-            </select>
+            <label htmlFor="keywords">Tags:</label>
+            <div className="customSelect">
+              <select onChange={this.handleFilter} id="keywords">
+                <option value="all">All</option>
+                {this.keywords.map((keywords, index) => (
+                  <option key={index} value={keywords}>
+                    {keywords}
+                  </option>
+                ))}
+              </select>
+            </div>
           </form>
         </div>
         {this.conditionalRender()}

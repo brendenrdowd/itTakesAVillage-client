@@ -42,7 +42,7 @@ class LoginForm extends Component {
           {error && <p className="login-error">{error}</p>}
         </div>
         <div className="username">
-          <label htmlFor="LoginForm__username">Username</label>{" "}
+          <label htmlFor="LoginForm__username">Username: </label>{" "}
           <input
             type="text"
             required
@@ -52,7 +52,7 @@ class LoginForm extends Component {
         </div>
 
         <div className="password">
-          <label htmlFor="LoginForm__password">Password</label>{" "}
+          <label htmlFor="LoginForm__password">Password: </label>{" "}
           <input
             required
             name="password"

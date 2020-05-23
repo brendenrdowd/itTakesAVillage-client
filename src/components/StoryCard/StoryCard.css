@@ -3,11 +3,15 @@
 }
 
 .cards {
-  border: 2px solid gainsboro;
+  background-color: darkseagreen;
   border-radius: 25px;
   padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 20px 20px;
+}
+
+.cards h3 {
+  text-align: center;
 }

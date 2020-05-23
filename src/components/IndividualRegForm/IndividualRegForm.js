@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { Input, Button, Required } from '../Utils/Utils';
-import validator from 'validator';
-import UserApiService from '../../services/user-api-service';
-import './IndividualRegForm.css';
+import React, { Component } from "react";
+import { Input, Button, Required } from "../Utils/Utils";
+import validator from "validator";
+import UserApiService from "../../services/user-api-service";
+import "./IndividualRegForm.css";
 
 // const initialState = {
 //   name: '',
@@ -26,56 +26,56 @@ export default class IndividualRegForm extends Component {
 
   state = {
     error: null,
-    nameError: '',
-    userNameError: '',
-    emailError: '',
-    zipCodeError: '',
-    passwordError: '',
-    repeatPasswordError: '',
+    nameError: "",
+    userNameError: "",
+    emailError: "",
+    zipCodeError: "",
+    passwordError: "",
+    repeatPasswordError: "",
   };
 
   validation = (target) => {
-    let nameError = '';
-    let userNameError = '';
-    let emailError = '';
-    let zipCodeError = '';
-    let passwordError = '';
-    let repeatPasswordError = '';
+    let nameError = "";
+    let userNameError = "";
+    let emailError = "";
+    let zipCodeError = "";
+    let passwordError = "";
+    let repeatPasswordError = "";
     // let { users } = this.context;
     //need to add user name and email take validations
 
     if (!target.name.value) {
-      nameError = 'Name field is empty';
+      nameError = "Name field is empty";
     }
     if (!target.username.value) {
-      userNameError = 'Username field is empty';
+      userNameError = "Username field is empty";
     }
     if (!target.email.value) {
-      emailError = 'Email field is empty';
+      emailError = "Email field is empty";
     }
     if (!validator.isEmail(target.email.value)) {
-      emailError = 'Invalid email';
+      emailError = "Invalid email";
     }
     if (!target.location.value) {
-      zipCodeError = 'Zip code field is empty';
+      zipCodeError = "Zip code field is empty";
     }
     if (!target.password.value) {
-      passwordError = 'Password field is empty';
+      passwordError = "Password field is empty";
     }
     // if (!isValidZipcode(target.location.value)) {
     //   zipCodeError = 'invalid zip code';
     // }
     if (!Number(target.location.value)) {
-      zipCodeError = 'Must be numbers';
+      zipCodeError = "Must be numbers";
     }
     // if (target.location.value.length !== 5) {
     //   zipCodeError = 'Zip code must be 5 characters long';
     // }
     if (!target.repeatPassword.value) {
-      repeatPasswordError = 'Password field is empty';
+      repeatPasswordError = "Password field is empty";
     }
     if (target.repeatPassword.value.length !== target.password.value.length) {
-      repeatPasswordError = 'Passwords must match';
+      repeatPasswordError = "Passwords must match";
     }
     this.setState({
       nameError,
@@ -124,12 +124,12 @@ export default class IndividualRegForm extends Component {
       repeatPassword: repeatPassword.value,
     })
       .then((user) => {
-        name.value = '';
-        username.value = '';
-        email.value = '';
-        location.value = '';
-        password.value = '';
-        repeatPassword.value = '';
+        name.value = "";
+        username.value = "";
+        email.value = "";
+        location.value = "";
+        password.value = "";
+        repeatPassword.value = "";
         this.props.onRegistrationSuccess();
       })
       .catch((res) => {
@@ -139,80 +139,82 @@ export default class IndividualRegForm extends Component {
   render() {
     // const { error } = this.state;
     return (
-      <form className='IndividualRegForm' onSubmit={this.handleSubmit}>
+      <form className="IndividualRegForm" onSubmit={this.handleSubmit}>
         {/* <div role='alert'>
           {error && <p className='registration_error'>{error}</p>}
         </div> */}
 
-        <div className='name'>
-          <label htmlFor='IndividualRegForm__name'>
-            Full name <Required />
+        <div className="name">
+          <label htmlFor="IndividualRegForm__name">
+            Full name: <Required />
           </label>
           <Input
-            name='name'
-            placeholder='joe doe'
-            type='text'
+            name="name"
+            placeholder="joe doe"
+            type="text"
             // required
-            id='IndividualRegForm__name'
+            id="IndividualRegForm__name"
           ></Input>
           {this.state.nameError}
         </div>
-        <div className='username'>
-          <label htmlFor='IndividualRegForm__username'>
-            Username <Required />
+        <div className="username">
+          <label htmlFor="IndividualRegForm__username">
+            Username: <Required />
           </label>
           <Input
-            name='username'
-            placeholder='joedoe'
-            type='text'
-            id='IndividualRegForm__username'
+            name="username"
+            placeholder="joedoe"
+            type="text"
+            id="IndividualRegForm__username"
           ></Input>
           {this.state.userNameError}
         </div>
-        <div className='email'>
-          <label htmlFor='IndividualRegForm__email'>
-            Email <Required />
+        <div className="email">
+          <label htmlFor="IndividualRegForm__email">
+            Email: <Required />
           </label>
-          <Input name='email' type='text' id='IndividualRegForm__email'></Input>
+          <Input name="email" type="text" id="IndividualRegForm__email"></Input>
           {this.state.emailError}
         </div>
-        <div className='location'>
-          <label htmlFor='IndividualRegForm__location'>
-            Zip code <Required />
+        <div className="location">
+          <label htmlFor="IndividualRegForm__location">
+            Zip code: <Required />
           </label>
           <Input
-            name='location'
-            placeholder='88888'
-            type='text'
-            id='IndividualRegForm__location'
+            name="location"
+            placeholder="88888"
+            type="text"
+            id="IndividualRegForm__location"
           ></Input>
           {this.state.zipCodeError}
         </div>
-        <div className='password'>
-          <label htmlFor='IndividualRegForm__password'>
-            Password <Required />
+        <div className="password">
+          <label htmlFor="IndividualRegForm__password">
+            Password: <Required />
           </label>
           <Input
-            name='password'
-            placeholder='Password123'
-            type='password'
-            id='IndividualRegForm__password'
+            name="password"
+            placeholder="Password123"
+            type="password"
+            id="IndividualRegForm__password"
           ></Input>
           {this.state.passwordError}
         </div>
-        <div className='re-enter-password'>
-          <label htmlFor='IndividualRegForm__password'>
-            Repeat password <Required />
+        <div className="re-enter-password">
+          <label htmlFor="IndividualRegForm__password">
+            Repeat password: <Required />
           </label>
           <Input
-            name='repeatPassword'
-            placeholder='Password123'
-            type='password'
-            id='IndividualRegForm__password'
+            name="repeatPassword"
+            placeholder="Password123"
+            type="password"
+            id="IndividualRegForm__password"
           ></Input>
           {this.state.repeatPasswordError}
         </div>
-        <Button type='submit'>Sign up</Button>
+        <div className="buttonContainer">
+          <Button type="submit">Sign up</Button>
+        </div>
       </form>
     );
   }
