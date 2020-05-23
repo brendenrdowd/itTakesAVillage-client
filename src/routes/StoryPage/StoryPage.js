@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { Component } from "react";
 import { Section, Hyph } from "../../components/Utils/Utils";
 import CreateCommentForm from "../../components/CreateCommentForm/CreateCommentForm";
@@ -7,6 +8,18 @@ import CommentToolBar from "../../components/Utils/CommentToolbar";
 import StoryApiService from "../../services/story-api-service";
 import CommentApiService from "../../services/comment-api-service";
 import ApiContext from "../../contexts/ApiContext";
+=======
+import React, { Component } from 'react'
+import { Section, Hyph } from '../../components/Utils/Utils'
+import CreateCommentForm from '../../components/CreateCommentForm/CreateCommentForm'
+import StoryCard from '../../components/StoryCard/StoryCard'
+import CardToolBar from '../../components/Utils/CardToolBar'
+import CommentToolBar from '../../components/Utils/CommentToolbar'
+import StoryApiService from '../../services/story-api-service'
+import CommentApiService from '../../services/comment-api-service'
+import ApiContext from '../../contexts/ApiContext'
+import UserApiService from '../../services/user-api-service'
+>>>>>>> master
 
 export default class StoryPage extends Component {
   static defaultProps = {
@@ -19,11 +32,17 @@ export default class StoryPage extends Component {
     story: {},
     comments: [],
     user: {},
+<<<<<<< HEAD
   };
+=======
+    authorName: ''
+  }
+>>>>>>> master
 
   componentDidMount() {
     const story_id = this.props.match.params.id;
     // need to make sure we're grabbing the story in service
+<<<<<<< HEAD
     const story = StoryApiService.getStoryById(story_id);
     // need to make sure we're grabbing story from commentApi correctly
     const comments = CommentApiService.getCommentsByStoryId(story_id) || [];
@@ -59,6 +78,58 @@ export default class StoryPage extends Component {
   render() {
     const { error } = this.context;
     let content;
+=======
+    StoryApiService.getStoryById(story_id)
+      .then(story => {
+        this.setState({ story: story })
+      })
+
+    // need to make sure we're grabbing story from commentApi correctly
+    CommentApiService.getCommentsByStoryId(story_id) 
+    .then (comments => {
+      this.setState({ comments })
+    })
+    const user = this.context.user
+    this.setState(
+      {
+        user
+      }
+    )
+  }
+
+
+  render() {
+    console.log("comments", this.state.comments);
+    let comments = (this.state.comments.length < 0) ? "Add a comment..." : this.state.comments.map(comment =>
+      <li key={comment.id} className="comment">
+        <p className="comment_text">
+          {comment.comment}
+        </p>
+        <Hyph />
+        <p>
+          {comment.author}
+        </p>
+      </li>
+    )
+    const renderStory = (
+      <Section className="StoryPage">
+        <StoryCard
+          issue={this.state.story.issue}
+          flag={this.state.story.flag}
+          author={this.state.authorName}
+        />
+        <CreateCommentForm story={this.state.story} />
+        <ul className="comments_list">
+          {comments}
+        </ul>
+      </Section>
+    )
+    console.log(this.state.story);
+    console.log(this.state.authorName);
+
+    const { error } = this.context
+    let content
+>>>>>>> master
     if (error) {
       content =
         error.error === `Story doesn't exist` ? (
@@ -69,6 +140,16 @@ export default class StoryPage extends Component {
     } else {
       content = this.renderStory;
     }
+<<<<<<< HEAD
     return <Section className="StoryPage">{content}</Section>;
+=======
+    else { content = renderStory }
+    return (
+      <Section className="StoryPage">
+        {content}
+      </Section>
+    )
+>>>>>>> master
   }
 }
+
