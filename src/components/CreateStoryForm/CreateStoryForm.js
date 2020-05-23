@@ -12,7 +12,7 @@ class CreateStoryForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectValue: "food",
+      selectValue: "groceries",
       textValue: "",
     };
   }

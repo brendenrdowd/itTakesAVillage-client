@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import StoryCard from '../../components/StoryCard/StoryCard';
-import UserService from '../../services/user-api-service';
-import thing from '../../dummystore';
-import './DashboardPage.css';
-import { Link } from 'react-router-dom';
-import userContext from '../../contexts/ApiContext';
-import StoryService from '../../services/story-api-service';
+import React, { Component } from "react";
+import StoryCard from "../../components/StoryCard/StoryCard";
+import UserService from "../../services/user-api-service";
+// import thing from "../../dummystore";
+import "./DashboardPage.css";
+import { Link } from "react-router-dom";
+import userContext from "../../contexts/ApiContext";
+import StoryService from "../../services/story-api-service";
 
 export default class DashboardPage extends Component {
   constructor() {
@@ -21,12 +21,12 @@ export default class DashboardPage extends Component {
 
   keywords = [
     "groceries",
-    // "author",
     "food",
     "rideshare",
     "transportation",
     "moving",
     "clothing",
+    "my stories",
   ];
   // need to update this, grab user id/object on successful login
   componentDidMount() {
@@ -51,9 +51,9 @@ export default class DashboardPage extends Component {
   };
 
   conditionalRender = () => {
-    if (!this.state.filter || this.state.filter === 'all') {
-      return thing.stories.map((card) => (
-        <Link key={card.id} to={`/story/${card.id}`} className='card-link'>
+    if (!this.state.filter || this.state.filter === "all") {
+      return this.state.data.map((card) => (
+        <Link key={card.id} to={`/story/${card.id}`} className="card-link">
           <StoryCard
             resolved={card.resolved}
             date={card.created_at}
@@ -63,24 +63,30 @@ export default class DashboardPage extends Component {
         </Link>
       ));
     }
-    // if (this.state.filter === "author") {
-    //   return this.state.data.map((card) =>
-    //     card.author.includes(this.state.userId) ? (
-    //       <Link key={card.id} to={`/story/${card.id}`} className="card-link">
-    //         <StoryCard
-    //           resolved={card.resolved}
-    //           date={card.created_at}
-    //           flag={card.flag}
-    //           issue={card.issue}
-    //         />
-    //       </Link>
-    //     ) : null
-    //   );
-    // }
+
+    let dataObj = this.state.data;
+    const currentUser = this.state.userId;
+    let activeUserObj = dataObj.filter(function (user) {
+      return user.author == currentUser;
+    });
+    if (this.state.filter === "my stories") {
+      console.log({ activeUserObj });
+      return activeUserObj.map((card) => (
+        <Link key={card.id} to={`/story/${card.id}`} className="card-link">
+          <StoryCard
+            resolved={card.resolved}
+            date={card.created_at}
+            flag={card.flag}
+            issue={card.issue}
+          />
+        </Link>
+      ));
+    }
+
     if (this.state.filter) {
       return this.state.data.map((card) =>
         card.flag.includes(this.state.filter) ? (
-          <Link key={card.id} to={`/story/${card.id}`} className='card-link'>
+          <Link key={card.id} to={`/story/${card.id}`} className="card-link">
             <StoryCard
               resolved={card.resolved}
               date={card.created_at}
@@ -94,15 +100,15 @@ export default class DashboardPage extends Component {
   };
 
   render() {
-    // console.log(this.state.data);
-    console.log('dashboard userid', this.context.userId);
+    console.log("current state", this.state.data);
+    console.log("dashboard userid", this.state.userId);
     return (
       <section>
-        <div className='filterForm'>
+        <div className="filterForm">
           <form>
-            <label htmlFor='keywords'>Filter By:</label>
-            <select onChange={this.handleFilter} id='keywords'>
-              <option value='all'>All</option>
+            <label htmlFor="keywords">Filter By:</label>
+            <select onChange={this.handleFilter} id="keywords">
+              <option value="all">All</option>
               {this.keywords.map((keywords, index) => (
                 <option key={index} value={keywords}>
                   {keywords}
