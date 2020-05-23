@@ -13,19 +13,20 @@ export default class DashboardPage extends Component {
     this.state = {
       filter: null,
       data: [],
+      // userId: "",
     };
   }
 
   static contextType = userContext;
 
   keywords = [
-    'groceries',
-    // "delivery",
-    'food offer',
-    'rideshare',
-    'transportation',
-    'moving',
-    'clothing',
+    "groceries",
+    // "author",
+    "food",
+    "rideshare",
+    "transportation",
+    "moving",
+    "clothing",
   ];
   // need to update this, grab user id/object on successful login
   componentDidMount() {
@@ -41,6 +42,8 @@ export default class DashboardPage extends Component {
           data,
         })
       );
+    // Humberto testing
+    // this.setState({ userId: this.context.userId });
   }
 
   handleFilter = (e) => {
@@ -60,6 +63,20 @@ export default class DashboardPage extends Component {
         </Link>
       ));
     }
+    // if (this.state.filter === "author") {
+    //   return this.state.data.map((card) =>
+    //     card.author.includes(this.state.userId) ? (
+    //       <Link key={card.id} to={`/story/${card.id}`} className="card-link">
+    //         <StoryCard
+    //           resolved={card.resolved}
+    //           date={card.created_at}
+    //           flag={card.flag}
+    //           issue={card.issue}
+    //         />
+    //       </Link>
+    //     ) : null
+    //   );
+    // }
     if (this.state.filter) {
       return this.state.data.map((card) =>
         card.flag.includes(this.state.filter) ? (
