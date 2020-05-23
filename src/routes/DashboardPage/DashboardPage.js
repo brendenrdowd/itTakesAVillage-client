@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import StoryCard from "../../components/StoryCard/StoryCard";
 import UserService from "../../services/user-api-service";
-<<<<<<< HEAD
 import thing from "../../dummystore";
-=======
->>>>>>> 16d6268fc14fc7b024f6d3027080f967dcaad891
 import "./DashboardPage.css";
 import { Link } from "react-router-dom";
 import userContext from "../../contexts/ApiContext";
@@ -104,28 +101,10 @@ export default class DashboardPage extends Component {
   };
 
   render() {
-<<<<<<< HEAD
-    // console.log(this.state.data);
-    console.log("dashboard userid", this.context.userId);
-=======
->>>>>>> 16d6268fc14fc7b024f6d3027080f967dcaad891
     return (
       <section>
         <div className="filterForm">
           <form>
-<<<<<<< HEAD
-            <label htmlFor="keywords">Tags:</label>
-            <div className="customSelect">
-              <select onChange={this.handleFilter} id="keywords">
-                <option value="all">All</option>
-                {this.keywords.map((keywords, index) => (
-                  <option key={index} value={keywords}>
-                    {keywords}
-                  </option>
-                ))}
-              </select>
-            </div>
-=======
             <label htmlFor="keywords">Filter By:</label>
             <select onChange={this.handleFilter} id="keywords">
               <option value="all">All</option>
@@ -135,7 +114,6 @@ export default class DashboardPage extends Component {
                 </option>
               ))}
             </select>
->>>>>>> 16d6268fc14fc7b024f6d3027080f967dcaad891
           </form>
         </div>
         {this.conditionalRender()}

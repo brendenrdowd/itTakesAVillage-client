@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 // import PrivateRoute from '../Utils/PrivateRoute';
-<<<<<<< HEAD
 import PublicOnlyRoute from "../Utils/PublicOnlyRoute";
 import Toolbar from "../Nav/Toolbar/Toolbar";
 import SideDrawer from "../Nav/SideDrawer/SideDrawer";
@@ -29,30 +28,23 @@ import userContext from "../../contexts/ApiContext";
 import "./App.css";
 
 import "./App.css";
-=======
-import PublicOnlyRoute from '../Utils/PublicOnlyRoute';
-import Toolbar from '../Nav/Toolbar/Toolbar';
-import SideDrawer from '../Nav/SideDrawer/SideDrawer';
-import Backdrop from '../Nav/Backdrop/Backdrop';
-import Footer from '../Footer/Footer';
-import Store from '../../dummystore';
-import DashboardPage from '../../routes/DashboardPage/DashboardPage';
-import LandingPage from '../../routes/LandingPage/LandingPage';
-import LoginPage from '../../routes/LoginPage/LoginPage';
-import NotFoundPage from '../../routes/NotFoundPage/NotFoundPage';
-import RegistrationPage from '../../routes/RegistrationPage/RegistrationPage';
-import CreateStoryPage from '../../routes/CreateStoryPage/CreateStoryPage';
-import CreateCommentForm from '../../components/CreateCommentForm/CreateCommentForm'
-import PoliciesPage from '../../routes/PoliciesPage/PoliciesPage';
-import StoryPage from '../../routes/StoryPage/StoryPage';
-import userContext from '../../contexts/ApiContext';
-import './App.css';
-
-<<<<<<< HEAD
->>>>>>> ffb88efc85c0cb1293b2e56ac365f6d22ba73d22
-=======
->>>>>>> master
->>>>>>> 16d6268fc14fc7b024f6d3027080f967dcaad891
+import PublicOnlyRoute from "../Utils/PublicOnlyRoute";
+import Toolbar from "../Nav/Toolbar/Toolbar";
+import SideDrawer from "../Nav/SideDrawer/SideDrawer";
+import Backdrop from "../Nav/Backdrop/Backdrop";
+import Footer from "../Footer/Footer";
+import Store from "../../dummystore";
+import DashboardPage from "../../routes/DashboardPage/DashboardPage";
+import LandingPage from "../../routes/LandingPage/LandingPage";
+import LoginPage from "../../routes/LoginPage/LoginPage";
+import NotFoundPage from "../../routes/NotFoundPage/NotFoundPage";
+import RegistrationPage from "../../routes/RegistrationPage/RegistrationPage";
+import CreateStoryPage from "../../routes/CreateStoryPage/CreateStoryPage";
+import CreateCommentForm from "../../components/CreateCommentForm/CreateCommentForm";
+import PoliciesPage from "../../routes/PoliciesPage/PoliciesPage";
+import StoryPage from "../../routes/StoryPage/StoryPage";
+import userContext from "../../contexts/ApiContext";
+import "./App.css";
 
 let userID = localStorage.getItem("user_id");
 
@@ -98,7 +90,7 @@ export default class App extends Component {
             {/* Private */}
             <Route path={"/create"} component={CreateStoryPage} />
             {/* private route */}
-            <Route path={'/comment/'} component={CreateCommentForm} />
+            <Route path={"/comment/"} component={CreateCommentForm} />
             {/* <Route
                 path={'/comment/edit/:id'}
                 component={CreateStoryPage} /> */}
