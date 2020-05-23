@@ -37,34 +37,28 @@ export default class StoryPage extends Component {
     .then (comments => {
       this.setState({ comments })
     })
-
     const user = this.context.user
-    
-    
     this.setState(
-
       {
         user
       }
     )
   }
 
-  comments = (this.state.comments) ? "Add a comment..." : this.state.comments.map(comment =>
-    <li key={comment.id} className="comment">
-      <p className="comment_text">
-        {comment.content}
-      </p>
-      <Hyph />
-      <p>
-        {comment.user}
-      </p>
-    </li>
-  )
-
 
   render() {
     console.log("comments", this.state.comments);
-    
+    let comments = (this.state.comments.length < 0) ? "Add a comment..." : this.state.comments.map(comment =>
+      <li key={comment.id} className="comment">
+        <p className="comment_text">
+          {comment.comment}
+        </p>
+        <Hyph />
+        <p>
+          {comment.author}
+        </p>
+      </li>
+    )
     const renderStory = (
       <Section className="StoryPage">
         <StoryCard
@@ -74,7 +68,7 @@ export default class StoryPage extends Component {
         />
         <CreateCommentForm story={this.state.story} />
         <ul className="comments_list">
-          {this.comments}
+          {comments}
         </ul>
       </Section>
     )

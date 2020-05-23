@@ -33,7 +33,7 @@ class CreateCommentForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault()
     const comment = {
-      user: this.context.userId,
+      author: this.context.userId,
       comment: this.state.newComment,
       story: this.props.story.id
     };
