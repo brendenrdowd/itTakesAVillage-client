@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import userContext from '../../../contexts/ApiContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import TokenService from '../../../services/token-service';
+import UserApiService from '../../../services/user-api-service';
+
 // import './NavLinks.css'
 
 export class NavLinks extends Component {
@@ -16,6 +18,15 @@ export class NavLinks extends Component {
     TokenService.clearAuthToken();
     this.setState({ loggedIn: false });
   };
+
+  handleDeleteClick = () => {
+    UserApiService.deleteUser()
+      .then(data => {
+        TokenService.clearAuthToken();
+        this.setState({ loggedIn: false });
+        this.props.history.push('/');
+      })
+  }
 
   closeModal = () => {
     this.context.closeBackdrop();
@@ -49,6 +60,12 @@ export class NavLinks extends Component {
           <Link to='/create'>
             <FontAwesomeIcon icon='plus-square' />{' '}
             <span className='tooltiptext'>New Story</span>
+          </Link>
+        </li>,
+        <li onClick={this.closeModal} key='5' className='tooltip'>
+          <Link onClick={this.handleDeleteClick} to='/'>
+            <FontAwesomeIcon icon='sign-out-alt' />{' '}
+            <span className='tooltiptext'>Delete User</span>
           </Link>
         </li>,
         <li onClick={this.closeModal} key='5' className='tooltip'>

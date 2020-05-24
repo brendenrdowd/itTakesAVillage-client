@@ -50,6 +50,25 @@ const UserApiService = {
         console.error(err);
       });
   },
+  deleteUser() {
+    return fetch(`${config.API_ENDPOINT}/users/`, {
+      method: "DELETE",
+      headers: {
+        authorization: `Bearer ${TokenService.getAuthToken()}`,
+      },
+    })
+      .then((res) =>
+        !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
+      )
+      .then((res) => {
+        TokenService.saveAuthToken(res.authToken);
+        return res;
+      })
+      .catch((err) => {
+        console.log("refresh token request error");
+        console.error(err);
+      });
+  },
 };
 
 export default UserApiService;
