@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import CommentService from '../../services/comment-api-service';
-import userContext from '../../contexts/ApiContext';
-import './CommentForm.css';
+import React, { Component } from "react";
+import CommentService from "../../services/comment-api-service";
+import userContext from "../../contexts/ApiContext";
+import "./CommentForm.css";
 
 class CreateCommentForm extends Component {
   // grab parent story from props
@@ -17,7 +17,11 @@ class CreateCommentForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+<<<<<<< HEAD
       newComment:""
+=======
+      newComment: "",
+>>>>>>> master
     };
   }
 
@@ -65,7 +69,7 @@ class CreateCommentForm extends Component {
           // onChange={this.handleCommentChange}
           required
         />
-        <button type='submit'>Submit</button>
+        <button type="submit">Submit</button>
       </form>
     );
   }

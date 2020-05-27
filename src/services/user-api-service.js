@@ -1,11 +1,20 @@
-import config from '../config';
-import TokenService from './token-service';
+import config from "../config";
+import TokenService from "./token-service";
 
 const UserApiService = {
   getAllUsers() {
     return fetch(`${config.API_ENDPOINT}/users`, {
       headers: {
-        'content-type': 'application/json',
+        "content-type": "application/json",
+      },
+    }).then((res) =>
+      !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
+    );
+  },
+  getUserById(id) {
+    return fetch(`${config.API_ENDPOINT}/users/${id}`, {
+      headers: {
+        "content-type": "application/json",
       },
     }).then((res) =>
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
@@ -13,9 +22,9 @@ const UserApiService = {
   },
   postUser(newUser) {
     return fetch(`${config.API_ENDPOINT}/users`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'content-type': 'application/json',
+        "content-type": "application/json",
       },
       body: JSON.stringify(newUser),
     }).then((res) =>
@@ -24,7 +33,7 @@ const UserApiService = {
   },
   postRefreshToken() {
     return fetch(`${config.API_ENDPOINT}/auth/refresh`, {
-      method: 'POST',
+      method: "POST",
       headers: {
         authorization: `Bearer ${TokenService.getAuthToken()}`,
       },
@@ -37,7 +46,7 @@ const UserApiService = {
         return res;
       })
       .catch((err) => {
-        console.log('refresh token request error');
+        console.log("refresh token request error");
         console.error(err);
       });
   },

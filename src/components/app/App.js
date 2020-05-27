@@ -7,7 +7,6 @@ import Toolbar from "../Nav/Toolbar/Toolbar";
 import SideDrawer from "../Nav/SideDrawer/SideDrawer";
 import Backdrop from "../Nav/Backdrop/Backdrop";
 import Footer from "../Footer/Footer";
-import Store from "../../dummystore";
 import DashboardPage from "../../routes/DashboardPage/DashboardPage";
 import LandingPage from "../../routes/LandingPage/LandingPage";
 import LoginPage from "../../routes/LoginPage/LoginPage";
@@ -23,8 +22,6 @@ import "./App.css";
 let userID = localStorage.getItem("user_id");
 
 export default class App extends Component {
-  // what is our state going to look like?
-
   state = {
     error: "",
     hasError: false,
