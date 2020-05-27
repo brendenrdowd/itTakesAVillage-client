@@ -2,14 +2,9 @@ import React, { Component } from "react";
 import StoryService from "../../services/story-api-service";
 import Context from "../../contexts/ApiContext";
 import "./CreateStoryForm.css";
-// import userContext from "../../contexts/ApiContext";
-// import userContext from "../../contexts/ApiContext";
-// import history from "../../history";
 
 class CreateStoryForm extends Component {
-  // grab user data from context?
   static contextType = Context;
-  // static contextType = userContext;
   constructor(props) {
     super(props);
     this.state = {
@@ -40,13 +35,11 @@ class CreateStoryForm extends Component {
     const story = {
       flag: this.state.selectValue,
       issue: this.state.textValue,
-      // author: userContext.userId
     };
 
     // User_Id aka author being passed from API backend
     StoryService.postStory(story)
       .then((story) => {
-        // this.context.addStory(story);
         this.props.history.push(`/story/${story.id}`);
       })
       .catch((error) => {
@@ -57,8 +50,6 @@ class CreateStoryForm extends Component {
   render() {
     return (
       <form className="createStory" onSubmit={this.handleSubmit}>
-        {/* will need to update this once we're grabbing user object from backend */}
-        {/* <h3>User: {this.context.user}</h3> */}
         <label>
           <h3>Create Story:</h3>
         </label>

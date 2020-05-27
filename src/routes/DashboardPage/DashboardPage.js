@@ -65,13 +65,14 @@ export default class DashboardPage extends Component {
     }
 
     let dataObj = this.state.data;
-    const currentUser = this.state.userId;
+    const currentUser = parseInt(this.state.userId);
     let activeUserObj = dataObj.filter(function (user) {
       // validate if this is allowed
-      return user.author == currentUser;
+      return user.author === currentUser;
     });
     if (this.state.filter === "my stories") {
-      console.log({ activeUserObj });
+      console.log(typeof activeUserObj[0].author);
+      console.log(typeof currentUser);
       return activeUserObj.map((card) => (
         <Link key={card.id} to={`/story/${card.id}`} className="card-link">
           <StoryCard
