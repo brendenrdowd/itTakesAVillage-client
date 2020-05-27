@@ -14,7 +14,7 @@ import LoginPage from "../../routes/LoginPage/LoginPage";
 import NotFoundPage from "../../routes/NotFoundPage/NotFoundPage";
 import RegistrationPage from "../../routes/RegistrationPage/RegistrationPage";
 import CreateStoryPage from "../../routes/CreateStoryPage/CreateStoryPage";
-import CreateCommentForm from "../../components/CreateCommentForm/CreateCommentForm";
+import CreateCommentForm from "../CreateCommentForm/CreateCommentForm";
 import PoliciesPage from "../../routes/PoliciesPage/PoliciesPage";
 import StoryPage from "../../routes/StoryPage/StoryPage";
 import userContext from "../../contexts/ApiContext";

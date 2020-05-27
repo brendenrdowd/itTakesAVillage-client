@@ -36,11 +36,11 @@ const CommentApiService = {
   },
 
   editComment(comment) {
-    return fetch(`${config.API_ENDPOINT}/comment/edit/${comment.id}`, {
+    return fetch(`${config.API_ENDPOINT}/comment/edit/${comment}`, {
       method: "PATCH",
       body: JSON.stringify(comment),
       headers: {
-        //Authorization: `bearer ${TokenService.getAuthToken()}`,
+        Authorization: `bearer ${TokenService.getAuthToken()}`,
         "content-type": "application/json"
       }
     })
@@ -51,11 +51,11 @@ const CommentApiService = {
   },
 
   deleteComment(comment) {
-    return fetch(`${config.API_ENDPOINT}/comment/${comment.id}`, {
+    return fetch(`${config.API_ENDPOINT}/comment/${comment}`, {
       method: "DELETE",
       body: JSON.stringify(comment),
       headers: {
-        //Authorization: `bearer ${TokenService.getAuthToken()}`,
+        Authorization: `bearer ${TokenService.getAuthToken()}`,
         "content-type": "application/json"
       }
 

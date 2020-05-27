@@ -7,6 +7,7 @@ const userContext = React.createContext({
   clearError: () => {},
   stories: [],
   addStory: () => {},
+  addComment: () => {},
   updateUser: () => {},
   toggleSideDrawer: () => {},
   closeBackdrop: () => {},
