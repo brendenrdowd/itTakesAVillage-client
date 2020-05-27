@@ -68,6 +68,8 @@ export default class StoryPage extends Component {
     );
     console.log(this.state.story);
     console.log(this.state.authorName);
+    // HH testing
+    console.log(this.context.userId);
 
     const { error } = this.context;
     let content;

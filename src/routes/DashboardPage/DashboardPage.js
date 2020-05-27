@@ -67,7 +67,6 @@ export default class DashboardPage extends Component {
     let dataObj = this.state.data;
     const currentUser = parseInt(this.state.userId);
     let activeUserObj = dataObj.filter(function (user) {
-      // validate if this is allowed
       return user.author === currentUser;
     });
     if (this.state.filter === "my stories") {
@@ -75,12 +74,16 @@ export default class DashboardPage extends Component {
       console.log(typeof currentUser);
       return activeUserObj.map((card) => (
         <Link key={card.id} to={`/story/${card.id}`} className="card-link">
-          <StoryCard
-            resolved={card.resolved}
-            date={this.formatDate(card.created_at)}
-            flag={card.flag}
-            issue={card.issue}
-          />
+          <div>
+            <StoryCard
+              resolved={card.resolved}
+              date={this.formatDate(card.created_at)}
+              flag={card.flag}
+              issue={card.issue}
+              // HH testing
+              // currentUser={currentUser}
+            />
+          </div>
         </Link>
       ));
     }
