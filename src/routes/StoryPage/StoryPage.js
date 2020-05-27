@@ -27,6 +27,7 @@ export default class StoryPage extends Component {
 
   componentDidMount() {
     const story_id = this.props.match.params.id;
+    console.log(story_id)
     // need to make sure we're grabbing the story in service
     StoryApiService.getStoryById(story_id).then((story) => {
       this.setState({ story: story });
@@ -44,18 +45,18 @@ export default class StoryPage extends Component {
 
   render() {
     console.log("comments", this.state.comments);
-    let comments =
-      this.state.comments.length < 0
-        ? "Add a comment..."
-        : this.state.comments.map((comment) => (
-            <li key={comment.id} className="comment">
-              <p className="comment_text">{comment.comment}</p>
-              <p>
-                <Hyph />
-                {/* {comment.author} */}
-              </p>
-            </li>
-          ));
+    // let comments =
+    //   (this.state.comments.length < 0)
+    //     ? "Add a comment..."
+    //     : this.state.comments.map((comment) => (
+    //         <li key={comment.id} className="comment">
+    //           <p className="comment_text">{comment.comment}</p>
+    //           <p>
+    //             <Hyph />
+    //             {/* {comment.author} */}
+    //           </p>
+    //         </li>
+    //       ));
     const renderStory = (
       <Section className="StoryPage">
         <StoryCard
@@ -64,7 +65,7 @@ export default class StoryPage extends Component {
           author={this.state.authorName}
         />
         <CreateCommentForm story={this.state.story} />
-        <ul className="comments_list">{comments}</ul>
+       {/* <ul className="comments_list">{comments}</ul> */}
       </Section>
     );
     console.log(this.state.story);

@@ -17,11 +17,7 @@ class CreateCommentForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-<<<<<<< HEAD
-      newComment:""
-=======
       newComment: "",
->>>>>>> master
     };
   }
 
