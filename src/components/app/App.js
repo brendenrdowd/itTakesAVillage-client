@@ -19,6 +19,8 @@ import PoliciesPage from "../../routes/PoliciesPage/PoliciesPage";
 import StoryPage from "../../routes/StoryPage/StoryPage";
 import userContext from "../../contexts/ApiContext";
 import "./App.css";
+import EditStoryForm from "../../components/EditStoryForm/EditStoryForm";
+import EditStoryPage from "../../routes/EditStoryPage/EditStoryPage";
 
 let userID = localStorage.getItem("user_id");
 
@@ -70,7 +72,8 @@ export default class App extends Component {
                 component={CreateStoryPage} /> */}
             <Route path={"/story/:id"} component={StoryPage} />
             {/* private route */}
-            <Route path={"/story/edit/:id"} component={CreateStoryPage} />
+            <Route path={"/edit"} component={EditStoryForm} />
+            <Route path={"/story/edit/:id"} component={StoryPage} />
             <Route path={"/policies"} component={PoliciesPage} />
             <Route component={NotFoundPage} />
           </Switch>
