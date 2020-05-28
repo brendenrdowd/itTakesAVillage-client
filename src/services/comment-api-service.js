@@ -20,7 +20,7 @@ const CommentApiService = {
       return res.json();
     });
   },
-
+//chage endpoints for the RESTful api
   getCommentsByStoryId(storyId) {
     return fetch(`${config.API_ENDPOINT}/comment/${storyId}`, {
       method: "GET",

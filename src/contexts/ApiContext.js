@@ -7,14 +7,17 @@ const userContext = React.createContext({
   },
   newComment: [],
   error: null,
-  setUserId: () => {},
-  clearError: () => {},
+  setUserId: () => { },
+  clearError: () => { },
   stories: [],
-  addStory: () => {},
-  updateUser: () => {},
-  toggleSideDrawer: () => {},
-  closeBackdrop: () => {},
-  setUsers: () => {},
+  comments: [],
+  addComment: () => { },
+  addStory: () => { },
+  updateUser: () => { },
+  toggleSideDrawer: () => { },
+  closeBackdrop: () => { },
+  setUsers: () => { },
+  clearComments: () => { },
 });
 
 export default userContext;
@@ -23,6 +26,7 @@ export class UserProvider extends Component {
   state = {
     userId: [],
     users: [],
+    comments: [],
     newComment: [],
     sideDrawerOpen: false,
     error: null,
@@ -36,7 +40,10 @@ export class UserProvider extends Component {
   };
 
   addComment = (newComment) => {
-    this.setState([...this.state.newComment, newComment]);
+    this.setState({comments: [...this.state.comments, newComment]});
+  };
+  setComments = (comments) => {
+    this.setState({comments})
   };
   clearError = () => {
     this.setState({ error: null });
@@ -57,6 +64,10 @@ export class UserProvider extends Component {
     );
   };
 
+  clearComments = () => {
+    this.setState({comments: []}) 
+  }
+
   render() {
     const value = {
       userId: localStorage.getItem("user_id"),
@@ -68,6 +79,9 @@ export class UserProvider extends Component {
       toggleSideDrawer: this.drawerToggleClickHandler,
       setUsers: this.setUsers,
       addComment: this.addComment,
+      clearComments: this.clearComments,
+      comments: this.state.comments,
+      setComments: this.setComments,
     };
     return (
       <userContext.Provider value={value}>

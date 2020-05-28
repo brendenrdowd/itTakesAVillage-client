@@ -6,7 +6,7 @@ import CardToolBar from "../../components/Utils/CardToolBar";
 import CommentToolBar from "../../components/Utils/CommentToolbar";
 import StoryApiService from "../../services/story-api-service";
 import CommentApiService from "../../services/comment-api-service";
-import ApiContext from "../../contexts/ApiContext";
+import userContext from "../../contexts/ApiContext";
 import UserApiService from "../../services/user-api-service";
 import "./StoryPage.css";
 
@@ -15,7 +15,7 @@ export default class StoryPage extends Component {
     match: { params: {} },
   };
 
-  static contextType = ApiContext;
+  static contextType = userContext;
 
   state = {
     story: {},
@@ -26,36 +26,43 @@ export default class StoryPage extends Component {
   };
 
   componentDidMount() {
+    this.context.clearComments()
     const story_id = this.props.match.params.id;
     // need to make sure we're grabbing the story in service
     StoryApiService.getStoryById(story_id).then((story) => {
-      this.setState({ story: story });
+      this.setState({...this.state, story });
     });
-
+    //console.log(this.state.story);
     // need to make sure we're grabbing story from commentApi correctly
     CommentApiService.getCommentsByStoryId(story_id).then((comments) => {
-      this.setState({ comments });
+      this.context.setComments( comments );
     });
+    //console.log('comments', this.state.comments);
+    //this.context.addComment(this.state.comments)
+    console.log(this.context.comments);
     const user = this.context.user;
-    this.setState({
-      user,
-    });
+    this.setState({...this.state, user});
   }
 
+  // need to figure out how to update story page comments when context comments are updated
+  // if (this.state.comments !== this.context.comments) {
+  //   this.setState({ comments: this.context.comments })
+  // }
+
   render() {
-    console.log("comments", this.state.comments);
+
     let comments =
-      this.state.comments.length < 0
+      this.context.comments.length < 0
         ? "Add a comment..."
-        : this.state.comments.map((comment) => (
-            <li key={comment.id} className="comment">
-              <p className="comment_text">{comment.comment}</p>
-              <p>
-                <Hyph />
-                {/* {comment.author} */}
-              </p>
-            </li>
-          ));
+        : this.context.comments.map((comment) => (
+          <li key={comment.id} className="comment">
+            <p className="comment_text">{comment.comment}</p>
+            <p>
+              <Hyph />
+              {/* {comment.author} */}
+            </p>
+          </li>
+        ));
     const renderStory = (
       <Section className="StoryPage">
         <StoryCard
@@ -67,8 +74,6 @@ export default class StoryPage extends Component {
         <ul className="comments_list">{comments}</ul>
       </Section>
     );
-    console.log(this.state.story);
-    console.log(this.state.authorName);
 
     const { error } = this.context;
     let content;
@@ -77,8 +82,8 @@ export default class StoryPage extends Component {
         error.error === `Story doesn't exist` ? (
           <p className="not_found">Story not found</p>
         ) : (
-          <p className="not_found">Something went wrong</p>
-        );
+            <p className="not_found">Something went wrong</p>
+          );
     } else {
       content = renderStory;
     }

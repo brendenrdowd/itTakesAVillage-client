@@ -40,6 +40,8 @@ class CreateCommentForm extends Component {
     // should be able to consolidate this into just comment, depending on service/backend
     CommentService.postComment(userId, comment.value, this.props.story.id)
       .then((comment) => {
+        console.log('posted comment', comment);
+        
         //need to add a component did update, or push the new comment in context and update the storypage comment array with context
         this.context.addComment(comment);
         this.props.history.push(`/story/${comment.story}`);
