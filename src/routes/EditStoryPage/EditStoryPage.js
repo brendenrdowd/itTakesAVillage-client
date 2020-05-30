@@ -6,7 +6,6 @@ class EditStoryPage extends Component {
     return (
       <div>
         <EditStoryForm history={this.props.history} />
-        {/* <EditStoryForm /> */}
       </div>
     );
   }

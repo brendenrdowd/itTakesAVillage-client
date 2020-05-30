@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import userContext from "../../contexts/ApiContext";
 import StoryService from "../../services/story-api-service";
 import "./CreateStoryForm.css";
+import TestStoryEdit from "../TestStoryEdit/TestStoryEdit";
 
 class EditStoryForm extends Component {
   constructor() {
@@ -46,13 +47,12 @@ class EditStoryForm extends Component {
       return activeUserObj.map((card) => (
         <Link key={card.id} to={`/story/edit/${card.id}`} className="card-link">
           <div>
+            {this.renderFilter}
             <StoryCard
               resolved={card.resolved}
               date={this.formatDate(card.created_at)}
               flag={card.flag}
               issue={card.issue}
-              // HH testing
-              // currentUser={currentUser}
             />
           </div>
         </Link>
@@ -71,30 +71,13 @@ class EditStoryForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     console.log("edit button clicked");
-    // for testing
-    // const story = {
-    //   flag: this.state.selectValue,
-    //   issue: this.state.textValue,
-    // };
-
-    // // User_Id aka author being passed from API backend
-    // StoryService.postStory(story)
-    //   .then((story) => {
-    //     this.props.history.push(`/story/${story.id}`);
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
   };
 
   render() {
-    // console.log("from createStoryForm", this.props.history);
     return (
       <form className="createStory" onSubmit={this.handleSubmit}>
-        <h3>Edit Stories:</h3>
+        <h3>Edit My Stories:</h3>
         {this.conditionalRender()}
-        {/* <br />
-        <button type="submit">Submit</button> */}
       </form>
     );
   }

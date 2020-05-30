@@ -73,7 +73,7 @@ export default class App extends Component {
             <Route path={"/story/:id"} component={StoryPage} />
             {/* private route */}
             <Route path={"/edit"} component={EditStoryForm} />
-            <Route path={"/story/edit/:id"} component={StoryPage} />
+            <Route path={"/story/edit/:id"} component={CreateStoryPage} />
             <Route path={"/policies"} component={PoliciesPage} />
             <Route component={NotFoundPage} />
           </Switch>
