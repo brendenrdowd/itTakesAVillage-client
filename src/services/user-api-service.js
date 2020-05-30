@@ -2,6 +2,7 @@ import config from "../config";
 import TokenService from "./token-service";
 
 const UserApiService = {
+  // Find all users, get users by edit, post and delete users
   getAllUsers() {
     return fetch(`${config.API_ENDPOINT}/users`, {
       headers: {
@@ -46,7 +47,6 @@ const UserApiService = {
         return res;
       })
       .catch((err) => {
-        console.log("refresh token request error");
         console.error(err);
       });
   },

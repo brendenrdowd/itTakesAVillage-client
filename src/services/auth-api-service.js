@@ -2,6 +2,7 @@ import config from "../config";
 import TokenService from "./token-service";
 
 const AuthApiService = {
+  // Makes sure user is authorized based on credentials
   postLogin(credentials) {
     return fetch(`${config.API_ENDPOINT}/auth/login`, {
       method: "POST",

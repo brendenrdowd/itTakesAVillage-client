@@ -50,24 +50,28 @@ export class NavLinks extends Component {
     let links;
     if (this.state.loggedIn) {
       links = [
+        // Link to homepage/dashboard
         <li onClick={this.closeModal} key='3' className='tooltip'>
           <Link to='/dashboard'>
             <FontAwesomeIcon icon='home' />{' '}
             <span className='tooltiptext'>Home</span>
           </Link>
         </li>,
+        // Link to create new story
         <li onClick={this.closeModal} key='4' className='tooltip'>
           <Link to='/create'>
             <FontAwesomeIcon icon='plus-square' />{' '}
             <span className='tooltiptext'>New Story</span>
           </Link>
         </li>,
-        <li onClick={this.closeModal} key='5' className='tooltip'>
+        // Link to delete user and return them to landing page
+        <li onClick={this.closeModal} key='6' className='tooltip'>
           <Link onClick={this.handleDeleteClick} to='/'>
-            <FontAwesomeIcon icon='sign-out-alt' />{' '}
+            <FontAwesomeIcon icon='user-times' />{' '}
             <span className='tooltiptext'>Delete User</span>
           </Link>
         </li>,
+        // Link to log out user and return them to landing page
         <li onClick={this.closeModal} key='5' className='tooltip'>
           <Link onClick={this.handleLogoutClick} to='/'>
             <FontAwesomeIcon icon='sign-out-alt' />{' '}

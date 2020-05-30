@@ -2,11 +2,11 @@ import config from "../config";
 import TokenService from "./token-service";
 
 const CommentApiService = {
-
+  // Allows user to post, edit, and delete comments as well as get comments by story id
   postComment(userId, comment, storyId) {
     return fetch(`${config.API_ENDPOINT}/comment`, {
       method: "POST",
-      body: JSON.stringify({comment, author: userId, story: storyId}),
+      body: JSON.stringify({ comment, author: userId, story: storyId }),
       headers: {
         Authorization: `Bearer ${TokenService.getAuthToken()}`,
         "content-type": "application/json",

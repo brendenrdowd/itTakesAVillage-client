@@ -5,10 +5,11 @@ import "./LoginPage.css";
 export class LoginPage extends Component {
   static defaultProps = {
     history: {
-      push: () => {},
+      push: () => { },
     },
   };
 
+  // Takes user to dashboard upon successful login
   handleLoginSuccess = () => {
     const { history } = this.props;
     history.push("/dashboard");

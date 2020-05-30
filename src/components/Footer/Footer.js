@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Footer.css';
-import validator from 'validator';
 
+// Linked policies page from terms of use
 const Footer = () => {
   return (
     <div id='footer'>
