@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import userContext from "../../contexts/ApiContext";
 import StoryService from "../../services/story-api-service";
 import "./CreateStoryForm.css";
-import TestStoryEdit from "../TestStoryEdit/TestStoryEdit";
 
+// need to change the name of displays logged in user stories
 class EditStoryForm extends Component {
   constructor() {
     super();
@@ -45,7 +45,7 @@ class EditStoryForm extends Component {
       // for testing
       console.log(activeUserObj);
       return activeUserObj.map((card) => (
-        <Link key={card.id} to={`/story/edit/${card.id}`} className="card-link">
+        <Link key={card.id} to={`/story/${card.id}`} className="card-link">
           <div>
             {this.renderFilter}
             <StoryCard

@@ -22,6 +22,7 @@ export default class StoryPage extends Component {
     comments: [],
     user: {},
     authorName: "",
+    resolved: false,
   };
 
   componentDidMount() {
@@ -42,7 +43,11 @@ export default class StoryPage extends Component {
   }
 
   render() {
-    console.log("comments", this.state.comments);
+    // console.log("comments", this.state.comments);
+    console.log("author", this.state.story.author);
+    // need to change to a number
+    console.log("userId", this.context.userId);
+
     let comments =
       this.state.comments.length < 0
         ? "Add a comment..."
@@ -68,8 +73,26 @@ export default class StoryPage extends Component {
     );
     console.log(this.state.story);
     console.log(this.state.authorName);
-    // HH testing
-    console.log(this.context.userId);
+    // HH edit story test
+    const editStory = (
+      <Section className="StoryPage">
+        <StoryCard
+          issue={this.state.story.issue}
+          flag={this.state.story.flag}
+          author={this.state.authorName}
+        />
+        <div>
+          <p className="comment_text">Edit Story Issue:</p>
+          <input
+            type="text"
+            name="edit-story"
+            value={this.state.story.issue || ""}
+          />
+          <input type="checkbox" id="resolve" name="resolved" />
+          <label for="resolved">Resolve</label>
+        </div>
+      </Section>
+    );
 
     const { error } = this.context;
     let content;
@@ -81,7 +104,8 @@ export default class StoryPage extends Component {
           <p className="not_found">Something went wrong</p>
         );
     } else {
-      content = renderStory;
+      // testing story edit
+      content = editStory;
     }
     return <Section className="StoryPage">{content}</Section>;
   }
