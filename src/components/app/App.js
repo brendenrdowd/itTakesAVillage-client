@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
-// import PrivateRoute from '../Utils/PrivateRoute';
+import PrivateRoute from '../Utils/PrivateRoute';
 import "./App.css";
 import PublicOnlyRoute from "../Utils/PublicOnlyRoute";
 import Toolbar from "../Nav/Toolbar/Toolbar";
@@ -57,17 +57,17 @@ export default class App extends Component {
             <PublicOnlyRoute path={"/login"} component={LoginPage} />
             <PublicOnlyRoute path={"/register"} component={RegistrationPage} />
             {/* private */}
-            <Route path={"/dashboard"} component={DashboardPage} />
+            <PrivateRoute path={"/dashboard"} component={DashboardPage} />
             {/* Private */}
-            <Route path={"/create"} component={CreateStoryPage} />
+            <PrivateRoute path={"/create"} component={CreateStoryPage} />
             {/* private route */}
-            <Route path={"/comment/"} component={CreateCommentForm} />
+            <PrivateRoute path={"/comment/"} component={CreateCommentForm} />
             {/* <Route
                 path={'/comment/edit/:id'}
                 component={CreateStoryPage} /> */}
             <Route path={"/story/:id"} component={StoryPage} />
             {/* private route */}
-            <Route path={"/story/edit/:id"} component={CreateStoryPage} />
+            <PrivateRoute path={"/story/edit/:id"} component={CreateStoryPage} />
             <Route path={"/policies"} component={PoliciesPage} />
             <Route component={NotFoundPage} />
           </Switch>
