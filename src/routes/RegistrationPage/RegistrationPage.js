@@ -5,10 +5,10 @@ import './RegistrationPage.css';
 export default class RegistrationPage extends Component {
   static defaultProps = {
     history: {
-      push: () => {},
+      push: () => { },
     },
   };
-
+  // Directs user to login page is they successfully sign up
   handleRegistrationSuccess = (user) => {
     const { history } = this.props;
     history.push('/login');

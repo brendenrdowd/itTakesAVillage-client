@@ -2,6 +2,7 @@ import config from "../config";
 import TokenService from "./token-service";
 
 const UserApiService = {
+  // Find all users, get users by edit, post and delete users
   getAllUsers() {
     return fetch(`${config.API_ENDPOINT}/users`, {
       headers: {
@@ -34,6 +35,24 @@ const UserApiService = {
   postRefreshToken() {
     return fetch(`${config.API_ENDPOINT}/auth/refresh`, {
       method: "POST",
+      headers: {
+        authorization: `Bearer ${TokenService.getAuthToken()}`,
+      },
+    })
+      .then((res) =>
+        !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
+      )
+      .then((res) => {
+        TokenService.saveAuthToken(res.authToken);
+        return res;
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  },
+  deleteUser() {
+    return fetch(`${config.API_ENDPOINT}/users/`, {
+      method: "DELETE",
       headers: {
         authorization: `Bearer ${TokenService.getAuthToken()}`,
       },

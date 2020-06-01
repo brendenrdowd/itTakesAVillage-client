@@ -41,21 +41,20 @@ export default class StoryPage extends Component {
       user,
     });
   }
-
+  // renders comments and story. If no story exists, throws error
   render() {
-    console.log("comments", this.state.comments);
     let comments =
       this.state.comments.length < 0
         ? "Add a comment..."
         : this.state.comments.map((comment) => (
-            <li key={comment.id} className="comment">
-              <p className="comment_text">{comment.comment}</p>
-              <p>
-                <Hyph />
-                {/* {comment.author} */}
-              </p>
-            </li>
-          ));
+          <li key={comment.id} className="comment">
+            <p className="comment_text">{comment.comment}</p>
+            <p>
+              <Hyph />
+              {/* {comment.author} */}
+            </p>
+          </li>
+        ));
     const renderStory = (
       <Section className="StoryPage">
         <StoryCard
@@ -67,8 +66,6 @@ export default class StoryPage extends Component {
         <ul className="comments_list">{comments}</ul>
       </Section>
     );
-    console.log(this.state.story);
-    console.log(this.state.authorName);
 
     const { error } = this.context;
     let content;
@@ -77,8 +74,8 @@ export default class StoryPage extends Component {
         error.error === `Story doesn't exist` ? (
           <p className="not_found">Story not found</p>
         ) : (
-          <p className="not_found">Something went wrong</p>
-        );
+            <p className="not_found">Something went wrong</p>
+          );
     } else {
       content = renderStory;
     }

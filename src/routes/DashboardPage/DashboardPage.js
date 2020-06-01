@@ -27,7 +27,7 @@ export default class DashboardPage extends Component {
     "clothing",
     "my stories",
   ];
-
+  // this sets state to match user id
   componentDidMount() {
     StoryService.getAllStories().then((data) =>
       this.setState({
@@ -49,6 +49,7 @@ export default class DashboardPage extends Component {
     return `${month}/${day}/${year}`;
   };
 
+  // this renders story on page based on filter or filter all
   conditionalRender = () => {
     if (!this.state.filter || this.state.filter === "all") {
       return this.state.data.map((card) => (
@@ -62,7 +63,7 @@ export default class DashboardPage extends Component {
         </Link>
       ));
     }
-
+    // this filters through stories by author
     let dataObj = this.state.data;
     const currentUser = this.state.userId;
     let activeUserObj = dataObj.filter(function (user) {
@@ -70,7 +71,6 @@ export default class DashboardPage extends Component {
       return user.author == currentUser;
     });
     if (this.state.filter === "my stories") {
-      console.log({ activeUserObj });
       return activeUserObj.map((card) => (
         <Link key={card.id} to={`/story/${card.id}`} className="card-link">
           <StoryCard
