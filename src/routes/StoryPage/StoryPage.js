@@ -22,7 +22,7 @@ export default class StoryPage extends Component {
     comments: [],
     user: {},
     authorName: "",
-    resolved: false,
+    resolved: true,
   };
 
   componentDidMount() {
@@ -42,6 +42,30 @@ export default class StoryPage extends Component {
     });
   }
 
+  handleCheckBox = () => {
+    this.setState({
+      resolved: !this.state.resolved,
+    });
+    console.log(this.state.resolved);
+  };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    let editIssue = document.getElementById("issue").value;
+    const editStory = {
+      issue: editIssue,
+      resolved: this.state.resolved,
+      id: this.state.story.id,
+    };
+    StoryApiService.editStory(editStory)
+      .then((story) => {
+        this.props.history.push(`/story/edit/${story.id}`);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   render() {
     // console.log("comments", this.state.comments);
     console.log("author", this.state.story.author);
@@ -60,6 +84,7 @@ export default class StoryPage extends Component {
               </p>
             </li>
           ));
+
     const renderStory = (
       <Section className="StoryPage">
         <StoryCard
@@ -82,17 +107,38 @@ export default class StoryPage extends Component {
           author={this.state.authorName}
         />
         <div>
-          <p className="comment_text">Edit Story Issue:</p>
-          <input
-            type="text"
-            name="edit-story"
-            value={this.state.story.issue || ""}
-          />
-          <input type="checkbox" id="resolve" name="resolved" />
-          <label for="resolved">Resolve</label>
+          <label>
+            Edit Story Issue:
+            <input
+              id="issue"
+              type="text"
+              name="edit-story"
+              defaultValue={this.state.story.issue || ""}
+            />
+          </label>
+          <label>
+            Resolve:{" "}
+            <input
+              type="checkbox"
+              id="resolve"
+              name="resolved"
+              onChange={this.handleCheckBox}
+            />
+          </label>
+          <button onClick={this.handleSubmit}>Submit</button>
         </div>
       </Section>
     );
+
+    const conditionalRender = () => {
+      const author = this.state.story.author;
+      const userId = parseInt(this.context.userId);
+      if (author === userId) {
+        return editStory;
+      } else {
+        return renderStory;
+      }
+    };
 
     const { error } = this.context;
     let content;
@@ -105,7 +151,7 @@ export default class StoryPage extends Component {
         );
     } else {
       // testing story edit
-      content = editStory;
+      content = conditionalRender();
     }
     return <Section className="StoryPage">{content}</Section>;
   }

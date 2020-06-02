@@ -47,18 +47,16 @@ const StoryApiService = {
   },
 
   editStory(story) {
-    return fetch(`${config.API_ENDPOINT}/story/edit/${story.id}`, {
+    // Error: Empty .update() call detected! Update data does no…ry. Table: itav_stories. Columns: resolved,issue.
+    return fetch(`${config.API_ENDPOINT}/story/${story.id}`, {
       method: "PATCH",
       body: JSON.stringify(story),
       headers: {
-        authorization: `bearer ${config.API_ENDPOINT}`
-      }
-        .then(res =>
-          (!res.ok)
-            ? res.json().then(e => Promise.reject(e))
-            : res.json()
-        )
-    })
+        authorization: `bearer ${config.API_ENDPOINT}`,
+      },
+    }).then((res) =>
+      !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
+    );
   },
 
   deleteStory(story) {
@@ -66,18 +64,14 @@ const StoryApiService = {
       method: "DELETE",
       body: JSON.stringify(),
       headers: {
-        authorization: `bearer ${config.API_ENDPOINT}`
-      }
-        .then(res =>
-          (!res.ok)
-            ? res.json().then(e => Promise.reject(e))
-            : res.json()
-        )
-    })
-  }
-}
+        authorization: `bearer ${config.API_ENDPOINT}`,
+      }.then((res) =>
+        !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
+      ),
+    });
+  },
+};
 
 export default StoryApiService;
 
-
-//create a function that reaches out to the backend 
+//create a function that reaches out to the backend
