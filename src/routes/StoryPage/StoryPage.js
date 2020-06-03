@@ -22,7 +22,7 @@ export default class StoryPage extends Component {
     comments: [],
     user: {},
     authorName: "",
-    resolved: true,
+    resolved: false,
   };
 
   componentDidMount() {
@@ -46,7 +46,6 @@ export default class StoryPage extends Component {
     this.setState({
       resolved: !this.state.resolved,
     });
-    console.log(this.state.resolved);
   };
 
   handleSubmit = (event) => {
@@ -57,9 +56,10 @@ export default class StoryPage extends Component {
       resolved: this.state.resolved,
       id: this.state.story.id,
     };
+
     StoryApiService.editStory(editStory)
       .then((story) => {
-        this.props.history.push(`/story/edit/${story.id}`);
+        this.props.history.push(`/edit`);
       })
       .catch((error) => {
         console.error(error);
@@ -67,11 +67,6 @@ export default class StoryPage extends Component {
   };
 
   render() {
-    // console.log("comments", this.state.comments);
-    console.log("author", this.state.story.author);
-    // need to change to a number
-    console.log("userId", this.context.userId);
-
     let comments =
       this.state.comments.length < 0
         ? "Add a comment..."
@@ -96,9 +91,7 @@ export default class StoryPage extends Component {
         <ul className="comments_list">{comments}</ul>
       </Section>
     );
-    console.log(this.state.story);
-    console.log(this.state.authorName);
-    // HH edit story test
+
     const editStory = (
       <Section className="StoryPage">
         <StoryCard

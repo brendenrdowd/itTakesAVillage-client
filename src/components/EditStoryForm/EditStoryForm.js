@@ -42,8 +42,6 @@ class EditStoryForm extends Component {
       return user.author === currentUser;
     });
     if (this.state.filter === "my stories") {
-      // for testing
-      console.log(activeUserObj);
       return activeUserObj.map((card) => (
         <Link key={card.id} to={`/story/${card.id}`} className="card-link">
           <div>
