@@ -70,11 +70,6 @@ export default class DashboardPage extends Component {
       return user.author === currentUser;
     });
     if (this.state.filter === "my stories") {
-<<<<<<< HEAD
-      console.log(typeof activeUserObj[0].author);
-      console.log(typeof currentUser);
-=======
->>>>>>> master
       return activeUserObj.map((card) => (
         <Link key={card.id} to={`/story/${card.id}`} className="card-link">
           <div>
@@ -83,8 +78,6 @@ export default class DashboardPage extends Component {
               date={this.formatDate(card.created_at)}
               flag={card.flag}
               issue={card.issue}
-              // HH testing
-              // currentUser={currentUser}
             />
           </div>
         </Link>

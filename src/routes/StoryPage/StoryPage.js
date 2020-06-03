@@ -42,6 +42,25 @@ export default class StoryPage extends Component {
       user,
     });
   }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    let editIssue = document.getElementById("issue").value;
+    const editStory = {
+      issue: editIssue,
+      resolved: this.state.resolved,
+      id: this.state.story.id,
+    };
+
+    StoryApiService.editStory(editStory)
+      .then((story) => {
+        this.props.history.push(`/edit`);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   // renders comments and story. If no story exists, throws error
   render() {
     let comments =
