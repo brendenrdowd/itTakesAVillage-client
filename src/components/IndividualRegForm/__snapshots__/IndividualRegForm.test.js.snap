@@ -6,15 +6,12 @@ exports[`renders correctly 1`] = `
   onSubmit={[Function]}
 >
   <div
-    role="alert"
-  />
-  <div
     className="name"
   >
     <label
-      htmlFor="IndividualRegForm__full_name"
+      htmlFor="IndividualRegForm__name"
     >
-      Full name 
+      Full name: 
       <span
         className="Required "
       >
@@ -23,19 +20,20 @@ exports[`renders correctly 1`] = `
     </label>
     <input
       className="Input "
-      id="IndividualRegForm__full_name"
+      id="IndividualRegForm__name"
       name="name"
+      onChange={[Function]}
       placeholder="joe doe"
       type="text"
     />
   </div>
   <div
-    className="user_name"
+    className="username"
   >
     <label
-      htmlFor="IndividualRegForm__user_name"
+      htmlFor="IndividualRegForm__username"
     >
-      Username 
+      Username: 
       <span
         className="Required "
       >
@@ -44,8 +42,9 @@ exports[`renders correctly 1`] = `
     </label>
     <input
       className="Input "
-      id="IndividualRegForm__user_name"
+      id="IndividualRegForm__username"
       name="username"
+      onChange={[Function]}
       placeholder="joedoe"
       type="text"
     />
@@ -56,7 +55,7 @@ exports[`renders correctly 1`] = `
     <label
       htmlFor="IndividualRegForm__email"
     >
-      Email 
+      Email: 
       <span
         className="Required "
       >
@@ -67,6 +66,7 @@ exports[`renders correctly 1`] = `
       className="Input "
       id="IndividualRegForm__email"
       name="email"
+      onChange={[Function]}
       type="text"
     />
   </div>
@@ -74,9 +74,9 @@ exports[`renders correctly 1`] = `
     className="location"
   >
     <label
-      htmlFor="IndividualRegForm__zip_code"
+      htmlFor="IndividualRegForm__location"
     >
-      Zip code 
+      Zip code: 
       <span
         className="Required "
       >
@@ -85,8 +85,9 @@ exports[`renders correctly 1`] = `
     </label>
     <input
       className="Input "
-      id="IndividualRegForm__zip_code"
+      id="IndividualRegForm__location"
       name="location"
+      onChange={[Function]}
       placeholder="88888"
       type="text"
     />
@@ -97,7 +98,7 @@ exports[`renders correctly 1`] = `
     <label
       htmlFor="IndividualRegForm__password"
     >
-      Password 
+      Password: 
       <span
         className="Required "
       >
@@ -108,6 +109,7 @@ exports[`renders correctly 1`] = `
       className="Input "
       id="IndividualRegForm__password"
       name="password"
+      onChange={[Function]}
       placeholder="Password123"
       type="password"
     />
@@ -118,7 +120,7 @@ exports[`renders correctly 1`] = `
     <label
       htmlFor="IndividualRegForm__password"
     >
-      Repeat password 
+      Repeat password: 
       <span
         className="Required "
       >
@@ -129,12 +131,14 @@ exports[`renders correctly 1`] = `
       className="Input "
       id="IndividualRegForm__password"
       name="repeatPassword"
+      onChange={[Function]}
       placeholder="Password123"
       type="password"
     />
   </div>
   <button
     className="Button "
+    disabled="Please enter name"
     type="submit"
   >
     Sign up

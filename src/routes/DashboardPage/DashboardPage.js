@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import StoryCard from "../../components/StoryCard/StoryCard";
 import UserService from "../../services/user-api-service";
-import thing from "../../dummystore";
 import "./DashboardPage.css";
 import { Link } from "react-router-dom";
 import userContext from "../../contexts/ApiContext";
@@ -28,7 +27,7 @@ export default class DashboardPage extends Component {
     "clothing",
     "my stories",
   ];
-
+  // this sets state to match user id
   componentDidMount() {
     StoryService.getAllStories().then((data) =>
       this.setState({
@@ -50,6 +49,7 @@ export default class DashboardPage extends Component {
     return `${month}/${day}/${year}`;
   };
 
+  // this renders story on page based on filter or filter all
   conditionalRender = () => {
     if (!this.state.filter || this.state.filter === "all") {
       return this.state.data.map((card) => (
@@ -63,15 +63,18 @@ export default class DashboardPage extends Component {
         </Link>
       ));
     }
-
+    // this filters through stories by author
     let dataObj = this.state.data;
     const currentUser = parseInt(this.state.userId);
     let activeUserObj = dataObj.filter(function (user) {
       return user.author === currentUser;
     });
     if (this.state.filter === "my stories") {
+<<<<<<< HEAD
       console.log(typeof activeUserObj[0].author);
       console.log(typeof currentUser);
+=======
+>>>>>>> master
       return activeUserObj.map((card) => (
         <Link key={card.id} to={`/story/${card.id}`} className="card-link">
           <div>

@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import userContext from "../../../contexts/ApiContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TokenService from "../../../services/token-service";
+import UserApiService from "../../../services/user-api-service";
+
 // import './NavLinks.css'
 
 export class NavLinks extends Component {
@@ -15,6 +17,14 @@ export class NavLinks extends Component {
   handleLogoutClick = () => {
     TokenService.clearAuthToken();
     this.setState({ loggedIn: false });
+  };
+
+  handleDeleteClick = () => {
+    UserApiService.deleteUser().then((data) => {
+      TokenService.clearAuthToken();
+      this.setState({ loggedIn: false });
+      this.props.history.push("/");
+    });
   };
 
   closeModal = () => {
@@ -39,26 +49,36 @@ export class NavLinks extends Component {
     let links;
     if (this.state.loggedIn) {
       links = [
+        // Link to homepage/dashboard
         <li onClick={this.closeModal} key="3" className="tooltip">
           <Link to="/dashboard">
             <FontAwesomeIcon icon="home" />{" "}
             <span className="tooltiptext">Home</span>
           </Link>
         </li>,
+        // Link to create new story
         <li onClick={this.closeModal} key="4" className="tooltip">
           <Link to="/create">
             <FontAwesomeIcon icon="plus-square" />{" "}
             <span className="tooltiptext">New Story</span>
           </Link>
         </li>,
+        // Link to delete user and return them to landing page
+        <li onClick={this.closeModal} key="6" className="tooltip">
+          <Link onClick={this.handleDeleteClick} to="/">
+            <FontAwesomeIcon icon="user-times" />{" "}
+            <span className="tooltiptext">Delete User</span>
+          </Link>
+        </li>,
+        // Link to log out user and return them to landing page
         <li onClick={this.closeModal} key="5" className="tooltip">
           <Link onClick={this.handleLogoutClick} to="/">
             <FontAwesomeIcon icon="sign-out-alt" />{" "}
             <span className="tooltiptext">Log Out</span>
           </Link>
         </li>,
-        // HH edit story test
-        <li onClick={this.closeModal} key="6" className="tooltip">
+        // Link to edit story
+        <li onClick={this.closeModal} key="7" className="tooltip">
           <Link to="/edit">
             <FontAwesomeIcon icon="plus-square" />{" "}
             <span className="tooltiptext">Edit Story</span>

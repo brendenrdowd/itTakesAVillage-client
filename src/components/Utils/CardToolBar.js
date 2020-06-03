@@ -25,17 +25,18 @@ export class CardToolBar extends Component {
       TumblrShareButton,
       TwitterShareButton,
     ];
+    // Allow users to edit or delete their stories by id
     const tools =
       ((
         <Link to={`story/edit/${this.props.story.id}`}>
           <button>Edit</button>
         </Link>
       ),
-      (
-        <button onClick={this.deleteStoryHandler(this.props.story.id)}>
-          Delete
-        </button>
-      ));
+        (
+          <button onClick={this.deleteStoryHandler(this.props.story.id)}>
+            Delete
+          </button>
+        ));
     if (this.context.user === this.props.story.author) {
       buttons = [...buttons, tools];
     }

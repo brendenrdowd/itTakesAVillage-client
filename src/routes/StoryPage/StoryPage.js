@@ -23,6 +23,7 @@ export default class StoryPage extends Component {
     user: {},
     authorName: "",
     resolved: false,
+    comment: {},
   };
 
   componentDidMount() {
@@ -41,31 +42,7 @@ export default class StoryPage extends Component {
       user,
     });
   }
-
-  handleCheckBox = () => {
-    this.setState({
-      resolved: !this.state.resolved,
-    });
-  };
-
-  handleSubmit = (event) => {
-    event.preventDefault();
-    let editIssue = document.getElementById("issue").value;
-    const editStory = {
-      issue: editIssue,
-      resolved: this.state.resolved,
-      id: this.state.story.id,
-    };
-
-    StoryApiService.editStory(editStory)
-      .then((story) => {
-        this.props.history.push(`/edit`);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
+  // renders comments and story. If no story exists, throws error
   render() {
     let comments =
       this.state.comments.length < 0
@@ -75,11 +52,10 @@ export default class StoryPage extends Component {
               <p className="comment_text">{comment.comment}</p>
               <p>
                 <Hyph />
-                {comment.author}
+                {/* {comment.author} */}
               </p>
             </li>
           ));
-
     const renderStory = (
       <Section className="StoryPage">
         <StoryCard

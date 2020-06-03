@@ -40,7 +40,7 @@ export default class IndividualRegForm extends Component {
   }
 
   static defaultProps = {
-    onRegistrationSuccess: () => {},
+    onRegistrationSuccess: () => { },
   };
 
   static contextType = userContext;
@@ -98,7 +98,7 @@ export default class IndividualRegForm extends Component {
       },
     });
   }
-
+  // Checks that name entered is alphabetic
   validateName() {
     const name = this.state.name.value;
     if (name.length === 0) {
@@ -107,6 +107,7 @@ export default class IndividualRegForm extends Component {
       return 'Name should not contain any numbers';
     }
   }
+
   validateUsername() {
     const username = this.state.username.value;
     if (username.length === 0) {
@@ -115,6 +116,7 @@ export default class IndividualRegForm extends Component {
       //   return 'username should not contain any numbers';
     }
   }
+  // Checks if email address is valid
   validateEmail() {
     const email = this.state.email.value;
     if (email.length === 0) {
@@ -123,6 +125,7 @@ export default class IndividualRegForm extends Component {
       return 'Enter a valid email address';
     }
   }
+  // Checks if zip code is a valid US 5 digit zip code
   validateZipcode() {
     const location = this.state.location.value;
 
@@ -132,19 +135,20 @@ export default class IndividualRegForm extends Component {
       return 'Enter a valie zip code';
     }
   }
-
+  // Checks if required password is a minimum of 8 char and maximum of 72 chars
+  // Also checks if password has atleast one number and one uppercase letter
   validatePassword() {
     const password = this.state.password.value.trim();
     const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[\S]/;
     if (password.length === 0) {
       return 'Password is required';
-    } else if (password.length < 6 || password.length > 72) {
-      return 'Password must be between 6 and 72 characters long';
+    } else if (password.length < 8 || password.length > 72) {
+      return 'Password must be between 8 and 72 characters long';
     } else if (!password.match(REGEX_UPPER_LOWER_NUMBER_SPECIAL)) {
       return 'Password must contain at least one number and one uppercase letter';
     }
   }
-
+  // Checks if the repeated password matches first password
   validateRepeatPassword() {
     const repeatPassword = this.state.repeatPassword.value.trim();
     const password = this.state.password.value.trim();
@@ -153,7 +157,7 @@ export default class IndividualRegForm extends Component {
       return 'Passwords do not match';
     }
   }
-
+  // Function that handles form submission
   handleSubmit = (ev) => {
     ev.preventDefault();
     const {
@@ -176,12 +180,12 @@ export default class IndividualRegForm extends Component {
       repeatPassword: repeatPassword.value,
     })
       .then((user) => {
-        name.value = "";
-        username.value = "";
-        email.value = "";
-        location.value = "";
-        password.value = "";
-        repeatPassword.value = "";
+        name.value = '';
+        username.value = '';
+        email.value = '';
+        location.value = '';
+        password.value = '';
+        repeatPassword.value = '';
         this.props.onRegistrationSuccess();
       })
       .catch((res) => {
@@ -190,8 +194,6 @@ export default class IndividualRegForm extends Component {
   };
   render() {
     const { users } = this.context;
-    console.log(users);
-    // const { error } = this.state;
     const nameError = this.validateName();
     const usernameError = this.validateUsername();
     const emailError = this.validateEmail();
@@ -199,19 +201,19 @@ export default class IndividualRegForm extends Component {
     const passwordError = this.validatePassword();
     const repeatPasswordError = this.validateRepeatPassword();
     return (
-      <form className="IndividualRegForm" onSubmit={this.handleSubmit}>
+      <form className='IndividualRegForm' onSubmit={this.handleSubmit}>
         {/* <div role='alert'>
           {error && <p className='registration_error'>{error}</p>}
         </div> */}
 
-        <div className="name">
-          <label htmlFor="IndividualRegForm__name">
+        <div className='name'>
+          <label htmlFor='IndividualRegForm__name'>
             Full name: <Required />
           </label>
           <Input
-            name="name"
-            placeholder="joe doe"
-            type="text"
+            name='name'
+            placeholder='joe doe'
+            type='text'
             // required
             id='IndividualRegForm__name'
             onChange={(e) => this.updateName(e.target.value)}
@@ -220,8 +222,8 @@ export default class IndividualRegForm extends Component {
             <ValidationError message={nameError}></ValidationError>
           )}
         </div>
-        <div className="username">
-          <label htmlFor="IndividualRegForm__username">
+        <div className='username'>
+          <label htmlFor='IndividualRegForm__username'>
             Username: <Required />
           </label>
           <Input
@@ -235,8 +237,8 @@ export default class IndividualRegForm extends Component {
             <ValidationError message={usernameError}></ValidationError>
           )}
         </div>
-        <div className="email">
-          <label htmlFor="IndividualRegForm__email">
+        <div className='email'>
+          <label htmlFor='IndividualRegForm__email'>
             Email: <Required />
           </label>
           <Input
@@ -249,8 +251,8 @@ export default class IndividualRegForm extends Component {
             <ValidationError message={emailError}></ValidationError>
           )}
         </div>
-        <div className="location">
-          <label htmlFor="IndividualRegForm__location">
+        <div className='location'>
+          <label htmlFor='IndividualRegForm__location'>
             Zip code: <Required />
           </label>
           <Input
@@ -264,8 +266,8 @@ export default class IndividualRegForm extends Component {
             <ValidationError message={locationError}></ValidationError>
           )}
         </div>
-        <div className="password">
-          <label htmlFor="IndividualRegForm__password">
+        <div className='password'>
+          <label htmlFor='IndividualRegForm__password'>
             Password: <Required />
           </label>
           <Input
@@ -279,8 +281,8 @@ export default class IndividualRegForm extends Component {
             <ValidationError message={passwordError}></ValidationError>
           )}
         </div>
-        <div className="re-enter-password">
-          <label htmlFor="IndividualRegForm__password">
+        <div className='re-enter-password'>
+          <label htmlFor='IndividualRegForm__password'>
             Repeat password: <Required />
           </label>
           <Input

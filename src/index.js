@@ -12,10 +12,11 @@ import {
   faHome,
   faPlusSquare,
   faBars,
+  faUserTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import "./index.css";
 
-library.add(fab, faSignOutAlt, faHome, faPlusSquare, faBars);
+library.add(fab, faSignOutAlt, faHome, faPlusSquare, faBars, faUserTimes);
 
 ReactDOM.render(
   <Router history={history}>
