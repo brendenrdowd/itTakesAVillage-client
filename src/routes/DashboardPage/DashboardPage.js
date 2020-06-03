@@ -74,10 +74,7 @@ export default class DashboardPage extends Component {
       return activeUserObj.map((card) => (
         <Link key={card.id} to={`/story/${card.id}`} className="card-link">
           <StoryCard
-            resolved={card.resolved}
-            date={this.formatDate(card.created_at)}
-            flag={card.flag}
-            issue={card.issue}
+            card={card}
           />
         </Link>
       ));
@@ -88,10 +85,7 @@ export default class DashboardPage extends Component {
         card.flag.includes(this.state.filter) ? (
           <Link key={card.id} to={`/story/${card.id}`} className="card-link">
             <StoryCard
-              resolved={card.resolved}
-              date={this.formatDate(card.created_at)}
-              flag={card.flag}
-              issue={card.issue}
+              card={card}
             />
           </Link>
         ) : null

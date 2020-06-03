@@ -50,3 +50,8 @@
   margin-left: 10px;
   margin-right: 10px;
 }
+
+.tool-bar{
+  display:flex;
+  justify-content: space-evenly;
+}

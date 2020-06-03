@@ -56,17 +56,13 @@ export default class App extends Component {
             <PublicOnlyRoute exact path={"/"} component={LandingPage} />
             <PublicOnlyRoute path={"/login"} component={LoginPage} />
             <PublicOnlyRoute path={"/register"} component={RegistrationPage} />
-            {/* private */}
             <PrivateRoute path={"/dashboard"} component={DashboardPage} />
-            {/* Private */}
             <PrivateRoute path={"/create"} component={CreateStoryPage} />
-            {/* private route */}
             <PrivateRoute path={"/comment/"} component={CreateCommentForm} />
             {/* <Route
                 path={'/comment/edit/:id'}
                 component={CreateStoryPage} /> */}
             <Route path={"/story/:id"} component={StoryPage} />
-            {/* private route */}
             <PrivateRoute path={"/story/edit/:id"} component={CreateStoryPage} />
             <Route path={"/policies"} component={PoliciesPage} />
             <Route component={NotFoundPage} />
