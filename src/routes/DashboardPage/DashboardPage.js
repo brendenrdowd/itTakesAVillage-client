@@ -65,10 +65,9 @@ export default class DashboardPage extends Component {
     }
     // this filters through stories by author
     let dataObj = this.state.data;
-    const currentUser = this.state.userId;
+    const currentUser = parseInt(this.state.userId);
     let activeUserObj = dataObj.filter(function (user) {
-      // validate if this is allowed
-      return user.author == currentUser;
+      return user.author === currentUser;
     });
     if (this.state.filter === "my stories") {
       return activeUserObj.map((card) => (
