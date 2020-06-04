@@ -5,6 +5,7 @@ const userContext = React.createContext({
     return localStorage.getItem('user_id');
   },
   newComment: [],
+  users: [],
   error: null,
   setUserId: () => {},
   clearError: () => {},
@@ -14,6 +15,7 @@ const userContext = React.createContext({
   toggleSideDrawer: () => {},
   closeBackdrop: () => {},
   setUsers: () => {},
+  setError: () => {},
 });
 
 export default userContext;
@@ -28,6 +30,7 @@ export class UserProvider extends Component {
   };
   setUsers = (users) => {
     this.setState({ users });
+    // console.log(users);
   };
   setUserId = (userId) => {
     this.setState({ userId: localStorage.setItem('user_id', userId) });
@@ -49,10 +52,15 @@ export class UserProvider extends Component {
     });
   };
 
+  setError = (error) => {
+    this.setState({ error });
+  };
+
   render() {
     const value = {
       userId: localStorage.getItem('user_id'),
       error: this.state.error,
+      users: this.state.users,
       sideDrawerOpen: this.state.sideDrawerOpen,
       clearError: this.clearError,
       setUserId: this.setUserId,
@@ -60,6 +68,7 @@ export class UserProvider extends Component {
       toggleSideDrawer: this.drawerToggleClickHandler,
       setUsers: this.setUsers,
       addComment: this.addComment,
+      setError: this.setError,
     };
     return (
       <userContext.Provider value={value}>

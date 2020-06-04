@@ -32,21 +32,20 @@ class CreateCommentForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    const { comment } = event.target;
-    const { userId } = this.context;
+    // const { comment } = event.target;
+    // const { userId } = this.context;
 
-    this.setState({ error: null });
+    // this.setState({ error: null });
 
-    CommentService.postComment({
-      author: userId,
-      comment: comment.value,
-      story: this.props.story.id,
-    })
-      .then(this.context.addComment)
-      .then(() => {
-        comment.value = '';
-      })
-      .catch(this.context.setError);
+    // CommentService.postComment({
+    //   author: userId,
+    //   comment: comment.value,
+    //   story: this.props.story.id,
+    // })
+    //   .then(this.context.addComment)
+    //   .then(() => {
+    //     comment.value = '';
+    //   })
 
     // const comment = {
     //   author: this.context.userId,

@@ -2,6 +2,17 @@ import config from '../config';
 import TokenService from './token-service';
 
 const UserApiService = {
+  checkUsername(username) {
+    return fetch(`${config.API_ENDPOINT}/users/check`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({ username }),
+    }).then((res) =>
+      !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
+    );
+  },
   getAllUsers() {
     return fetch(`${config.API_ENDPOINT}/users`, {
       headers: {

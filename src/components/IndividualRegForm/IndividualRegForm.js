@@ -36,6 +36,7 @@ export default class IndividualRegForm extends Component {
         touched: false,
       },
       error: null,
+      usernameError: null,
     };
   }
 
@@ -46,7 +47,10 @@ export default class IndividualRegForm extends Component {
   static contextType = userContext;
 
   componentDidMount() {
-    UserApiService.getAllUsers().then(this.context.setUsers);
+    this.context.clearError();
+    UserApiService.getAllUsers()
+      .then(this.context.setUsers)
+      .catch(this.context.setError);
   }
 
   updateName(name) {
@@ -64,6 +68,7 @@ export default class IndividualRegForm extends Component {
         touched: true,
       },
     });
+    this.validateUsername(username);
   }
   updateEmail(email) {
     this.setState({
@@ -109,12 +114,28 @@ export default class IndividualRegForm extends Component {
   }
   validateUsername() {
     const username = this.state.username.value;
-    if (username.length === 0) {
-      return 'Please enter username';
-      // } else if (username.match(/[0-9]/)) {
-      //   return 'username should not contain any numbers';
-    }
+    // const { users } = this.context;
+    // const sortUsersByUsername = users.map((user) => user.username);
+    // const userTaken = sortUsersByUsername.includes(username);
+
+    UserApiService.checkUsername(username).then((exists) => {
+      if (exists) {
+        this.setState({ usernameError: 'Username already taken' });
+      } else {
+        this.setState({ usernameError: null });
+      }
+    });
+
+    // console.log(sortUsersByUsername);
+
+    // console.log(users, sortUsersByUsername);
+    // if (username.length === 0) {
+    //   return 'Please enter username';
+    // } else if (userTaken) {
+    //   return 'Username already taken';
+    // }
   }
+
   validateEmail() {
     const email = this.state.email.value;
     if (email.length === 0) {
@@ -166,7 +187,6 @@ export default class IndividualRegForm extends Component {
     } = ev.target;
 
     this.setState({ error: null });
-
     UserApiService.postUser({
       name: name.value,
       username: username.value,
@@ -189,20 +209,16 @@ export default class IndividualRegForm extends Component {
       });
   };
   render() {
-    const { users } = this.context;
-    console.log(users);
+    const { error, usernameError } = this.state;
     const nameError = this.validateName();
-    const usernameError = this.validateUsername();
+    // const usernameError = this.validateUsername();
     const emailError = this.validateEmail();
     const locationError = this.validateZipcode();
     const passwordError = this.validatePassword();
     const repeatPasswordError = this.validateRepeatPassword();
     return (
       <form className='IndividualRegForm' onSubmit={this.handleSubmit}>
-        {/* <div role='alert'>
-          {error && <p className='registration_error'>{error}</p>}
-        </div> */}
-
+        <div role='alert'>{error && <p className='red'>{error}</p>}</div>
         <div className='name'>
           <label htmlFor='IndividualRegForm__name'>
             Full name: <Required />
@@ -211,7 +227,6 @@ export default class IndividualRegForm extends Component {
             name='name'
             placeholder='joe doe'
             type='text'
-            // required
             id='IndividualRegForm__name'
             onChange={(e) => this.updateName(e.target.value)}
           ></Input>
@@ -245,7 +260,7 @@ export default class IndividualRegForm extends Component {
             onChange={(e) => this.updateEmail(e.target.value)}
           ></Input>
           {this.state.email.touched && (
-            <ValidationError message={emailError}></ValidationError>
+            <ValidationError message={error}></ValidationError>
           )}
         </div>
         <div className='location'>
