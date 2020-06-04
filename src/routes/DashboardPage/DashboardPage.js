@@ -69,14 +69,12 @@ export default class DashboardPage extends Component {
     if (this.state.filter === "my stories") {
       return activeUserObj.map((card) => (
         <Link key={card.id} to={`/story/${card.id}`} className="card-link">
-          <div>
-            <StoryCard
-              resolved={card.resolved}
-              date={this.formatDate(card.created_at)}
-              flag={card.flag}
-              issue={card.issue}
-            />
-          </div>
+          <StoryCard
+            resolved={card.resolved}
+            date={this.formatDate(card.created_at)}
+            flag={card.flag}
+            issue={card.issue}
+          />
         </Link>
       ));
     }

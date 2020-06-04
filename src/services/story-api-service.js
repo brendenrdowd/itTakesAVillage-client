@@ -63,9 +63,10 @@ const StoryApiService = {
   deleteStory(story) {
     return fetch(`${config.API_ENDPOINT}/story/${story.id}`, {
       method: "DELETE",
-      body: JSON.stringify(),
+      body: JSON.stringify(story),
       headers: {
-        authorization: `bearer ${config.API_ENDPOINT}`,
+        Authorization: `Bearer ${TokenService.getAuthToken()}`,
+        "content-type": "application/json",
       }.then((res) =>
         !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
       ),

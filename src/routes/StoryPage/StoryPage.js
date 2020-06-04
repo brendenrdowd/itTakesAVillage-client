@@ -61,6 +61,20 @@ export default class StoryPage extends Component {
       });
   };
 
+  handleDelete = (event) => {
+    event.preventDefault();
+    const storyDelete = {
+      id: this.state.story.id,
+    };
+    StoryApiService.deleteStory(storyDelete)
+      .then((storyDelete) => {
+        this.props.history.push(`/edit`);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   // renders comments and story. If no story exists, throws error
   render() {
     let comments =
@@ -114,6 +128,7 @@ export default class StoryPage extends Component {
             />
           </label>
           <button onClick={this.handleSubmit}>Submit</button>
+          <button onClick={this.handleDelete}>Delete Story</button>
         </div>
       </Section>
     );

@@ -77,13 +77,6 @@ export class NavLinks extends Component {
             <span className="tooltiptext">Log Out</span>
           </Link>
         </li>,
-        // Link to edit story
-        <li onClick={this.closeModal} key="7" className="tooltip">
-          <Link to="/edit">
-            <FontAwesomeIcon icon="plus-square" />{" "}
-            <span className="tooltiptext">Edit Story</span>
-          </Link>
-        </li>,
       ];
     } else {
       links = [
