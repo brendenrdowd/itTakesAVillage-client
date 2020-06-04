@@ -43,10 +43,8 @@ export default class DashboardPage extends Component {
 
   // patch for making dates readable
   formatDate = (date) => {
-    let year = date.slice(0, 4);
-    let month = date.slice(5, 7);
-    let day = date.slice(8, 10);
-    return `${month}/${day}/${year}`;
+    const d = new Date(date)
+    return d.toDateString()
   };
 
   // this renders story on page based on filter or filter all
@@ -73,7 +71,10 @@ export default class DashboardPage extends Component {
       return activeUserObj.map((card) => (
         <Link key={card.id} to={`/story/${card.id}`} className="card-link">
           <StoryCard
-            card={card}
+            resolved={card.resolved}
+            date={this.formatDate(card.created_at)}
+            flag={card.flag}
+            issue={card.issue}
           />
         </Link>
       ));
@@ -84,7 +85,10 @@ export default class DashboardPage extends Component {
         card.flag.includes(this.state.filter) ? (
           <Link key={card.id} to={`/story/${card.id}`} className="card-link">
             <StoryCard
-              card={card}
+              resolved={card.resolved}
+              date={this.formatDate(card.created_at)}
+              flag={card.flag}
+              issue={card.issue}
             />
           </Link>
         ) : null

@@ -37,10 +37,12 @@ export default class StoryPage extends Component {
     CommentApiService.getCommentsByStoryId(story_id).then((comments) => {
       this.setState({ comments });
     });
+    // we might not need this part
     const user = this.context.user;
     this.setState({
       user,
     });
+    //to here
   }
 
   handleSubmit = (event) => {
@@ -61,20 +63,33 @@ export default class StoryPage extends Component {
       });
   };
 
+  getCommentAuthor = (id) => {
+    UserApiService.getUserById(id)
+      .then(author => {
+        // prevents infinite rerender on state change
+        if(this.state.authorName !== author.username){
+          this.setState({authorName:author.username})
+        }
+        return
+      }).catch(error => {
+        console.log(error)
+      })
+  }
+
   // renders comments and story. If no story exists, throws error
   render() {
     let comments =
       this.state.comments.length < 0
         ? "Add a comment..."
         : this.state.comments.map((comment) => (
-            <li key={comment.id} className="comment">
-              <p className="comment_text">{comment.comment}</p>
-              <p>
-                <Hyph />
-                {/* {comment.author} */}
-              </p>
-            </li>
-          ));
+          <li key={comment.id} className="comment">
+            <p className="comment_text">{comment.comment}</p>
+            {this.getCommentAuthor(comment.author)}
+            <Hyph />
+            <p>{this.state.authorName}</p>
+          </li>
+        ));
+
     const renderStory = (
       <Section className="StoryPage">
         <StoryCard
@@ -135,8 +150,8 @@ export default class StoryPage extends Component {
         error.error === `Story doesn't exist` ? (
           <p className="not_found">Story not found</p>
         ) : (
-          <p className="not_found">Something went wrong</p>
-        );
+            <p className="not_found">Something went wrong</p>
+          );
     } else {
       // testing story edit
       content = conditionalRender();
