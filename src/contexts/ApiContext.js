@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import UserAPIService from "../services/user-api-service";
 
 const userContext = React.createContext({
   get userId() {
-    return localStorage.getItem('user_id');
+    return localStorage.getItem("user_id");
   },
   newComment: [],
   users: [],
@@ -27,13 +28,14 @@ export class UserProvider extends Component {
     newComment: [],
     sideDrawerOpen: false,
     error: null,
+    authorName: "",
   };
   setUsers = (users) => {
     this.setState({ users });
     // console.log(users);
   };
   setUserId = (userId) => {
-    this.setState({ userId: localStorage.setItem('user_id', userId) });
+    this.setState({ userId: localStorage.setItem("user_id", userId) });
   };
 
   addComment = (newComment) => {
@@ -52,13 +54,15 @@ export class UserProvider extends Component {
     });
   };
 
-  setError = (error) => {
-    this.setState({ error });
+  getUserNameById = (id) => {
+    UserAPIService.getUserById(id).then((res) =>
+      this.setState({ authorName: res.username })
+    );
   };
 
   render() {
     const value = {
-      userId: localStorage.getItem('user_id'),
+      userId: localStorage.getItem("user_id"),
       error: this.state.error,
       users: this.state.users,
       sideDrawerOpen: this.state.sideDrawerOpen,

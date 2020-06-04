@@ -1,6 +1,6 @@
 .createStory {
   border: 2px solid darkseagreen;
-  box-shadow: 10px 10px 10px -6px #3c653c;
+  box-shadow: 10px 10px 5px grey;
   border-radius: 25px;
   padding: 10px;
   display: flex;

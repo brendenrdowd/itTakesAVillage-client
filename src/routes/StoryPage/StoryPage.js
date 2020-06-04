@@ -22,6 +22,8 @@ export default class StoryPage extends Component {
     comments: [],
     user: {},
     authorName: "",
+    resolved: false,
+    comment: {},
   };
 
   componentDidMount() {
@@ -35,26 +37,59 @@ export default class StoryPage extends Component {
     CommentApiService.getCommentsByStoryId(story_id).then((comments) => {
       this.setState({ comments });
     });
+    // we might not need this part
     const user = this.context.user;
     this.setState({
       user,
     });
+    //to here
   }
 
+  handleSubmit = (event) => {
+    event.preventDefault();
+    let editIssue = document.getElementById("issue").value;
+    const editStory = {
+      issue: editIssue,
+      resolved: this.state.resolved,
+      id: this.state.story.id,
+    };
+
+    StoryApiService.editStory(editStory)
+      .then((story) => {
+        this.props.history.push(`/edit`);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  getCommentAuthor = (id) => {
+    UserApiService.getUserById(id)
+      .then(author => {
+        // prevents infinite rerender on state change
+        if(this.state.authorName !== author.username){
+          this.setState({authorName:author.username})
+        }
+        return
+      }).catch(error => {
+        console.log(error)
+      })
+  }
+
+  // renders comments and story. If no story exists, throws error
   render() {
-    console.log("comments", this.state.comments);
     let comments =
       this.state.comments.length < 0
         ? "Add a comment..."
         : this.state.comments.map((comment) => (
-            <li key={comment.id} className="comment">
-              <p className="comment_text">{comment.comment}</p>
-              <p>
-                <Hyph />
-                {comment.author}
-              </p>
-            </li>
-          ));
+          <li key={comment.id} className="comment">
+            <p className="comment_text">{comment.comment}</p>
+            {this.getCommentAuthor(comment.author)}
+            <Hyph />
+            <p>{this.state.authorName}</p>
+          </li>
+        ));
+
     const renderStory = (
       <Section className="StoryPage">
         <StoryCard
@@ -66,8 +101,47 @@ export default class StoryPage extends Component {
         <ul className="comments_list">{comments}</ul>
       </Section>
     );
-    console.log(this.state.story);
-    console.log(this.state.authorName);
+
+    const editStory = (
+      <Section className="StoryPage">
+        <StoryCard
+          issue={this.state.story.issue}
+          flag={this.state.story.flag}
+          author={this.state.authorName}
+        />
+        <div>
+          <label>
+            Edit Story Issue:
+            <input
+              id="issue"
+              type="text"
+              name="edit-story"
+              defaultValue={this.state.story.issue || ""}
+            />
+          </label>
+          <label>
+            Resolve:{" "}
+            <input
+              type="checkbox"
+              id="resolve"
+              name="resolved"
+              onChange={this.handleCheckBox}
+            />
+          </label>
+          <button onClick={this.handleSubmit}>Submit</button>
+        </div>
+      </Section>
+    );
+
+    const conditionalRender = () => {
+      const author = this.state.story.author;
+      const userId = parseInt(this.context.userId);
+      if (author === userId) {
+        return editStory;
+      } else {
+        return renderStory;
+      }
+    };
 
     const { error } = this.context;
     let content;
@@ -76,10 +150,11 @@ export default class StoryPage extends Component {
         error.error === `Story doesn't exist` ? (
           <p className="not_found">Story not found</p>
         ) : (
-          <p className="not_found">Something went wrong</p>
-        );
+            <p className="not_found">Something went wrong</p>
+          );
     } else {
-      content = renderStory;
+      // testing story edit
+      content = conditionalRender();
     }
     return <Section className="StoryPage">{content}</Section>;
   }

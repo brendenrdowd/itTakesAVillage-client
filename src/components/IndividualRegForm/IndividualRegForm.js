@@ -41,7 +41,7 @@ export default class IndividualRegForm extends Component {
   }
 
   static defaultProps = {
-    onRegistrationSuccess: () => {},
+    onRegistrationSuccess: () => { },
   };
 
   static contextType = userContext;
@@ -103,7 +103,7 @@ export default class IndividualRegForm extends Component {
       },
     });
   }
-
+  // Checks that name entered is alphabetic
   validateName() {
     const name = this.state.name.value;
     if (name.length === 0) {
@@ -112,6 +112,7 @@ export default class IndividualRegForm extends Component {
       return 'Name should not contain any numbers';
     }
   }
+
   validateUsername() {
     const username = this.state.username.value;
     // const { users } = this.context;
@@ -135,7 +136,6 @@ export default class IndividualRegForm extends Component {
     //   return 'Username already taken';
     // }
   }
-
   validateEmail() {
     const email = this.state.email.value;
     if (email.length === 0) {
@@ -144,6 +144,7 @@ export default class IndividualRegForm extends Component {
       return 'Enter a valid email address';
     }
   }
+  // Checks if zip code is a valid US 5 digit zip code
   validateZipcode() {
     const location = this.state.location.value;
 
@@ -153,7 +154,8 @@ export default class IndividualRegForm extends Component {
       return 'Enter a valie zip code';
     }
   }
-
+  // Checks if required password is a minimum of 8 char and maximum of 72 chars
+  // Also checks if password has atleast one number and one uppercase letter
   validatePassword() {
     const password = this.state.password.value.trim();
     const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[\S]/;
@@ -165,7 +167,7 @@ export default class IndividualRegForm extends Component {
       return 'Password must contain at least one number and one uppercase letter';
     }
   }
-
+  // Checks if the repeated password matches first password
   validateRepeatPassword() {
     const repeatPassword = this.state.repeatPassword.value.trim();
     const password = this.state.password.value.trim();
@@ -174,7 +176,7 @@ export default class IndividualRegForm extends Component {
       return 'Passwords do not match';
     }
   }
-
+  // Function that handles form submission
   handleSubmit = (ev) => {
     ev.preventDefault();
     const {
@@ -209,7 +211,11 @@ export default class IndividualRegForm extends Component {
       });
   };
   render() {
+<<<<<<< HEAD
     const { error, usernameError } = this.state;
+=======
+    const { users } = this.context;
+>>>>>>> 48d28a402a7d4b80116c2ce387f3fdfc26ae58a3
     const nameError = this.validateName();
     // const usernameError = this.validateUsername();
     const emailError = this.validateEmail();
