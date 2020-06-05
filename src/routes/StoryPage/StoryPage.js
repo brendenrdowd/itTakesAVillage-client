@@ -51,7 +51,6 @@ export default class StoryPage extends Component {
       resolved: this.state.resolved,
       id: this.state.story.id,
     };
-
     StoryApiService.editStory(editStory)
       .then((story) => {
         this.props.history.push(`/edit`);
@@ -63,13 +62,13 @@ export default class StoryPage extends Component {
 
   handleDelete = (event) => {
     event.preventDefault();
-    const storyDelete = {
-      id: this.state.story.id,
-    };
-    StoryApiService.deleteStory(storyDelete)
-      .then((storyDelete) => {
-        this.props.history.push(`/edit`);
-      })
+    // const storyDelete = {
+    //   id: this.props.match.params.id,
+    // };
+    // console.log(storyDelete);
+
+    StoryApiService.deleteStory(this.props.match.params.id)
+      .then(this.props.history.push(`/dashboard`))
       .catch((error) => {
         console.error(error);
       });
