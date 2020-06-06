@@ -7,7 +7,10 @@ import './Toolbar.css'
 const toolbar = props => (
   <header className="toolbar">
     <nav className="toolbar__navigation">
-      <div className="toolbar__logo"><Link to="/">It Takes a Village</Link></div>
+      <div className="toolbar__logo">
+        <img className="logo" src="/logo192.png" alt="ITAV-logo"/>
+        <Link to="/">It Takes a Village</Link>
+        </div>
       <div className="spacer"></div>
       <div className="toolbar__toggle">
         <DrawerToggleButton />

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
-// import PrivateRoute from '../Utils/PrivateRoute';
+import PrivateRoute from '../Utils/PrivateRoute';
 import "./App.css";
 import PublicOnlyRoute from "../Utils/PublicOnlyRoute";
 import Toolbar from "../Nav/Toolbar/Toolbar";
@@ -18,6 +18,7 @@ import PoliciesPage from "../../routes/PoliciesPage/PoliciesPage";
 import StoryPage from "../../routes/StoryPage/StoryPage";
 import userContext from "../../contexts/ApiContext";
 import "./App.css";
+import EditStoryForm from "../../components/EditStoryForm/EditStoryForm";
 
 let userID = localStorage.getItem("user_id");
 
@@ -56,18 +57,15 @@ export default class App extends Component {
             <PublicOnlyRoute exact path={"/"} component={LandingPage} />
             <PublicOnlyRoute path={"/login"} component={LoginPage} />
             <PublicOnlyRoute path={"/register"} component={RegistrationPage} />
-            {/* private */}
-            <Route path={"/dashboard"} component={DashboardPage} />
-            {/* Private */}
-            <Route path={"/create"} component={CreateStoryPage} />
-            {/* private route */}
-            <Route path={"/comment/"} component={CreateCommentForm} />
+            <PrivateRoute path={"/dashboard"} component={DashboardPage} />
+            <PrivateRoute path={"/create"} component={CreateStoryPage} />
+            <PrivateRoute path={"/comment/"} component={CreateCommentForm} />
             {/* <Route
                 path={'/comment/edit/:id'}
                 component={CreateStoryPage} /> */}
             <Route path={"/story/:id"} component={StoryPage} />
-            {/* private route */}
-            <Route path={"/story/edit/:id"} component={CreateStoryPage} />
+            <PrivateRoute path={"/edit"} component={EditStoryForm} />
+            <PrivateRoute exact path={"/story/edit/:id"} component={StoryPage} />
             <Route path={"/policies"} component={PoliciesPage} />
             <Route component={NotFoundPage} />
           </Switch>

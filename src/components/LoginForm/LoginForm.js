@@ -7,12 +7,13 @@ import './LoginForm.css';
 
 class LoginForm extends Component {
   static defaultProps = {
-    onLoginSuccess: () => {},
+    onLoginSuccess: () => { },
   };
   static contextType = UserContext;
 
   state = { error: null };
 
+  // Handles JWT authentication for loginform credentials
   handleSubmitJwtAuth = (ev) => {
     ev.preventDefault();
     this.setState({ error: null });
