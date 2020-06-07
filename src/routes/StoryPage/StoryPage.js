@@ -95,7 +95,7 @@ export default class StoryPage extends Component {
         : this.state.comments.map((comment) => (
           <li key={comment.id} className="comment">
             <p className="comment_text">{comment.comment}</p>
-            {this.getCommentAuthor(comment.author)}
+            {/* {this.getCommentAuthor(comment.author)} */}
             <Hyph />
             <p>- authorname will come soon</p>
             {/* <p>{author}</p> */}
