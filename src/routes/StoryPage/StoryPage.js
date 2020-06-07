@@ -63,21 +63,28 @@ export default class StoryPage extends Component {
       });
   };
 
-  getCommentAuthor = (id) => {
-    UserApiService.getUserById(id)
-      .then(author => {
-        // prevents infinite rerender on state change
-        if(this.state.authorName !== author.username){
-          this.setState({authorName:author.username})
-        }
-        return
-      }).catch(error => {
-        console.log(error)
-      })
-  }
+  // getCommentAuthor = (id) => {
+  //   UserApiService.getUserById(id)
+  //     .then(author => {
+  //       // prevents infinite rerender on state change
+  //       if(this.state.authorName !== author.username){
+  //         this.setState({authorName:author.username})
+  //       }
+  //       return
+  //     }).catch(error => {
+  //       console.log(error)
+  //     })
+  // }
 
   // renders comments and story. If no story exists, throws error
   render() {
+    let author = UserApiService.getUserById(id)
+      .then(author => {
+        // prevents infinite rerender on state change
+        if (this.state.authorName !== author.username) {
+          this.setState({ authorName: author.username })
+        }
+      })
     let comments =
       this.state.comments.length < 0
         ? "Add a comment..."
@@ -86,7 +93,7 @@ export default class StoryPage extends Component {
             <p className="comment_text">{comment.comment}</p>
             {this.getCommentAuthor(comment.author)}
             <Hyph />
-            <p>{this.state.authorName}</p>
+            <p>{author}</p>
           </li>
         ));
 
