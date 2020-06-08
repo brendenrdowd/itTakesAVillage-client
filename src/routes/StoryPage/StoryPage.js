@@ -34,19 +34,19 @@ export default class StoryPage extends Component {
     });
 
     // need to make sure we're grabbing story from commentApi correctly
-    CommentApiService.getCommentsByStoryId(story_id).then((comments) => {
-      // need to update authors as I set state or else infinity. #sunday monday 6/7 6/8
-      this.setState({ comments });
-    });
-
-    // need
-
-    // we might not need this part
-    const user = this.context.user;
-    this.setState({
-      user,
-    });
-    //to here
+    CommentApiService.getCommentsByStoryId(story_id)
+      .then((comments) => {
+        // need to update authors as I set state or else infinity. #sunday monday 6/7 6/8
+        comments.map(comment => {
+          UserApiService.getUserById(comment.author)
+            .then(author => {
+              comment.authorName = author.username;
+              this.setState({ comments: [...this.state.comments, comment] })
+            }).catch(error => {
+              console.log(error)
+            })
+        })
+      });
   }
 
   handleSubmit = (event) => {
@@ -67,38 +67,17 @@ export default class StoryPage extends Component {
       });
   };
 
-  // getCommentAuthor = (id) => {
-  //   UserApiService.getUserById(id)
-  //     .then(author => {
-  //       // prevents infinite rerender on state change
-  //       if(this.state.authorName !== author.username){
-  //         this.setState({authorName:author.username})
-  //       }
-  //       return
-  //     }).catch(error => {
-  //       console.log(error)
-  //     })
-  // }
-
   // renders comments and story. If no story exists, throws error
   render() {
-    // let author = UserApiService.getUserById(id)
-    //   .then(author => {
-    //     // prevents infinite rerender on state change?
-    //     if (this.state.authorName !== author.username) {
-    //       this.setState({ authorName: author.username })
-    //     }
-    //   })
     let comments =
       this.state.comments.length < 0
         ? "Add a comment..."
         : this.state.comments.map((comment) => (
           <li key={comment.id} className="comment">
             <p className="comment_text">{comment.comment}</p>
-            {/* {this.getCommentAuthor(comment.author)} */}
             <Hyph />
-            <p>- authorname will come soon</p>
-            {/* <p>{author}</p> */}
+            {/* <p>- authorname will come soon</p> */}
+            <p>{comment.authorName}</p>
           </li>
         ));
 
