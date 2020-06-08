@@ -35,6 +35,21 @@ const CommentApiService = {
           : res.json())
   },
 
+  deleteComment(id) {
+    return fetch(`${config.API_ENDPOINT}/comment/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `bearer ${TokenService.getAuthToken()}`,
+        "content-type": "application/json"
+      },
+    })
+      .then(res =>
+        // console.log(res))
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res)
+  },
+
   editComment(comment) {
     return fetch(`${config.API_ENDPOINT}/comment/edit/${comment.id}`, {
       method: "PATCH",
@@ -49,23 +64,6 @@ const CommentApiService = {
           ? res.json().then(e => Promise.reject(e))
           : res.json())
   },
-
-  deleteComment(comment) {
-    return fetch(`${config.API_ENDPOINT}/comment/${comment.id}`, {
-      method: "DELETE",
-      body: JSON.stringify(comment),
-      headers: {
-        //Authorization: `bearer ${TokenService.getAuthToken()}`,
-        "content-type": "application/json"
-      }
-
-    })
-      .then(res =>
-        (!res.ok)
-          ? res.json().then(e => Promise.reject(e))
-          : res.json())
-  },
-
 }
 
 

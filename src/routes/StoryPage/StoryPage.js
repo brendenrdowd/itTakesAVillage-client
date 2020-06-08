@@ -6,7 +6,7 @@ import CardToolBar from "../../components/Utils/CardToolBar";
 import CommentToolBar from "../../components/Utils/CommentToolbar";
 import StoryApiService from "../../services/story-api-service";
 import CommentApiService from "../../services/comment-api-service";
-import ApiContext from "../../contexts/ApiContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import UserApiService from "../../services/user-api-service";
 import "./StoryPage.css";
 
@@ -14,8 +14,6 @@ export default class StoryPage extends Component {
   static defaultProps = {
     match: { params: {} },
   };
-
-  static contextType = ApiContext;
 
   state = {
     story: {},
@@ -27,14 +25,17 @@ export default class StoryPage extends Component {
   };
 
   componentDidMount() {
-    const story_id = this.props.match.params.id;
     // need to make sure we're grabbing the story in service
-    StoryApiService.getStoryById(story_id).then((story) => {
+    StoryApiService.getStoryById(this.props.match.params.id).then((story) => {
       this.setState({ story: story });
     });
+    // grabbing comments for specific story
+    this.getComments()
+  }
 
-    // need to make sure we're grabbing story from commentApi correctly
-    CommentApiService.getCommentsByStoryId(story_id)
+  getComments = () => {
+    this.setState({ comments: [] })
+    CommentApiService.getCommentsByStoryId(this.props.match.params.id)
       .then((comments) => {
         // need to update authors as I set state or else infinity. #sunday monday 6/7 6/8
         comments.map(comment => {
@@ -67,17 +68,40 @@ export default class StoryPage extends Component {
       });
   };
 
+  handleDeleteComment = (id) => {
+    console.log("calling delete", id)
+    CommentApiService.deleteComment(id)
+    .then(res => this.getComments())
+  }
+
+  handleSuccess = () => {
+    this.getComments()
+  }
+
+
   // renders comments and story. If no story exists, throws error
   render() {
+    const deleteButton = (id, author) => {
+      const userId = Number(localStorage.getItem("user_id"));
+      if (author === userId) {
+        return <button onClick={this.handleDeleteComment.bind(this, id)} className="delete"><FontAwesomeIcon icon={["fas", "trash-alt"]} size="lg" /></button>
+      }
+      else {
+        return
+      }
+    }
+
     let comments =
       this.state.comments.length < 0
         ? "Add a comment..."
         : this.state.comments.map((comment) => (
           <li key={comment.id} className="comment">
             <p className="comment_text">{comment.comment}</p>
-            <Hyph />
-            {/* <p>- authorname will come soon</p> */}
-            <p>{comment.authorName}</p>
+            <div className="row">
+              <p> - {comment.authorName}</p>
+              {deleteButton(comment.id, comment.author)}
+              {/* <button className="delete"><FontAwesomeIcon icon={["fas", "trash-alt"]} size="2x" /></button> */}
+            </div>
           </li>
         ));
 
@@ -88,7 +112,7 @@ export default class StoryPage extends Component {
           flag={this.state.story.flag}
           author={this.state.authorName}
         />
-        <CreateCommentForm story={this.state.story} />
+        <CreateCommentForm onSuccess={this.handleSuccess} story={this.state.story} />
         <ul className="comments_list">{comments}</ul>
       </Section>
     );

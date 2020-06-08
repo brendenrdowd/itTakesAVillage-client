@@ -21,7 +21,7 @@ export default userContext;
 
 export class UserProvider extends Component {
   state = {
-    userId: [],
+    userId: localStorage.getItem("user_id"),
     users: [],
     newComment: [],
     sideDrawerOpen: false,
@@ -32,6 +32,7 @@ export class UserProvider extends Component {
     this.setState({ users });
   };
   setUserId = (userId) => {
+    console.log(userId)
     this.setState({ userId: localStorage.setItem("user_id", userId) });
   };
 
@@ -59,7 +60,7 @@ export class UserProvider extends Component {
 
   render() {
     const value = {
-      userId: localStorage.getItem("user_id"),
+      userId: this.state.userId,
       error: this.state.error,
       sideDrawerOpen: this.state.sideDrawerOpen,
       clearError: this.clearError,

@@ -42,7 +42,9 @@ class CreateCommentForm extends Component {
       .then((comment) => {
         //need to add a component did update, or push the new comment in context and update the storypage comment array with context
         this.context.addComment(comment);
-        this.props.history.push(`/story/${comment.story}`);
+        this.props.onSuccess()
+        this.setState({newComment: ""}) 
+        // this.props.history.push(`/story/${comment.story}`);
       })
       .catch(this.context.setError);
   };
@@ -55,9 +57,8 @@ class CreateCommentForm extends Component {
         <input
           type="text"
           name="comment"
-          // value={this.state.value}
-          placeholder="enter comment"
-          // onChange={this.handleCommentChange}
+          value = {this.state.newComment}
+          onChange={this.handleCommentChange}
           required
         />
         <button type="submit">Submit</button>
