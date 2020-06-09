@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { Section, Hyph } from "../../components/Utils/Utils";
+import { Section } from "../../components/Utils/Utils";
 import CreateCommentForm from "../../components/CreateCommentForm/CreateCommentForm";
 import StoryCard from "../../components/StoryCard/StoryCard";
-import CardToolBar from "../../components/Utils/CardToolBar";
-import CommentToolBar from "../../components/Utils/CommentToolbar";
+// import CardToolBar from "../../components/Utils/CardToolBar";
+// import CommentToolBar from "../../components/Utils/CommentToolbar";
 import StoryApiService from "../../services/story-api-service";
 import CommentApiService from "../../services/comment-api-service";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -39,7 +39,7 @@ export default class StoryPage extends Component {
       .then((comments) => {
         // need to update authors as I set state or else infinity. #sunday monday 6/7 6/8
         comments.map(comment => {
-          UserApiService.getUserById(comment.author)
+          return UserApiService.getUserById(comment.author)
             .then(author => {
               comment.authorName = author.username;
               this.setState({ comments: [...this.state.comments, comment] })
@@ -69,7 +69,6 @@ export default class StoryPage extends Component {
   };
 
   handleDeleteComment = (id) => {
-    console.log("calling delete", id)
     CommentApiService.deleteComment(id)
     .then(res => this.getComments())
   }

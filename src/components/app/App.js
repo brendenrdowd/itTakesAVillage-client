@@ -20,8 +20,6 @@ import userContext from "../../contexts/ApiContext";
 import "./App.css";
 import EditStoryForm from "../../components/EditStoryForm/EditStoryForm";
 
-let userID = localStorage.getItem("user_id");
-
 export default class App extends Component {
   state = {
     error: "",
@@ -60,9 +58,7 @@ export default class App extends Component {
             <PrivateRoute path={"/dashboard"} component={DashboardPage} />
             <PrivateRoute path={"/create"} component={CreateStoryPage} />
             <PrivateRoute path={"/comment/"} component={CreateCommentForm} />
-            {/* <Route
-                path={'/comment/edit/:id'}
-                component={CreateStoryPage} /> */}
+            {/* <PrivateRoute path={"/user/:id"} component={EditUserForm} /> */}
             <Route path={"/story/:id"} component={StoryPage} />
             <PrivateRoute path={"/edit"} component={EditStoryForm} />
             <PrivateRoute exact path={"/story/edit/:id"} component={StoryPage} />

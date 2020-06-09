@@ -20,7 +20,8 @@ export class NavLinks extends Component {
   };
 
   handleDeleteClick = () => {
-    UserApiService.deleteUser().then((data) => {
+    UserApiService.deleteUser()
+    .then((data) => {
       TokenService.clearAuthToken();
       this.setState({ loggedIn: false });
       this.props.history.push("/");
@@ -63,36 +64,42 @@ export class NavLinks extends Component {
             <span className="tooltiptext">New Story</span>
           </Link>
         </li>,
+        
         // Link to delete user and return them to landing page ->> add drop down here with user delete, and user edit, called user settings
-        // <li class="dropdown">
-        //   <button class="dropbtn">
-        //   <FontAwesomeIcon icon="user-cog" />
-        //   <FontAwesomeIcon icon="sort-down" />
-        //   </button>
-        //   <div class="dropdown-content">
-        //     <a href="#">Link 1</a>
-        //     <a href="#">Link 2</a>
-        //     <a href="#">Link 3</a>
-        //   </div>
-        // </li>,
+        // <li key="6" className="dropdown tooltip">
+        //   <Link className="dropbtn">
+        //     <FontAwesomeIcon icon="user-cog" />{" "}
+        //     <span className="tooltiptext">Settings </span>
+        //     <FontAwesomeIcon icon="sort-down" />{" "}
+        //     <ul className="dropdown-content">
         <li onClick={this.closeModal} key="6" className="tooltip">
           <Link onClick={this.handleDeleteClick} to="/">
             <FontAwesomeIcon icon="user-times" />{" "}
             <span className="tooltiptext">Delete User</span>
           </Link>
         </li>,
+        <li onClick={this.closeModal} key="9" className="tooltip">
+          <Link to={`/user/${localStorage.getItem("user_id")}`}>
+            <FontAwesomeIcon icon="user-edit" />{" "}
+            <span className="tooltiptext">Edit User</span>
+          </Link>
+        </li>,
+        //     </ul>
+        //   </Link>
+        // </li>,
+
+        // Link to edit story --> needs to be moved to story page
+        // <li onClick={this.closeModal} key="7" className="tooltip">
+        //   <Link to="/edit">
+        //     <FontAwesomeIcon icon="plus-square" />{" "}
+        //     <span className="tooltiptext">Edit Story</span>
+        //   </Link>
+        // </li>,
         // Link to log out user and return them to landing page
         <li onClick={this.closeModal} key="5" className="tooltip">
           <Link onClick={this.handleLogoutClick} to="/">
             <FontAwesomeIcon icon="sign-out-alt" />{" "}
             <span className="tooltiptext">Log Out</span>
-          </Link>
-        </li>,
-        // Link to edit story
-        <li onClick={this.closeModal} key="7" className="tooltip">
-          <Link to="/edit">
-            <FontAwesomeIcon icon="plus-square" />{" "}
-            <span className="tooltiptext">Edit Story</span>
           </Link>
         </li>,
       ];

@@ -193,7 +193,6 @@ export default class IndividualRegForm extends Component {
       });
   };
   render() {
-    const { users } = this.context;
     const nameError = this.validateName();
     const usernameError = this.validateUsername();
     const emailError = this.validateEmail();
