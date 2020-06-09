@@ -63,7 +63,18 @@ export class NavLinks extends Component {
             <span className="tooltiptext">New Story</span>
           </Link>
         </li>,
-        // Link to delete user and return them to landing page
+        // Link to delete user and return them to landing page ->> add drop down here with user delete, and user edit, called user settings
+        // <li class="dropdown">
+        //   <button class="dropbtn">
+        //   <FontAwesomeIcon icon="user-cog" />
+        //   <FontAwesomeIcon icon="sort-down" />
+        //   </button>
+        //   <div class="dropdown-content">
+        //     <a href="#">Link 1</a>
+        //     <a href="#">Link 2</a>
+        //     <a href="#">Link 3</a>
+        //   </div>
+        // </li>,
         <li onClick={this.closeModal} key="6" className="tooltip">
           <Link onClick={this.handleDeleteClick} to="/">
             <FontAwesomeIcon icon="user-times" />{" "}
