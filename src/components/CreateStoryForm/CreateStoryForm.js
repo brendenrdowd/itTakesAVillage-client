@@ -10,7 +10,6 @@ class CreateStoryForm extends Component {
     this.state = {
       selectValue: "groceries",
       textValue: "",
-      // textValue: "test",
     };
   }
 
