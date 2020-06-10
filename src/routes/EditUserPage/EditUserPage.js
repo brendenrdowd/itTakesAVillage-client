@@ -9,7 +9,6 @@ export default class EditUserPage extends Component {
   };
   // Directs user to dashboard page after they successfully update their profile
   handleUpdateSuccess = (user) => {
-    console.log("success")
     const { history } = this.props;
     history.push('/dashboard');
   };
