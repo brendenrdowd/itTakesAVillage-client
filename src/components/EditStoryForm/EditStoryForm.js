@@ -3,7 +3,7 @@ import StoryCard from "../../components/StoryCard/StoryCard";
 import { Link } from "react-router-dom";
 import userContext from "../../contexts/ApiContext";
 import StoryService from "../../services/story-api-service";
-import "./CreateStoryForm.css";
+import "./EditStoryForm.css";
 
 // need to change the name of displays logged in user stories
 class EditStoryForm extends Component {
@@ -29,10 +29,8 @@ class EditStoryForm extends Component {
 
   // patch for making dates readable
   formatDate = (date) => {
-    let year = date.slice(0, 4);
-    let month = date.slice(5, 7);
-    let day = date.slice(8, 10);
-    return `${month}/${day}/${year}`;
+    const d = new Date(date);
+    return d.toDateString();
   };
 
   conditionalRender = () => {
@@ -44,15 +42,13 @@ class EditStoryForm extends Component {
     if (this.state.filter === "my stories") {
       return activeUserObj.map((card) => (
         <Link key={card.id} to={`/story/${card.id}`} className="card-link">
-          <div>
-            {this.renderFilter}
-            <StoryCard
-              resolved={card.resolved}
-              date={this.formatDate(card.created_at)}
-              flag={card.flag}
-              issue={card.issue}
-            />
-          </div>
+          {this.renderFilter}
+          <StoryCard
+            resolved={card.resolved}
+            date={this.formatDate(card.created_at)}
+            flag={card.flag}
+            issue={card.issue}
+          />
         </Link>
       ));
     }
@@ -73,7 +69,7 @@ class EditStoryForm extends Component {
 
   render() {
     return (
-      <form className="createStory" onSubmit={this.handleSubmit}>
+      <form className="editStory" onSubmit={this.handleSubmit}>
         <h3>Edit My Stories:</h3>
         {this.conditionalRender()}
       </form>

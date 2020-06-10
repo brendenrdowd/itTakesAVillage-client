@@ -40,10 +40,9 @@ export default class DashboardPage extends Component {
     this.setState({ filter: e.target.value });
   };
 
-  // patch for making dates readable
   formatDate = (date) => {
-    const d = new Date(date)
-    return d.toDateString()
+    const d = new Date(date);
+    return d.toDateString();
   };
 
   // this renders story on page based on filter or filter all
@@ -111,6 +110,12 @@ export default class DashboardPage extends Component {
                 ))}
               </select>
             </div>
+            <Link to="/edit">
+              <button className="edit-btn" type="button">
+                Edit My Stories
+              </button>
+            </Link>
+            {/* <button onClick={this.handleEditButton}></button> */}
           </form>
         </div>
         {this.conditionalRender()}
