@@ -115,7 +115,6 @@ export default class DashboardPage extends Component {
                 Edit My Stories
               </button>
             </Link>
-            {/* <button onClick={this.handleEditButton}></button> */}
           </form>
         </div>
         {this.conditionalRender()}

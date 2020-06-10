@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { Section } from "../../components/Utils/Utils";
 import CreateCommentForm from "../../components/CreateCommentForm/CreateCommentForm";
 import StoryCard from "../../components/StoryCard/StoryCard";
-// import CardToolBar from "../../components/Utils/CardToolBar";
-// import CommentToolBar from "../../components/Utils/CommentToolbar";
 import StoryApiService from "../../services/story-api-service";
 import CommentApiService from "../../services/comment-api-service";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -25,7 +23,6 @@ export default class StoryPage extends Component {
   };
 
   componentDidMount() {
-    // need to make sure we're grabbing the story in service
     StoryApiService.getStoryById(this.props.match.params.id).then((story) => {
       this.setState({ story: story });
     });
@@ -37,7 +34,6 @@ export default class StoryPage extends Component {
     this.setState({ comments: [] });
     CommentApiService.getCommentsByStoryId(this.props.match.params.id).then(
       (comments) => {
-        // need to update authors as I set state or else infinity. #sunday monday 6/7 6/8
         comments.map((comment) => {
           return UserApiService.getUserById(comment.author)
             .then((author) => {
@@ -112,7 +108,6 @@ export default class StoryPage extends Component {
               <div className="row">
                 <p> - {comment.authorName}</p>
                 {deleteButton(comment.id, comment.author)}
-                {/* <button className="delete"><FontAwesomeIcon icon={["fas", "trash-alt"]} size="2x" /></button> */}
               </div>
             </li>
           ));

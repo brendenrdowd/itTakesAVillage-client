@@ -18,7 +18,6 @@ export default class RegistrationPage extends Component {
     return (
       <section className='RegistrationPage'>
         <h2>Sign up</h2>
-        {/* we'll add the conditional buttons here for organization v individual */}
         <IndividualRegForm
           onRegistrationSuccess={this.handleRegistrationSuccess}
         />

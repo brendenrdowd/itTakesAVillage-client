@@ -13,10 +13,6 @@ class CreateStoryForm extends Component {
     };
   }
 
-  //   story/edit/:id
-  // fetch get storybyid
-  // // .then(story => this.setState({selectValue:story.flag, text.Value:story.issue})
-
   keywords = [
     "groceries",
     "food offer",
