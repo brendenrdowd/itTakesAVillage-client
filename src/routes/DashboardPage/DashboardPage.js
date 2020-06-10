@@ -41,13 +41,8 @@ export default class DashboardPage extends Component {
   };
 
   formatDate = (date) => {
-<<<<<<< HEAD
     const d = new Date(date);
     return d.toDateString();
-=======
-    const d = new Date(date)
-    return d.toDateString()
->>>>>>> master
   };
 
   // this renders story on page based on filter or filter all
