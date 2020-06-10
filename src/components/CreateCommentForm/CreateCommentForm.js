@@ -33,7 +33,7 @@ class CreateCommentForm extends Component {
     event.preventDefault();
 
     const { comment } = event.target;
-    const { userId } = this.context;
+    const { userId } = localStorage.getItem("user_id");
 
     this.setState({ error: null });
 
