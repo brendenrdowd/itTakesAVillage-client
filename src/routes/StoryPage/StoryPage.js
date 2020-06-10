@@ -139,7 +139,7 @@ export default class StoryPage extends Component {
           flag={this.state.story.flag}
           author={this.state.authorName}
         />
-        <div>
+        <div className="edit-form">
           <label>
             Edit Story Issue:
             <input
@@ -150,7 +150,7 @@ export default class StoryPage extends Component {
             />
           </label>
           <label>
-            Resolve:{" "}
+            Resolve:
             <input
               type="checkbox"
               id="resolve"
@@ -158,15 +158,24 @@ export default class StoryPage extends Component {
               onChange={this.handleCheckBox}
             />
           </label>
-          <button onClick={this.handleSubmit}>Submit</button>
-          <button onClick={this.handleDelete}>Delete Story</button>
+          <div className="edit-btns">
+            <button className="edit-story" onClick={this.handleSubmit}>
+              Submit
+            </button>
+            <button
+              className="delete-btn edit-story"
+              onClick={this.handleDelete}
+            >
+              Delete
+            </button>
+          </div>
         </div>
       </Section>
     );
 
     const conditionalRender = () => {
       const author = this.state.story.author;
-      const userId = parseInt(this.context.userId);
+      const userId = parseInt(localStorage.getItem("user_id"));
       if (author === userId) {
         return editStory;
       } else {
