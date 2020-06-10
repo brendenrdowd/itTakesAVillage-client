@@ -7,6 +7,7 @@
   left:0;
   background-color: darkseagreen;
   height:50px;
+  z-index: 5000;
 }
 
 .toolbar__navigation{
@@ -52,12 +53,12 @@
   color:#243c24;
 }
 
-@media(max-width:768px){
+@media(max-width:899px){
   .toolbar__navitgation-items{
     display: none;
   }
 }
-@media (min-width:769px) {
+@media (min-width:900px) {
   .toolbar__toggle{
     display:none;
   }
