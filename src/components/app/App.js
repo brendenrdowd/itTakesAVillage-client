@@ -13,6 +13,7 @@ import LoginPage from "../../routes/LoginPage/LoginPage";
 import NotFoundPage from "../../routes/NotFoundPage/NotFoundPage";
 import RegistrationPage from "../../routes/RegistrationPage/RegistrationPage";
 import CreateStoryPage from "../../routes/CreateStoryPage/CreateStoryPage";
+import EditUserPage from "../../routes/EditUserPage/EditUserPage";
 import CreateCommentForm from "../CreateCommentForm/CreateCommentForm";
 import PoliciesPage from "../../routes/PoliciesPage/PoliciesPage";
 import StoryPage from "../../routes/StoryPage/StoryPage";
@@ -58,7 +59,7 @@ export default class App extends Component {
             <PrivateRoute path={"/dashboard"} component={DashboardPage} />
             <PrivateRoute path={"/create"} component={CreateStoryPage} />
             <PrivateRoute path={"/comment/"} component={CreateCommentForm} />
-            {/* <PrivateRoute path={"/user/:id"} component={EditUserForm} /> */}
+            <PrivateRoute path={"/user/:id"} component={EditUserPage} />
             <Route path={"/story/:id"} component={StoryPage} />
             <PrivateRoute path={"/edit"} component={EditStoryForm} />
             <PrivateRoute exact path={"/story/edit/:id"} component={StoryPage} />

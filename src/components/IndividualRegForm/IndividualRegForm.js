@@ -112,8 +112,6 @@ export default class IndividualRegForm extends Component {
     const username = this.state.username.value;
     if (username.length === 0) {
       return 'Please enter username';
-      // } else if (username.match(/[0-9]/)) {
-      //   return 'username should not contain any numbers';
     }
   }
   // Checks if email address is valid
@@ -132,11 +130,11 @@ export default class IndividualRegForm extends Component {
     if (location.length === 0) {
       return 'Enter a zip code';
     } else if (!postcodeValidator(location, 'US')) {
-      return 'Enter a valie zip code';
+      return 'Enter a valid zip code';
     }
   }
   // Checks if required password is a minimum of 8 char and maximum of 72 chars
-  // Also checks if password has atleast one number and one uppercase letter
+  // Also checks if password has at least one number and one uppercase letter
   validatePassword() {
     const password = this.state.password.value.trim();
     const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[\S]/;
