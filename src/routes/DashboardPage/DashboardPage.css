@@ -59,3 +59,13 @@ select {
   -o-transition: 0.25s all ease;
   transition: 0.25s all ease;
 }
+
+.edit-btn {
+  margin-top: 20px;
+  border-radius: 4px;
+  padding: 15px;
+  background-color: darkseagreen;
+  color: white;
+  border: none;
+  width: 100px;
+}

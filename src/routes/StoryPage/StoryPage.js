@@ -30,25 +30,27 @@ export default class StoryPage extends Component {
       this.setState({ story: story });
     });
     // grabbing comments for specific story
-    this.getComments()
+    this.getComments();
   }
 
   getComments = () => {
-    this.setState({ comments: [] })
-    CommentApiService.getCommentsByStoryId(this.props.match.params.id)
-      .then((comments) => {
+    this.setState({ comments: [] });
+    CommentApiService.getCommentsByStoryId(this.props.match.params.id).then(
+      (comments) => {
         // need to update authors as I set state or else infinity. #sunday monday 6/7 6/8
-        comments.map(comment => {
+        comments.map((comment) => {
           return UserApiService.getUserById(comment.author)
-            .then(author => {
+            .then((author) => {
               comment.authorName = author.username;
-              this.setState({ comments: [...this.state.comments, comment] })
-            }).catch(error => {
-              console.log(error)
+              this.setState({ comments: [...this.state.comments, comment] });
             })
-        })
-      });
-  }
+            .catch((error) => {
+              console.log(error);
+            });
+        });
+      }
+    );
+  };
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -58,7 +60,6 @@ export default class StoryPage extends Component {
       resolved: this.state.resolved,
       id: this.state.story.id,
     };
-
     StoryApiService.editStory(editStory)
       .then((story) => {
         this.props.history.push(`/edit`);
@@ -68,41 +69,53 @@ export default class StoryPage extends Component {
       });
   };
 
+  handleDelete = (event) => {
+    event.preventDefault();
+    StoryApiService.deleteStory(this.props.match.params.id)
+      .then(this.props.history.push(`/dashboard`))
+      .catch((error) => {
+        console.error(error);
+      });
+  };
   handleDeleteComment = (id) => {
-    CommentApiService.deleteComment(id)
-    .then(res => this.getComments())
-  }
+    CommentApiService.deleteComment(id).then((res) => this.getComments());
+  };
 
   handleSuccess = () => {
-    this.getComments()
-  }
-
+    this.getComments();
+  };
 
   // renders comments and story. If no story exists, throws error
   render() {
     const deleteButton = (id, author) => {
       const userId = Number(localStorage.getItem("user_id"));
       if (author === userId) {
-        return <button onClick={this.handleDeleteComment.bind(this, id)} className="delete"><FontAwesomeIcon icon={["fas", "trash-alt"]} size="lg" /></button>
+        return (
+          <button
+            onClick={this.handleDeleteComment.bind(this, id)}
+            className="delete"
+          >
+            <FontAwesomeIcon icon={["fas", "trash-alt"]} size="lg" />
+          </button>
+        );
+      } else {
+        return;
       }
-      else {
-        return
-      }
-    }
+    };
 
     let comments =
       this.state.comments.length < 0
         ? "Add a comment..."
         : this.state.comments.map((comment) => (
-          <li key={comment.id} className="comment">
-            <p className="comment_text">{comment.comment}</p>
-            <div className="row">
-              <p> - {comment.authorName}</p>
-              {deleteButton(comment.id, comment.author)}
-              {/* <button className="delete"><FontAwesomeIcon icon={["fas", "trash-alt"]} size="2x" /></button> */}
-            </div>
-          </li>
-        ));
+            <li key={comment.id} className="comment">
+              <p className="comment_text">{comment.comment}</p>
+              <div className="row">
+                <p> - {comment.authorName}</p>
+                {deleteButton(comment.id, comment.author)}
+                {/* <button className="delete"><FontAwesomeIcon icon={["fas", "trash-alt"]} size="2x" /></button> */}
+              </div>
+            </li>
+          ));
 
     const renderStory = (
       <Section className="StoryPage">
@@ -111,7 +124,10 @@ export default class StoryPage extends Component {
           flag={this.state.story.flag}
           author={this.state.authorName}
         />
-        <CreateCommentForm onSuccess={this.handleSuccess} story={this.state.story} />
+        <CreateCommentForm
+          onSuccess={this.handleSuccess}
+          story={this.state.story}
+        />
         <ul className="comments_list">{comments}</ul>
       </Section>
     );
@@ -123,7 +139,7 @@ export default class StoryPage extends Component {
           flag={this.state.story.flag}
           author={this.state.authorName}
         />
-        <div>
+        <div className="edit-form">
           <label>
             Edit Story Issue:
             <input
@@ -134,7 +150,7 @@ export default class StoryPage extends Component {
             />
           </label>
           <label>
-            Resolve:{" "}
+            Resolve:
             <input
               type="checkbox"
               id="resolve"
@@ -142,14 +158,24 @@ export default class StoryPage extends Component {
               onChange={this.handleCheckBox}
             />
           </label>
-          <button onClick={this.handleSubmit}>Submit</button>
+          <div className="edit-btns">
+            <button className="edit-story" onClick={this.handleSubmit}>
+              Submit
+            </button>
+            <button
+              className="delete-btn edit-story"
+              onClick={this.handleDelete}
+            >
+              Delete
+            </button>
+          </div>
         </div>
       </Section>
     );
 
     const conditionalRender = () => {
       const author = this.state.story.author;
-      const userId = parseInt(this.context.userId);
+      const userId = parseInt(localStorage.getItem("user_id"));
       if (author === userId) {
         return editStory;
       } else {
@@ -164,8 +190,8 @@ export default class StoryPage extends Component {
         error.error === `Story doesn't exist` ? (
           <p className="not_found">Story not found</p>
         ) : (
-            <p className="not_found">Something went wrong</p>
-          );
+          <p className="not_found">Something went wrong</p>
+        );
     } else {
       // testing story edit
       content = conditionalRender();
