@@ -33,7 +33,6 @@ const UserApiService = {
     );
   },
   updateUser(user) {
-    console.log(user)
     return fetch(`${config.API_ENDPOINT}/users/${localStorage.getItem("user_id")}`, {
       method: "PATCH",
       headers: {
