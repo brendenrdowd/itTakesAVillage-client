@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import StoryCard from "../../components/StoryCard/StoryCard";
-import UserService from "../../services/user-api-service";
 import "./DashboardPage.css";
 import { Link } from "react-router-dom";
 import userContext from "../../contexts/ApiContext";
@@ -42,8 +41,13 @@ export default class DashboardPage extends Component {
   };
 
   formatDate = (date) => {
+<<<<<<< HEAD
     const d = new Date(date);
     return d.toDateString();
+=======
+    const d = new Date(date)
+    return d.toDateString()
+>>>>>>> master
   };
 
   // this renders story on page based on filter or filter all

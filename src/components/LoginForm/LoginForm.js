@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import AuthApiService from '../../services/auth-api-service';
 import UserContext from '../../contexts/ApiContext';
 import TokenService from '../../services/token-service';
-import { Input, Button } from '../Utils/Utils';
+import { Button } from '../Utils/Utils';
 import './LoginForm.css';
 
 class LoginForm extends Component {
@@ -24,7 +24,6 @@ class LoginForm extends Component {
       password: password.value,
     })
       .then((res) => {
-        console.log(this.context.userId);
         username.value = '';
         password.value = '';
         TokenService.saveAuthToken(res.authToken);

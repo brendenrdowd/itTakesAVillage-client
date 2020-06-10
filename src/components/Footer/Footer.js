@@ -6,7 +6,7 @@ import './Footer.css';
 const Footer = () => {
   return (
     <div id='footer'>
-      Built with React Ⓒ 2020
+      <p>Built with React Ⓒ 2020 </p>
       <Link to='/policies'>Terms of use</Link>
     </div>
   );

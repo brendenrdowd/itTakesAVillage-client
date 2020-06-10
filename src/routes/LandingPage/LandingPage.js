@@ -6,6 +6,7 @@ export default function LandingPage() {
   return (
     <section className="landing">
       <div className="missionContain">
+        <img className="landing-logo" src="/logo512.png" alt="ITAV-logo" />
         <h2>It Takes A Village</h2>
         <p>
           It Takes a Village is a community based altruism application that lets

@@ -28,19 +28,20 @@ export class CardToolBar extends Component {
     // Allow users to edit or delete their stories by id
     const tools =
       ((
-        <Link to={`story/edit/${this.props.story.id}`}>
+        <Link to={`story/edit/${this.props.id}`}>
           <button>Edit</button>
         </Link>
       ),
         (
-          <button onClick={this.deleteStoryHandler(this.props.story.id)}>
+          <button onClick={this.deleteStoryHandler(this.props.id)}>
             Delete
           </button>
         ));
-    if (this.context.user === this.props.story.author) {
+        // need to make sure we're storing using id in context
+    if (this.context.user === this.props.author) {
       buttons = [...buttons, tools];
     }
-    return <div className='button-bar'>{buttons}</div>;
+    return <div className='tool-bar'>{buttons}</div>;
   }
 }
 
