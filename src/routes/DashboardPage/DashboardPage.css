@@ -68,4 +68,5 @@ select {
   color: white;
   border: none;
   width: 100px;
+  cursor: pointer;
 }

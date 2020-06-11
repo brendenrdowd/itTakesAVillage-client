@@ -45,6 +45,12 @@ export default class DashboardPage extends Component {
     return d.toDateString();
   };
 
+  handleEditBtn = (e) => {
+    e.preventDefault();
+    this.props.history.push(`/edit`);
+    window.location.reload(false);
+  };
+
   // this renders story on page based on filter or filter all
   conditionalRender = () => {
     if (!this.state.filter || this.state.filter === "all") {
@@ -110,11 +116,13 @@ export default class DashboardPage extends Component {
                 ))}
               </select>
             </div>
-            <Link to="/edit">
-              <button className="edit-btn" type="button">
-                Edit My Stories
-              </button>
-            </Link>
+            <button
+              onClick={this.handleEditBtn}
+              className="edit-btn"
+              type="button"
+            >
+              Edit My Stories
+            </button>
             {/* <button onClick={this.handleEditButton}></button> */}
           </form>
         </div>
