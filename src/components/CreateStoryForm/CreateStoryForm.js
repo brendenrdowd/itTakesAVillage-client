@@ -53,7 +53,6 @@ class CreateStoryForm extends Component {
   };
 
   render() {
-    console.log("from createStoryForm", this.props.history);
     return (
       <form className="createStory" onSubmit={this.handleSubmit}>
         <label>
