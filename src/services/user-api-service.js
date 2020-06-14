@@ -32,6 +32,18 @@ const UserApiService = {
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
   },
+  updateUser(user) {
+    return fetch(`${config.API_ENDPOINT}/users/${localStorage.getItem("user_id")}`, {
+      method: "PATCH",
+      headers: {
+        authorization: `Bearer ${TokenService.getAuthToken()}`,
+        "content-type": "application/json"
+      },
+      body: JSON.stringify(user),
+    }).then((res) =>
+      !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
+    );
+  },
   postRefreshToken() {
     return fetch(`${config.API_ENDPOINT}/auth/refresh`, {
       method: "POST",

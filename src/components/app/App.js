@@ -13,14 +13,13 @@ import LoginPage from "../../routes/LoginPage/LoginPage";
 import NotFoundPage from "../../routes/NotFoundPage/NotFoundPage";
 import RegistrationPage from "../../routes/RegistrationPage/RegistrationPage";
 import CreateStoryPage from "../../routes/CreateStoryPage/CreateStoryPage";
+import EditUserPage from "../../routes/EditUserPage/EditUserPage";
 import CreateCommentForm from "../CreateCommentForm/CreateCommentForm";
 import PoliciesPage from "../../routes/PoliciesPage/PoliciesPage";
 import StoryPage from "../../routes/StoryPage/StoryPage";
 import userContext from "../../contexts/ApiContext";
 import "./App.css";
 import EditStoryForm from "../../components/EditStoryForm/EditStoryForm";
-
-let userID = localStorage.getItem("user_id");
 
 export default class App extends Component {
   state = {
@@ -60,9 +59,7 @@ export default class App extends Component {
             <PrivateRoute path={"/dashboard"} component={DashboardPage} />
             <PrivateRoute path={"/create"} component={CreateStoryPage} />
             <PrivateRoute path={"/comment/"} component={CreateCommentForm} />
-            {/* <Route
-                path={'/comment/edit/:id'}
-                component={CreateStoryPage} /> */}
+            <PrivateRoute path={"/user/:id"} component={EditUserPage} />
             <Route path={"/story/:id"} component={StoryPage} />
             <PrivateRoute path={"/edit"} component={EditStoryForm} />
             <PrivateRoute exact path={"/story/edit/:id"} component={StoryPage} />

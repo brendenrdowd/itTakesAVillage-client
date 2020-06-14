@@ -23,7 +23,7 @@ export default userContext;
 
 export class UserProvider extends Component {
   state = {
-    userId: [],
+    userId: localStorage.getItem("user_id"),
     users: [],
     newComment: [],
     sideDrawerOpen: false,
@@ -62,7 +62,7 @@ export class UserProvider extends Component {
 
   render() {
     const value = {
-      userId: localStorage.getItem("user_id"),
+      userId: this.state.userId,
       error: this.state.error,
       users: this.state.users,
       sideDrawerOpen: this.state.sideDrawerOpen,

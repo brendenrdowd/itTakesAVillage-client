@@ -3,7 +3,6 @@ import TokenService from "./token-service";
 
 const StoryApiService = {
   postStory(story) {
-    // added return
     return fetch(`${config.API_ENDPOINT}/story`, {
       method: "POST",
       body: JSON.stringify(story),
@@ -47,7 +46,6 @@ const StoryApiService = {
   },
 
   editStory(story) {
-    // Error: Empty .update() call detected! Update data does no…ry. Table: itav_stories. Columns: resolved,issue.
     return fetch(`${config.API_ENDPOINT}/story/${story.id}`, {
       method: "PATCH",
       body: JSON.stringify(story),
@@ -60,19 +58,18 @@ const StoryApiService = {
     );
   },
 
-  deleteStory(story) {
-    return fetch(`${config.API_ENDPOINT}/story/${story.id}`, {
+  deleteStory(id) {
+    return fetch(`${config.API_ENDPOINT}/story/${id}`, {
       method: "DELETE",
-      body: JSON.stringify(),
+      body: JSON.stringify(id),
       headers: {
-        authorization: `bearer ${config.API_ENDPOINT}`,
-      }.then((res) =>
-        !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
-      ),
-    });
+        authorization: `Bearer ${TokenService.getAuthToken()}`,
+        "content-type": "application/json",
+      },
+    }).then((res) =>
+      !res.ok ? res.json().then((e) => Promise.reject(e)) : res
+    );
   },
 };
 
 export default StoryApiService;
-
-//create a function that reaches out to the backend

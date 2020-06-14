@@ -115,26 +115,9 @@ export default class IndividualRegForm extends Component {
 
   validateUsername() {
     const username = this.state.username.value;
-    // const { users } = this.context;
-    // const sortUsersByUsername = users.map((user) => user.username);
-    // const userTaken = sortUsersByUsername.includes(username);
-
-    // UserApiService.checkUsername(username).then((exists) => {
-    //   if (exists) {
-    //     this.setState({ usernameError: 'Username already taken' });
-    //   } else {
-    //     this.setState({ usernameError: null });
-    //   }
-    // });
-
-    // console.log(sortUsersByUsername);
-
-    // console.log(users, sortUsersByUsername);
-    // if (username.length === 0) {
-    //   return 'Please enter username';
-    // } else if (userTaken) {
-    //   return 'Username already taken';
-    // }
+    if (username.length === 0) {
+      return 'Please enter username';
+    }
   }
   validateEmail() {
     const email = this.state.email.value;
@@ -151,11 +134,11 @@ export default class IndividualRegForm extends Component {
     if (location.length === 0) {
       return 'Enter a zip code';
     } else if (!postcodeValidator(location, 'US')) {
-      return 'Enter a valie zip code';
+      return 'Enter a valid zip code';
     }
   }
   // Checks if required password is a minimum of 8 char and maximum of 72 chars
-  // Also checks if password has atleast one number and one uppercase letter
+  // Also checks if password has at least one number and one uppercase letter
   validatePassword() {
     const password = this.state.password.value.trim();
     const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[\S]/;
@@ -211,7 +194,6 @@ export default class IndividualRegForm extends Component {
       });
   };
   render() {
-    const { users } = this.context;
     const nameError = this.validateName();
     // const usernameError = this.validateUsername();
     const emailError = this.validateEmail();
@@ -220,7 +202,6 @@ export default class IndividualRegForm extends Component {
     const repeatPasswordError = this.validateRepeatPassword();
     return (
       <form className='IndividualRegForm' onSubmit={this.handleSubmit}>
-        {/* <div role='alert'>{error && <p className='red'>{error}</p>}</div> */}
         <div className='name'>
           <label htmlFor='IndividualRegForm__name'>
             Full name: <Required />

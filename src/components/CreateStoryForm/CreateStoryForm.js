@@ -10,13 +10,8 @@ class CreateStoryForm extends Component {
     this.state = {
       selectValue: "groceries",
       textValue: "",
-      // textValue: "test",
     };
   }
-
-  //   story/edit/:id
-  // fetch get storybyid
-  // // .then(story => this.setState({selectValue:story.flag, text.Value:story.issue})
 
   keywords = [
     "groceries",
@@ -53,7 +48,6 @@ class CreateStoryForm extends Component {
   };
 
   render() {
-    console.log("from createStoryForm", this.props.history);
     return (
       <form className="createStory" onSubmit={this.handleSubmit}>
         <label>
