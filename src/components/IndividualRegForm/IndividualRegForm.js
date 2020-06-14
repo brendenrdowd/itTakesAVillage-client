@@ -119,13 +119,13 @@ export default class IndividualRegForm extends Component {
     // const sortUsersByUsername = users.map((user) => user.username);
     // const userTaken = sortUsersByUsername.includes(username);
 
-    UserApiService.checkUsername(username).then((exists) => {
-      if (exists) {
-        this.setState({ usernameError: 'Username already taken' });
-      } else {
-        this.setState({ usernameError: null });
-      }
-    });
+    // UserApiService.checkUsername(username).then((exists) => {
+    //   if (exists) {
+    //     this.setState({ usernameError: 'Username already taken' });
+    //   } else {
+    //     this.setState({ usernameError: null });
+    //   }
+    // });
 
     // console.log(sortUsersByUsername);
 
@@ -211,11 +211,7 @@ export default class IndividualRegForm extends Component {
       });
   };
   render() {
-<<<<<<< HEAD
-    const { error, usernameError } = this.state;
-=======
     const { users } = this.context;
->>>>>>> 48d28a402a7d4b80116c2ce387f3fdfc26ae58a3
     const nameError = this.validateName();
     // const usernameError = this.validateUsername();
     const emailError = this.validateEmail();
@@ -224,7 +220,7 @@ export default class IndividualRegForm extends Component {
     const repeatPasswordError = this.validateRepeatPassword();
     return (
       <form className='IndividualRegForm' onSubmit={this.handleSubmit}>
-        <div role='alert'>{error && <p className='red'>{error}</p>}</div>
+        {/* <div role='alert'>{error && <p className='red'>{error}</p>}</div> */}
         <div className='name'>
           <label htmlFor='IndividualRegForm__name'>
             Full name: <Required />
@@ -251,9 +247,9 @@ export default class IndividualRegForm extends Component {
             id='IndividualRegForm__username'
             onChange={(e) => this.updateUsername(e.target.value)}
           ></Input>
-          {this.state.username.touched && (
+          {/* {this.state.username.touched && (
             <ValidationError message={usernameError}></ValidationError>
-          )}
+          )} */}
         </div>
         <div className='email'>
           <label htmlFor='IndividualRegForm__email'>
@@ -265,9 +261,9 @@ export default class IndividualRegForm extends Component {
             id='IndividualRegForm__email'
             onChange={(e) => this.updateEmail(e.target.value)}
           ></Input>
-          {this.state.email.touched && (
+          {/* {this.state.email.touched && (
             <ValidationError message={error}></ValidationError>
-          )}
+          )} */}
         </div>
         <div className='location'>
           <label htmlFor='IndividualRegForm__location'>

@@ -32,8 +32,8 @@ class CreateCommentForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    // const { comment } = event.target;
-    // const { userId } = this.context;
+    const { comment } = event.target;
+    const { userId } = this.context;
 
     // this.setState({ error: null });
 
