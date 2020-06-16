@@ -3,7 +3,6 @@ import TokenService from "./token-service";
 
 const StoryApiService = {
   postStory(story) {
-    // added return
     return fetch(`${config.API_ENDPOINT}/story`, {
       method: "POST",
       body: JSON.stringify(story),
@@ -74,5 +73,3 @@ const StoryApiService = {
 };
 
 export default StoryApiService;
-
-//create a function that reaches out to the backend

@@ -199,9 +199,6 @@ export default class IndividualRegForm extends Component {
     const repeatPasswordError = this.validateRepeatPassword();
     return (
       <form className='IndividualRegForm' onSubmit={this.handleSubmit}>
-        {/* <div role='alert'>
-          {error && <p className='registration_error'>{error}</p>}
-        </div> */}
 
         <div className='name'>
           <label htmlFor='IndividualRegForm__name'>
@@ -279,7 +276,7 @@ export default class IndividualRegForm extends Component {
           )}
         </div>
         <div className='re-enter-password'>
-          <label htmlFor='IndividualRegForm__password'>
+          <label htmlFor='IndividualRegForm__repeatPassword'>
             Repeat password: <Required />
           </label>
           <Input

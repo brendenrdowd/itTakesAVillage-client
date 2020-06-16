@@ -9,7 +9,6 @@ export class EditUserForm extends Component {
     super(props);
     this.state = {
       username: "",
-      // password: "",
       location: "",
       error: ""
     }
@@ -49,34 +48,11 @@ export class EditUserForm extends Component {
     }
   }
 
-  validatePassword() {
-    const password = this.state.password.trim();
-    const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[\S]/;
-    if (password.length === 0) {
-      return 'Password is required';
-    } else if (password.length < 8 || password.length > 72) {
-      return 'Password must be between 8 and 72 characters long';
-    } else if (!password.match(REGEX_UPPER_LOWER_NUMBER_SPECIAL)) {
-      return 'Password must contain at least one number and one uppercase letter';
-    }
-  }
-  // Checks if the repeated password matches first password
-  validateRepeatPassword() {
-    const repeatPassword = this.state.repeatPassword.trim();
-    const password = this.state.password.trim();
-
-    if (repeatPassword !== password) {
-      return 'Passwords do not match';
-    }
-  }
-
   handleSubmit = (ev) => {
     ev.preventDefault();
     const {
       username,
       location,
-      // password,
-      // repeatPassword,
     } = ev.target;
 
     this.setState({ error: null });
@@ -84,14 +60,10 @@ export class EditUserForm extends Component {
     UserApiService.updateUser({
       username: username.value,
       location: location.value,
-      // password: password.value,
-      // repeatPassword: repeatPassword.value,
     })
       .then((user) => {
         username.value = '';
         location.value = '';
-        // password.value = '';
-        // repeatPassword.value = '';
         this.props.onUpdateSuccess(user);
       })
       .catch((res) => {
@@ -102,8 +74,6 @@ export class EditUserForm extends Component {
   render() {
     const usernameError = this.validateUsername();
     const locationError = this.validateZipcode();
-    // const passwordError = this.validatePassword();
-    // const repeatPasswordError = this.validateRepeatPassword();
     return (
       // need to update class name, but keeping styles for now
       <form className='IndividualRegForm' onSubmit={this.handleSubmit}>
@@ -137,35 +107,7 @@ export class EditUserForm extends Component {
             <ValidationError message={locationError}></ValidationError>
           )}
         </div>
-        {/* <div className='password'>
-          <label htmlFor='IndividualRegForm__password'>
-            Password: <Required />
-          </label>
-          <Input
-            name='password'
-            value={this.state.password}
-            type='password'
-            id='IndividualRegForm__password'
-            onChange={(e) => this.updatePassword(e.target.value)}
-          ></Input>
-          {this.state.password.touched && (
-            <ValidationError message={passwordError}></ValidationError>
-          )}
-        </div>
-        <div className='re-enter-password'>
-          <label htmlFor='IndividualRegForm__password'>
-            Repeat password: <Required />
-          </label>
-          <Input
-            name='repeatPassword'
-            type='password'
-            id='IndividualRegForm__password'
-            onChange={(e) => this.updateRepeatPassword(e.target.value)}
-          ></Input>
-          {this.state.repeatPassword.touched && (
-            <ValidationError message={repeatPasswordError}></ValidationError>
-          )}
-        </div> */}
+        
         <Button
           type='submit'
           disabled={

@@ -32,7 +32,6 @@ export class UserProvider extends Component {
     this.setState({ users });
   };
   setUserId = (userId) => {
-    console.log(userId)
     this.setState({ userId: localStorage.setItem("user_id", userId) });
   };
 

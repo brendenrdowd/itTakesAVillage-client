@@ -43,7 +43,6 @@ const CommentApiService = {
       },
     })
       .then(res =>
-        // console.log(res))
         (!res.ok)
           ? res.json().then(e => Promise.reject(e))
           : res)
@@ -54,7 +53,7 @@ const CommentApiService = {
       method: "PATCH",
       body: JSON.stringify(comment),
       headers: {
-        //Authorization: `bearer ${TokenService.getAuthToken()}`,
+        Authorization: `bearer ${TokenService.getAuthToken()}`,
         "content-type": "application/json"
       }
     })

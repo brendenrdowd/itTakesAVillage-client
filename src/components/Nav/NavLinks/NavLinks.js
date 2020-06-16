@@ -5,8 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TokenService from "../../../services/token-service";
 import UserApiService from "../../../services/user-api-service";
 
-// import './NavLinks.css'
-
 export class NavLinks extends Component {
   state = {
     loggedIn: TokenService.hasAuthToken(),
@@ -64,14 +62,6 @@ export class NavLinks extends Component {
             <span className="tooltiptext">New Story</span>
           </Link>
         </li>,
-        
-        // Link to delete user and return them to landing page ->> add drop down here with user delete, and user edit, called user settings
-        // <li key="6" className="dropdown tooltip">
-        //   <Link className="dropbtn">
-        //     <FontAwesomeIcon icon="user-cog" />{" "}
-        //     <span className="tooltiptext">Settings </span>
-        //     <FontAwesomeIcon icon="sort-down" />{" "}
-        //     <ul className="dropdown-content">
         <li onClick={this.closeModal} key="6" className="tooltip">
           <Link onClick={this.handleDeleteClick} to="/">
             <FontAwesomeIcon icon="user-times" />{" "}
@@ -84,17 +74,6 @@ export class NavLinks extends Component {
             <span className="tooltiptext">Edit User</span>
           </Link>
         </li>,
-        //     </ul>
-        //   </Link>
-        // </li>,
-
-        // Link to edit story --> needs to be moved to story page
-        // <li onClick={this.closeModal} key="7" className="tooltip">
-        //   <Link to="/edit">
-        //     <FontAwesomeIcon icon="plus-square" />{" "}
-        //     <span className="tooltiptext">Edit Story</span>
-        //   </Link>
-        // </li>,
         // Link to log out user and return them to landing page
         <li onClick={this.closeModal} key="5" className="tooltip">
           <Link onClick={this.handleLogoutClick} to="/">

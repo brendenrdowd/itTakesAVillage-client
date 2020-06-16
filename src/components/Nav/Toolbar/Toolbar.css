@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Pacifico&display=swap");
 
+<<<<<<< HEAD
 .toolbar {
   width: 100%;
   position: fixed;
@@ -7,6 +8,16 @@
   left: 0;
   background-color: #487948;
   height: 50px;
+=======
+.toolbar{
+  width:100%;
+  position:fixed;
+  top:0;
+  left:0;
+  background-color: darkseagreen;
+  height:50px;
+  z-index: 5000;
+>>>>>>> master
 }
 
 .toolbar__navigation {
@@ -52,6 +63,7 @@
   color: #243c24;
 }
 
+<<<<<<< HEAD
 @media (max-width: 768px) {
   .toolbar__navitgation-items {
     display: none;
@@ -60,6 +72,16 @@
 @media (min-width: 769px) {
   .toolbar__toggle {
     display: none;
+=======
+@media(max-width:899px){
+  .toolbar__navitgation-items{
+    display: none;
+  }
+}
+@media (min-width:900px) {
+  .toolbar__toggle{
+    display:none;
+>>>>>>> master
   }
 }
 

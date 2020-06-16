@@ -26,23 +26,32 @@ class CreateCommentForm extends Component {
     this.setState({ newComment: event.target.value });
   };
 
+<<<<<<< HEAD
   // ready for backend connect
+=======
+
+
+>>>>>>> master
   handleSubmit = (event) => {
     event.preventDefault();
 
     const { comment } = event.target;
-    const { userId } = this.context;
+    const  userId  = Number(localStorage.getItem("user_id"));
 
     this.setState({ error: null });
 
-    // should be able to consolidate this into just comment, depending on service/backend
+
     CommentService.postComment(userId, comment.value, this.props.story.id)
       .then((comment) => {
-        //need to add a component did update, or push the new comment in context and update the storypage comment array with context
         this.context.addComment(comment);
+<<<<<<< HEAD
         this.props.onSuccess();
         this.setState({ newComment: "" });
         // this.props.history.push(`/story/${comment.story}`);
+=======
+        this.props.onSuccess()
+        this.setState({ newComment: "" })
+>>>>>>> master
       })
       .catch(this.context.setError);
   };
@@ -64,7 +73,6 @@ class CreateCommentForm extends Component {
           onChange={this.handleCommentChange}
           required
         />
-        {/* <input type="submit" value="submit" disabled={this.isDisabled} /> */}
         {submit}
       </form>
     );
