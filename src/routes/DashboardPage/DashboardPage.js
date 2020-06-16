@@ -116,22 +116,11 @@ export default class DashboardPage extends Component {
                 ))}
               </select>
             </div>
-<<<<<<< HEAD
-            <button
-              onClick={this.handleEditBtn}
-              className="edit-btn"
-              type="button"
-            >
-              Edit My Stories
-            </button>
-            {/* <button onClick={this.handleEditButton}></button> */}
-=======
             <Link to="/edit">
               <button className="edit-btn" type="button">
                 Edit My Stories
               </button>
             </Link>
->>>>>>> master
           </form>
         </div>
         {this.conditionalRender()}
