@@ -276,7 +276,7 @@ export default class IndividualRegForm extends Component {
           )}
         </div>
         <div className='re-enter-password'>
-          <label htmlFor='IndividualRegForm__password'>
+          <label htmlFor='IndividualRegForm__repeatPassword'>
             Repeat password: <Required />
           </label>
           <Input
