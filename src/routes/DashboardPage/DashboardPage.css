@@ -29,6 +29,7 @@ select::-ms-expand {
 .customSelect {
   position: relative;
   display: flex;
+  align-items: center;
   width: 8em;
   height: 2em;
   line-height: 2;
@@ -41,7 +42,7 @@ select::-ms-expand {
 select {
   flex: 1;
   padding: 0 0.5em;
-  color: #fff;
+  color: black;
   cursor: pointer;
 }
 
@@ -64,7 +65,7 @@ select {
   margin-top: 20px;
   border-radius: 4px;
   padding: 15px;
-  background-color: darkseagreen;
+  background-color: #487948;
   color: white;
   border: none;
   width: 100px;

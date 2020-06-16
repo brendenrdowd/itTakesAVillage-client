@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import CommentService from "../../services/comment-api-service";
 import userContext from "../../contexts/ApiContext";
-import TokenService from '../../services/token-service'
+import TokenService from "../../services/token-service";
 import "./CommentForm.css";
 
 class CreateCommentForm extends Component {
@@ -9,7 +9,7 @@ class CreateCommentForm extends Component {
 
   static defaultProps = {
     history: {
-      push: () => { },
+      push: () => {},
     },
   };
 
@@ -26,8 +26,6 @@ class CreateCommentForm extends Component {
     this.setState({ newComment: event.target.value });
   };
 
-
-
   // ready for backend connect
   handleSubmit = (event) => {
     event.preventDefault();
@@ -42,19 +40,23 @@ class CreateCommentForm extends Component {
       .then((comment) => {
         //need to add a component did update, or push the new comment in context and update the storypage comment array with context
         this.context.addComment(comment);
-        this.props.onSuccess()
-        this.setState({ newComment: "" })
+        this.props.onSuccess();
+        this.setState({ newComment: "" });
         // this.props.history.push(`/story/${comment.story}`);
       })
       .catch(this.context.setError);
   };
 
   render() {
-    const submit = (!TokenService.hasAuthToken()) ? <h3>Log In to Comment</h3> : <button type="submit">Submit</button>
+    const submit = !TokenService.hasAuthToken() ? (
+      <h3>Log In to Comment</h3>
+    ) : (
+      <button type="submit">Submit</button>
+    );
     return (
-      <form className="commentForm" onSubmit={this.handleSubmit} >
+      <form className="commentForm" onSubmit={this.handleSubmit}>
         {/* input for comment */}
-        < label > Create comment:</label>
+        <label>Create comment:</label>
         <input
           type="text"
           name="comment"
@@ -64,7 +66,7 @@ class CreateCommentForm extends Component {
         />
         {/* <input type="submit" value="submit" disabled={this.isDisabled} /> */}
         {submit}
-      </form >
+      </form>
     );
   }
 }
