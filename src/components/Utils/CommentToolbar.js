@@ -5,7 +5,7 @@ import CommentApiService from '../../services/comment-api-service';
 
 export class CommentToolbar extends Component {
   deleteCommentHandler = (id) => {
-    CommentApiService.delete(id).then(console.log('deleted'));
+    CommentApiService.delete(id);
   };
   // Allows user to edit and delete comments by id
   render() {

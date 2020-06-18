@@ -31,7 +31,6 @@ class CreateStoryForm extends Component {
   };
 
   render() {
-    console.log(this.context.stories);
     return (
       <form
         aria-label='create-story-form'

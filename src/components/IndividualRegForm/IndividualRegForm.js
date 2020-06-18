@@ -276,7 +276,7 @@ export default class IndividualRegForm extends Component {
             name='repeatPassword'
             placeholder='Password123'
             type='password'
-            id='IndividualRegForm__password'
+            id='IndividualRegForm__repeatPassword'
             onChange={(e) => this.updateRepeatPassword(e.target.value)}
           ></Input>
           {this.state.repeatPassword.touched && (

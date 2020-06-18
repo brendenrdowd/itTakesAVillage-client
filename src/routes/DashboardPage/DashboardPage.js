@@ -100,7 +100,6 @@ export default class DashboardPage extends Component {
   };
 
   render() {
-    console.log(this.context.stories);
     return (
       <section>
         <div className='filterForm'>

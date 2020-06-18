@@ -14,7 +14,7 @@ import {
 export class CardToolBar extends Component {
   static contextType = ApiContext;
   deleteStoryHandler = (id) => {
-    StoryApiService.deleteStory(id).then(console.log('deleted'));
+    StoryApiService.deleteStory(id);
   };
   render() {
     let buttons = [
