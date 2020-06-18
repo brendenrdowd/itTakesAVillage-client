@@ -1,5 +1,5 @@
 .btn {
-  background-color: darkseagreen;
+  background-color: #487948;
   padding: 1em;
   color: white;
   text-decoration: none;
@@ -46,20 +46,20 @@
   }
 }
 
-.landing-logo{
-  width:60%;
-  display:block;
-  margin:auto;
+.landing-logo {
+  width: 60%;
+  display: block;
+  margin: auto;
 }
 
-@media (min-width:770px){
-  .landing-logo{
-    width:40%;
+@media (min-width: 770px) {
+  .landing-logo {
+    width: 40%;
   }
 }
 
-@media (min-width:1100px){
-  .landing-logo{
-    width:20%;
+@media (min-width: 1100px) {
+  .landing-logo {
+    width: 20%;
   }
 }

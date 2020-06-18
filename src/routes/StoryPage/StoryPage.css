@@ -44,10 +44,11 @@ select {
   margin-top: 20px;
   border-radius: 4px;
   padding: 15px;
-  background-color: darkseagreen;
+  background-color: #487948;
   color: white;
   border: none;
   width: 100px;
+  cursor: pointer;
 }
 
 .edit-story:hover {
@@ -60,7 +61,7 @@ select {
 }
 
 .delete-btn {
-  background-color: red;
+  background-color: #dc143c;
   margin-left: 20px;
   font-weight: 900;
 }

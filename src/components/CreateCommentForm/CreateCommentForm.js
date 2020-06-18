@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import CommentService from "../../services/comment-api-service";
 import userContext from "../../contexts/ApiContext";
-import TokenService from '../../services/token-service'
+import TokenService from "../../services/token-service";
 import "./CommentForm.css";
 
 class CreateCommentForm extends Component {
@@ -9,7 +9,7 @@ class CreateCommentForm extends Component {
 
   static defaultProps = {
     history: {
-      push: () => { },
+      push: () => {},
     },
   };
 
@@ -26,32 +26,33 @@ class CreateCommentForm extends Component {
     this.setState({ newComment: event.target.value });
   };
 
-
-
   handleSubmit = (event) => {
     event.preventDefault();
 
     const { comment } = event.target;
-    const  userId  = Number(localStorage.getItem("user_id"));
+    const userId = Number(localStorage.getItem("user_id"));
 
     // this.setState({ error: null });
-
 
     CommentService.postComment(userId, comment.value, this.props.story.id)
       .then((comment) => {
         this.context.addComment(comment);
-        this.props.onSuccess()
-        this.setState({ newComment: "" })
+        this.props.onSuccess();
+        this.setState({ newComment: "" });
       })
       .catch(this.context.setError);
   };
 
   render() {
-    const submit = (!TokenService.hasAuthToken()) ? <h3>Log In to Comment</h3> : <button type="submit">Submit</button>
+    const submit = !TokenService.hasAuthToken() ? (
+      <h3>Log In to Comment</h3>
+    ) : (
+      <button type="submit">Submit</button>
+    );
     return (
-      <form className="commentForm" onSubmit={this.handleSubmit} >
+      <form className="commentForm" onSubmit={this.handleSubmit}>
         {/* input for comment */}
-        < label > Create comment:</label>
+        <label>Create comment:</label>
         <input
           type="text"
           name="comment"
@@ -60,7 +61,7 @@ class CreateCommentForm extends Component {
           required
         />
         {submit}
-      </form >
+      </form>
     );
   }
 }

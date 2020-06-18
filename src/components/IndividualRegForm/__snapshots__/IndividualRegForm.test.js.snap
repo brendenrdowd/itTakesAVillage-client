@@ -118,7 +118,7 @@ exports[`renders correctly 1`] = `
     className="re-enter-password"
   >
     <label
-      htmlFor="IndividualRegForm__password"
+      htmlFor="IndividualRegForm__repeatPassword"
     >
       Repeat password: 
       <span
