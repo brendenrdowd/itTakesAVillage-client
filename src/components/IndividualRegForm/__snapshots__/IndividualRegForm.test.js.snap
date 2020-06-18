@@ -129,7 +129,7 @@ exports[`renders correctly 1`] = `
     </label>
     <input
       className="Input "
-      id="IndividualRegForm__password"
+      id="IndividualRegForm__repeatPassword"
       name="repeatPassword"
       onChange={[Function]}
       placeholder="Password123"
