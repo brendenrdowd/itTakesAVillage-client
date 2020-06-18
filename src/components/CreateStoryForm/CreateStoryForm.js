@@ -1,18 +1,10 @@
 import React, { Component } from 'react';
 import StoryService from '../../services/story-api-service';
-import Context from '../../contexts/ApiContext';
+import UserContext from '../../contexts/ApiContext';
 import './CreateStoryForm.css';
 
 class CreateStoryForm extends Component {
-  static contextType = Context;
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectValue: 'groceries',
-      textValue: '',
-    };
-  }
-
+  static contextType = UserContext;
   keywords = [
     'groceries',
     'food offer',
@@ -21,33 +13,31 @@ class CreateStoryForm extends Component {
     'moving',
     'clothing',
   ];
+  componentDidMount() {
+    StoryService.getAllStories().then(this.context.setStories);
+  }
+  handleSubmit = (ev) => {
+    ev.preventDefault();
+    const { flag, issue } = ev.target;
 
-  handleTextChange = (event) => {
-    this.setState({ textValue: event.target.value });
-  };
-
-  handleSelectorChange = (event) => {
-    this.setState({ selectValue: event.target.value });
-  };
-
-  handleSubmit = (event) => {
-    event.preventDefault();
-    const story = {
-      flag: this.state.selectValue,
-      issue: this.state.textValue,
-    };
-
-    // User_Id aka author being passed from API backend
-    StoryService.postStory(story)
-      .then((story) => {
-        this.props.history.push(`/dashboard`);
+    StoryService.postStory({ flag: flag.value, issue: issue.value })
+      .then(this.context.addStory)
+      .then(() => {
+        issue.value = '';
+        this.props.history.push('/dashboard');
+        window.location.reload();
       })
-      .catch((error) => {});
+      .catch(this.context.setError);
   };
 
   render() {
+    console.log(this.context.stories);
     return (
-      <form className='createStory' onSubmit={this.handleSubmit}>
+      <form
+        aria-label='create-story-form'
+        className='createStory'
+        onSubmit={this.handleSubmit}
+      >
         <h3>Create Story:</h3>
         <br />
         <p>
@@ -62,10 +52,7 @@ class CreateStoryForm extends Component {
         <br />
         <label htmlFor='select-help-type'>Select Help Type:</label>
         <div className='customSelect'>
-          <select
-            value={this.state.selectValue}
-            onChange={this.handleSelectorChange}
-          >
+          <select aria-label='custom-select' name='flag'>
             {this.keywords.map((keyword) => (
               <option key={keyword} value={keyword}>
                 {keyword}
@@ -75,11 +62,10 @@ class CreateStoryForm extends Component {
         </div>
         <br />
         <input
+          aria-label='enter-issue'
           name='issue'
           type='text'
-          value={this.state.textValue}
           placeholder='enter issue'
-          onChange={this.handleTextChange}
           required
         />
         <br />

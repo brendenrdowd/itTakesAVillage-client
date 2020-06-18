@@ -6,7 +6,12 @@ import { BrowserRouter } from 'react-router-dom';
 describe('NavLinks Component', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<BrowserRouter> <NavLinks /> </BrowserRouter>, div);
+    ReactDOM.render(
+      <BrowserRouter>
+        <NavLinks />
+      </BrowserRouter>,
+      div
+    );
     ReactDOM.unmountComponentAtNode(div);
-  })
-})
+  });
+});

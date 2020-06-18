@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import CreateStoryForm from "../../components/CreateStoryForm/CreateStoryForm";
+import React, { Component } from 'react';
+import CreateStoryForm from '../../components/CreateStoryForm/CreateStoryForm';
 
 class CreateStoryPage extends Component {
   render() {

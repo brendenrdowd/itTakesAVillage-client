@@ -1,15 +1,14 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import RegistrationPage from "./RegistrationPage";
-import { BrowserRouter } from "react-router-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import RegistrationPage from './RegistrationPage';
+import { BrowserRouter } from 'react-router-dom';
 
-describe("RegistrationPage Component", () => {
-  it("renders without crashing", () => {
-    const div = document.createElement("div");
+describe('RegistrationPage Component', () => {
+  it('renders without crashing', () => {
+    const div = document.createElement('div');
     ReactDOM.render(
       <BrowserRouter>
-        {" "}
-        <RegistrationPage />{" "}
+        <RegistrationPage />
       </BrowserRouter>,
       div
     );

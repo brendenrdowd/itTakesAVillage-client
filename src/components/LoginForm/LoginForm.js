@@ -7,7 +7,7 @@ import './LoginForm.css';
 
 class LoginForm extends Component {
   static defaultProps = {
-    onLoginSuccess: () => { },
+    onLoginSuccess: () => {},
   };
   static contextType = UserContext;
 

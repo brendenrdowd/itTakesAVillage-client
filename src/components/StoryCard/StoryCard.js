@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import "./StoryCard.css";
+import React, { Component } from 'react';
+import './StoryCard.css';
 
 class StoryCard extends Component {
   render() {
     return (
-      <div className="cards">
+      <div className='cards'>
         <p>{this.props.date}</p>
         <h3>{this.props.issue}</h3>
-        <p className="flag">{this.props.flag}</p>
+        <p className='flag'>{this.props.flag}</p>
       </div>
     );
   }

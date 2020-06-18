@@ -226,9 +226,6 @@ export default class IndividualRegForm extends Component {
             id='IndividualRegForm__username'
             onChange={(e) => this.updateUsername(e.target.value)}
           ></Input>
-          {/* {this.state.username.touched && (
-            <ValidationError message={usernameError}></ValidationError>
-          )} */}
         </div>
         <div className='email'>
           <label htmlFor='IndividualRegForm__email'>
@@ -240,9 +237,6 @@ export default class IndividualRegForm extends Component {
             id='IndividualRegForm__email'
             onChange={(e) => this.updateEmail(e.target.value)}
           ></Input>
-          {/* {this.state.email.touched && (
-            <ValidationError message={error}></ValidationError>
-          )} */}
         </div>
         <div className='location'>
           <label htmlFor='IndividualRegForm__location'>

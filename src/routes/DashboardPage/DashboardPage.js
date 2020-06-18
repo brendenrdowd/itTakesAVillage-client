@@ -48,7 +48,6 @@ export default class DashboardPage extends Component {
   handleEditBtn = (e) => {
     e.preventDefault();
     this.props.history.push(`/edit`);
-    window.location.reload(false);
   };
 
   // this renders story on page based on filter or filter all
@@ -101,6 +100,7 @@ export default class DashboardPage extends Component {
   };
 
   render() {
+    console.log(this.context.stories);
     return (
       <section>
         <div className='filterForm'>

@@ -1,14 +1,14 @@
-import config from "../config";
-import TokenService from "./token-service";
+import config from '../config';
+import TokenService from './token-service';
 
 const StoryApiService = {
   postStory(story) {
     return fetch(`${config.API_ENDPOINT}/story`, {
-      method: "POST",
+      method: 'POST',
       body: JSON.stringify(story),
       headers: {
         Authorization: `Bearer ${TokenService.getAuthToken()}`,
-        "content-type": "application/json",
+        'content-type': 'application/json',
       },
     }).then((res) => {
       if (!res.ok) {
@@ -22,10 +22,10 @@ const StoryApiService = {
 
   getAllStories() {
     return fetch(`${config.API_ENDPOINT}/story`, {
-      method: "GET",
+      method: 'GET',
       headers: {
         Authorization: `Bearer ${TokenService.getAuthToken()}`,
-        "content-type": "application/json",
+        'content-type': 'application/json',
       },
     }).then((res) =>
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
@@ -35,10 +35,10 @@ const StoryApiService = {
   //add delete and edit story functions
   getStoryById(id) {
     return fetch(`${config.API_ENDPOINT}/story/${id}`, {
-      method: "GET",
+      method: 'GET',
       headers: {
         Authorization: `Bearer ${TokenService.getAuthToken()}`,
-        "content-type": "application/json",
+        'content-type': 'application/json',
       },
     }).then((res) =>
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
@@ -47,11 +47,11 @@ const StoryApiService = {
 
   editStory(story) {
     return fetch(`${config.API_ENDPOINT}/story/${story.id}`, {
-      method: "PATCH",
+      method: 'PATCH',
       body: JSON.stringify(story),
       headers: {
         authorization: `bearer ${config.API_ENDPOINT}`,
-        "content-type": "application/json",
+        'content-type': 'application/json',
       },
     }).then((res) =>
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
@@ -60,11 +60,11 @@ const StoryApiService = {
 
   deleteStory(id) {
     return fetch(`${config.API_ENDPOINT}/story/${id}`, {
-      method: "DELETE",
+      method: 'DELETE',
       body: JSON.stringify(id),
       headers: {
         authorization: `Bearer ${TokenService.getAuthToken()}`,
-        "content-type": "application/json",
+        'content-type': 'application/json',
       },
     }).then((res) =>
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res

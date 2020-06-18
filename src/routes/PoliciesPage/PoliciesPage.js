@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import "./Policies.css";
+import React, { Component } from 'react';
+import './Policies.css';
 
 export default class PoliciesPage extends Component {
   render() {
     return (
-      <section className="policy">
+      <section className='policy'>
         <h3>It Takes a Village Policies and Terms and Conditions</h3>
-        <div className="paraContainer">
+        <div className='paraContainer'>
           <p>
             The information contained in this Application is provided for
             informational purposes only, any and all usage is at the sole

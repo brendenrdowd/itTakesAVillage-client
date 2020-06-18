@@ -32,12 +32,9 @@ export class CardToolBar extends Component {
           <button>Edit</button>
         </Link>
       ),
-        (
-          <button onClick={this.deleteStoryHandler(this.props.id)}>
-            Delete
-          </button>
-        ));
-        // need to make sure we're storing using id in context
+      (
+        <button onClick={this.deleteStoryHandler(this.props.id)}>Delete</button>
+      ));
     if (this.context.user === this.props.author) {
       buttons = [...buttons, tools];
     }

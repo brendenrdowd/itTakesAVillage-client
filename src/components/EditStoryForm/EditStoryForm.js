@@ -5,7 +5,6 @@ import userContext from '../../contexts/ApiContext';
 import StoryService from '../../services/story-api-service';
 import './EditStoryForm.css';
 
-// need to change the name of displays logged in user stories
 class EditStoryForm extends Component {
   constructor() {
     super();

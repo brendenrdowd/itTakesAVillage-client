@@ -15,14 +15,7 @@ export class NavLinks extends Component {
     TokenService.clearAuthToken();
     this.setState({ loggedIn: false });
   };
-  // The commented code below will be used in the future
-  // handleDeleteClick = () => {
-  //   UserApiService.deleteUser().then((data) => {
-  //     TokenService.clearAuthToken();
-  //     this.setState({ loggedIn: false });
-  //     this.props.history.push('/');
-  //   });
-  // };
+
 
   closeModal = () => {
     this.context.closeBackdrop();
@@ -60,13 +53,6 @@ export class NavLinks extends Component {
             <span className='tooltiptext'>New Story</span>
           </Link>
         </li>,
-        //The commented code below will be utilized in the future
-        // <li onClick={this.closeModal} key='6' className='tooltip'>
-        //   <Link onClick={this.handleDeleteClick} to='/'>
-        //     <FontAwesomeIcon icon='user-times' />{' '}
-        //     <span className='tooltiptext'>Delete User</span>
-        //   </Link>
-        // </li>,
         <li onClick={this.closeModal} key='9' className='tooltip'>
           <Link to={`/user/${localStorage.getItem('user_id')}`}>
             <FontAwesomeIcon icon='user-edit' />{' '}
