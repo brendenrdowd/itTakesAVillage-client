@@ -1,25 +1,25 @@
-import React, { Component } from "react";
-import StoryService from "../../services/story-api-service";
-import Context from "../../contexts/ApiContext";
-import "./CreateStoryForm.css";
+import React, { Component } from 'react';
+import StoryService from '../../services/story-api-service';
+import Context from '../../contexts/ApiContext';
+import './CreateStoryForm.css';
 
 class CreateStoryForm extends Component {
   static contextType = Context;
   constructor(props) {
     super(props);
     this.state = {
-      selectValue: "groceries",
-      textValue: "",
+      selectValue: 'groceries',
+      textValue: '',
     };
   }
 
   keywords = [
-    "groceries",
-    "food offer",
-    "rideshare",
-    "transportation",
-    "moving",
-    "clothing",
+    'groceries',
+    'food offer',
+    'rideshare',
+    'transportation',
+    'moving',
+    'clothing',
   ];
 
   handleTextChange = (event) => {
@@ -42,17 +42,13 @@ class CreateStoryForm extends Component {
       .then((story) => {
         this.props.history.push(`/dashboard`);
       })
-      .catch((error) => {
-        console.error(error);
-      });
+      .catch((error) => {});
   };
 
   render() {
     return (
-      <form className="createStory" onSubmit={this.handleSubmit}>
-        <label>
-          <h3>Create Story:</h3>
-        </label>
+      <form className='createStory' onSubmit={this.handleSubmit}>
+        <h3>Create Story:</h3>
         <br />
         <p>
           Please select the requested type of help from the drop down selections
@@ -64,8 +60,8 @@ class CreateStoryForm extends Component {
           as specific as possible for your requested help.
         </p>
         <br />
-        <label>Select Help Type:</label>
-        <div className="customSelect">
+        <label htmlFor='select-help-type'>Select Help Type:</label>
+        <div className='customSelect'>
           <select
             value={this.state.selectValue}
             onChange={this.handleSelectorChange}
@@ -79,15 +75,15 @@ class CreateStoryForm extends Component {
         </div>
         <br />
         <input
-          name="issue"
-          type="text"
+          name='issue'
+          type='text'
           value={this.state.textValue}
-          placeholder="enter issue"
+          placeholder='enter issue'
           onChange={this.handleTextChange}
           required
         />
         <br />
-        <button type="submit">Submit</button>
+        <button type='submit'>Submit</button>
       </form>
     );
   }

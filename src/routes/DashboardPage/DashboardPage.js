@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import StoryCard from "../../components/StoryCard/StoryCard";
-import "./DashboardPage.css";
-import { Link } from "react-router-dom";
-import userContext from "../../contexts/ApiContext";
-import StoryService from "../../services/story-api-service";
+import React, { Component } from 'react';
+import StoryCard from '../../components/StoryCard/StoryCard';
+import './DashboardPage.css';
+import { Link } from 'react-router-dom';
+import userContext from '../../contexts/ApiContext';
+import StoryService from '../../services/story-api-service';
 
 export default class DashboardPage extends Component {
   constructor() {
@@ -65,7 +65,7 @@ export default class DashboardPage extends Component {
     let activeUserObj = dataObj.filter(function (user) {
       return user.author === currentUser;
     });
-    if (this.state.filter === "my stories") {
+    if (this.state.filter === 'my stories') {
       return activeUserObj.map((card) => (
         <Link key={card.id} to={`/story/${card.id}`} className='card-link'>
           <StoryCard
@@ -110,8 +110,8 @@ export default class DashboardPage extends Component {
                 ))}
               </select>
             </div>
-            <Link to="/edit">
-              <button className="edit-btn" type="button">
+            <Link to='/edit'>
+              <button className='edit-btn' type='button'>
                 Edit My Stories
               </button>
             </Link>

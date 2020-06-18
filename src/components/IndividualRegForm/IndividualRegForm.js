@@ -41,7 +41,7 @@ export default class IndividualRegForm extends Component {
   }
 
   static defaultProps = {
-    onRegistrationSuccess: () => { },
+    onRegistrationSuccess: () => {},
   };
 
   static contextType = userContext;
@@ -195,8 +195,6 @@ export default class IndividualRegForm extends Component {
   };
   render() {
     const nameError = this.validateName();
-    // const usernameError = this.validateUsername();
-    const emailError = this.validateEmail();
     const locationError = this.validateZipcode();
     const passwordError = this.validatePassword();
     const repeatPasswordError = this.validateRepeatPassword();

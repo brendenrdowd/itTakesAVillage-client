@@ -1,18 +1,18 @@
-import React, { Component } from "react";
-import StoryCard from "../../components/StoryCard/StoryCard";
-import { Link } from "react-router-dom";
-import userContext from "../../contexts/ApiContext";
-import StoryService from "../../services/story-api-service";
-import "./EditStoryForm.css";
+import React, { Component } from 'react';
+import StoryCard from '../../components/StoryCard/StoryCard';
+import { Link } from 'react-router-dom';
+import userContext from '../../contexts/ApiContext';
+import StoryService from '../../services/story-api-service';
+import './EditStoryForm.css';
 
 // need to change the name of displays logged in user stories
 class EditStoryForm extends Component {
   constructor() {
     super();
     this.state = {
-      filter: "my stories",
+      filter: 'my stories',
       data: [],
-      userId: "",
+      userId: '',
     };
   }
 
@@ -39,9 +39,9 @@ class EditStoryForm extends Component {
     let activeUserObj = dataObj.filter(function (user) {
       return user.author === currentUser;
     });
-    if (this.state.filter === "my stories") {
+    if (this.state.filter === 'my stories') {
       return activeUserObj.map((card) => (
-        <Link key={card.id} to={`/story/${card.id}`} className="card-link">
+        <Link key={card.id} to={`/story/${card.id}`} className='card-link'>
           {this.renderFilter}
           <StoryCard
             resolved={card.resolved}
@@ -64,12 +64,11 @@ class EditStoryForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log("edit button clicked");
   };
 
   render() {
     return (
-      <form className="editStory" onSubmit={this.handleSubmit}>
+      <form className='editStory' onSubmit={this.handleSubmit}>
         <h3>Edit My Stories:</h3>
         {this.conditionalRender()}
       </form>
