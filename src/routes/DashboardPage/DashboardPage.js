@@ -122,8 +122,6 @@ export default class DashboardPage extends Component {
   };
 
   render() {
-    console.log(this.state.data);
-
     return (
       <section>
         <div className="filterForm">
