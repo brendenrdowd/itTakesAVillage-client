@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import StoryCard from '../../components/StoryCard/StoryCard';
-import './DashboardPage.css';
-import { Link } from 'react-router-dom';
-import userContext from '../../contexts/ApiContext';
-import StoryService from '../../services/story-api-service';
+import React, { Component } from "react";
+import StoryCard from "../../components/StoryCard/StoryCard";
+import "./DashboardPage.css";
+import { Link } from "react-router-dom";
+import userContext from "../../contexts/ApiContext";
+import StoryService from "../../services/story-api-service";
 
 export default class DashboardPage extends Component {
   constructor() {
@@ -11,20 +11,20 @@ export default class DashboardPage extends Component {
     this.state = {
       filter: null,
       data: [],
-      userId: '',
+      userId: "",
     };
   }
 
   static contextType = userContext;
 
   keywords = [
-    'groceries',
-    'food',
-    'rideshare',
-    'transportation',
-    'moving',
-    'clothing',
-    'my stories',
+    "groceries",
+    "food",
+    "rideshare",
+    "transportation",
+    "moving",
+    "clothing",
+    "my stories",
   ];
   // this sets state to match user id
   componentDidMount() {
@@ -52,17 +52,23 @@ export default class DashboardPage extends Component {
 
   // this renders story on page based on filter or filter all
   conditionalRender = () => {
-    if (!this.state.filter || this.state.filter === 'all') {
-      return this.state.data.map((card) => (
-        <Link key={card.id} to={`/story/${card.id}`} className='card-link'>
-          <StoryCard
-            resolved={card.resolved}
-            date={this.formatDate(card.created_at)}
-            flag={card.flag}
-            issue={card.issue}
-          />
-        </Link>
-      ));
+    if (!this.state.filter || this.state.filter === "all") {
+      return (
+        this.state.data
+          // reverse array object
+          .splice(0)
+          .reverse()
+          .map((card) => (
+            <Link key={card.id} to={`/story/${card.id}`} className="card-link">
+              <StoryCard
+                resolved={card.resolved}
+                date={this.formatDate(card.created_at)}
+                flag={card.flag}
+                issue={card.issue}
+              />
+            </Link>
+          ))
+      );
     }
     // this filters through stories by author
     let dataObj = this.state.data;
@@ -70,44 +76,62 @@ export default class DashboardPage extends Component {
     let activeUserObj = dataObj.filter(function (user) {
       return user.author === currentUser;
     });
-    if (this.state.filter === 'my stories') {
-      return activeUserObj.map((card) => (
-        <Link key={card.id} to={`/story/${card.id}`} className='card-link'>
-          <StoryCard
-            resolved={card.resolved}
-            date={this.formatDate(card.created_at)}
-            flag={card.flag}
-            issue={card.issue}
-          />
-        </Link>
-      ));
+    if (this.state.filter === "my stories") {
+      return (
+        activeUserObj
+          // reverse array object
+          .splice(0)
+          .reverse()
+          .map((card) => (
+            <Link key={card.id} to={`/story/${card.id}`} className="card-link">
+              <StoryCard
+                resolved={card.resolved}
+                date={this.formatDate(card.created_at)}
+                flag={card.flag}
+                issue={card.issue}
+              />
+            </Link>
+          ))
+      );
     }
 
     if (this.state.filter) {
-      return this.state.data.map((card) =>
-        card.flag.includes(this.state.filter) ? (
-          <Link key={card.id} to={`/story/${card.id}`} className='card-link'>
-            <StoryCard
-              resolved={card.resolved}
-              date={this.formatDate(card.created_at)}
-              flag={card.flag}
-              issue={card.issue}
-            />
-          </Link>
-        ) : null
+      return (
+        this.state.data
+          // reverse array object
+          .splice(0)
+          .reverse()
+          .map((card) =>
+            card.flag.includes(this.state.filter) ? (
+              <Link
+                key={card.id}
+                to={`/story/${card.id}`}
+                className="card-link"
+              >
+                <StoryCard
+                  resolved={card.resolved}
+                  date={this.formatDate(card.created_at)}
+                  flag={card.flag}
+                  issue={card.issue}
+                />
+              </Link>
+            ) : null
+          )
       );
     }
   };
 
   render() {
+    console.log(this.state.data);
+
     return (
       <section>
-        <div className='filterForm'>
+        <div className="filterForm">
           <form>
-            <label htmlFor='keywords'>Filter By:</label>
-            <div className='customSelect'>
-              <select onChange={this.handleFilter} id='keywords'>
-                <option value='all'>All</option>
+            <label htmlFor="keywords">Filter By:</label>
+            <div className="customSelect">
+              <select onChange={this.handleFilter} id="keywords">
+                <option value="all">All</option>
                 {this.keywords.map((keywords, index) => (
                   <option key={index} value={keywords}>
                     {keywords}
@@ -115,8 +139,8 @@ export default class DashboardPage extends Component {
                 ))}
               </select>
             </div>
-            <Link to='/edit'>
-              <button className='edit-btn' type='button'>
+            <Link to="/edit">
+              <button className="edit-btn" type="button">
                 Edit My Stories
               </button>
             </Link>
